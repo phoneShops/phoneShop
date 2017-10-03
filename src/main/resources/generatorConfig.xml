@@ -9,6 +9,6 @@
     <javaClientGenerator targetPackage="com.phone.dao" targetProject="src/main/java" type="XMLMAPPER" />
     <!-- <table tableName="student" domainObjectName="Student" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
     -->
-    <table tableName="emp" domainObjectName="Emp" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+    <table tableName="user" domainObjectName="user" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
   </context>
 </generatorConfiguration>
