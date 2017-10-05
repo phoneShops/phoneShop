@@ -14,7 +14,7 @@ import com.phone.controller.base.BaseController;
 import com.phone.service.impl.StudentImpl;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/test")
 public class ExampleController extends BaseController{
 //	@Resource
 //	private StudentService studentService = new StudentService();
