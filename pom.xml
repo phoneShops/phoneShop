@@ -15,6 +15,7 @@
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<druid.version>1.0.9</druid.version>
+		<shiro.version>1.2.3</shiro.version>  
 	</properties>
 
 	<dependencies>
@@ -26,7 +27,26 @@
 			<!-- 表示开发的时候引入，发布的时候不会加载此包 -->
 			<scope>test</scope>
 		</dependency>
-		<!-- 二维码包 -->
+		
+		<!-- shiro包 -->  
+		<dependency>  
+    		<groupId>org.apache.shiro</groupId>  
+    		<artifactId>shiro-core</artifactId>  
+    		<version>${shiro.version}</version>  
+		</dependency>  
+		<dependency>  
+   			 <groupId>org.apache.shiro</groupId>  
+    		<artifactId>shiro-web</artifactId>  
+    		<version>${shiro.version}</version>  
+		</dependency>  
+		<dependency>  
+    		<groupId>org.apache.shiro</groupId>  
+    		<artifactId>shiro-spring</artifactId>  
+    		<version>${shiro.version}</version>  
+		</dependency>  
+		
+		
+		<!-- 二维码包 Kaptcha包 -->
 		<dependency>  
      		<groupId>com.github.penggle</groupId>  
     		 <artifactId>kaptcha</artifactId>  
