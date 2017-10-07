@@ -31,8 +31,8 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<ul class="breadcrumb">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="account.html">Login</a></li>
+				<li><a href="<%=basePath%>user/toHome">Home</a></li>
+				<li><a href="<%=basePath%>user/tologin">Login</a></li>
 			</ul>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<%@page import="com.phone.pojo.user"%>
+<%@page import="com.phone.pojo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -49,11 +49,11 @@
 				<div class="col-xs-7">
 					<ul class="top-link">
 					<%
-						user u = (user)session.getAttribute("user");
+						User u = (User)session.getAttribute("user");
 						if(u==null){
 					%>
 						<li><a href="<%=basePath%>user/tologin"><span class="glyphicon glyphicon-user"></span>登录|</a></li>
-						<li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> 注册</a></li>
+						<li><a href="<%=basePath%>user/toregister"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
 					<%
 					}else{ 
 					%>

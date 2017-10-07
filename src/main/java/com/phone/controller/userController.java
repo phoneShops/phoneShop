@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.Constants;
 import com.phone.controller.base.BaseController;
-import com.phone.pojo.user;
+import com.phone.pojo.User;
 
 @Controller
 @RequestMapping("/user")
@@ -22,11 +22,11 @@ public class userController  extends BaseController{
 	public Object toHome(HttpServletRequest request ){
 		
 //		HttpServletRequest request = null;
-		HttpSession session = request.getSession();
-		
-		user u = new user();
-		u.setUid(1);
-		session.setAttribute("user",u);
+//		HttpSession session = request.getSession();
+//		
+//		user u = new user();
+//		u.setUid(1);
+//		session.setAttribute("user",u);
 		
 		return "user/Home";
 		
@@ -41,6 +41,15 @@ public class userController  extends BaseController{
 	@RequestMapping(value="/tologin")
 	public Object tologin(){
 		return "user/Login";
+	}
+	
+	/**
+	 * 跳转到注册界面
+	 * @return
+	 */
+	@RequestMapping(value="/toregister")
+	public Object toregister(){
+		return "user/register";
 	}
 	
 	
