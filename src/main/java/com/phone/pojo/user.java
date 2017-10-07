@@ -258,4 +258,30 @@ public class user {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    public user() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+	@Override
+	public String toString() {
+		return "user [uid=" + uid + ", username=" + username + ", password=" + password + ", card=" + card + ", phone="
+				+ phone + ", regTime=" + regTime + ", loginTime=" + loginTime + ", status=" + status + "]";
+	}
+
+	public user(Integer uid, String username, String password, String card, String phone, Date regTime, Date loginTime,
+			Integer status) {
+		super();
+		this.uid = uid;
+		this.username = username;
+		this.password = password;
+		this.card = card;
+		this.phone = phone;
+		this.regTime = regTime;
+		this.loginTime = loginTime;
+		this.status = status;
+	}
+    
+    
 }
