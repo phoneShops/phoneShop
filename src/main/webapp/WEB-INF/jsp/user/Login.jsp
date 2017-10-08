@@ -61,7 +61,7 @@
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
 						class="glyphicon glyphicon-user" aria-hidden="true"></i></span> <input
-						id="username" type="text" class="form-control" placeholder="用户名"
+						id="username" type="text" class="form-control" placeholder="用户名或手机号"
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
@@ -78,7 +78,7 @@
 				<input id="timestamp" name="timestamp" value="${timestamp }" type="hidden"> 
 				<a style="cursor: pointer; position: absolute; top: 260px; left: 380px" onclick="changeImg();">看不清，换一张？</a>
 				<br>
-				<span>XXXXXX</span>
+				<font id="font" style="visibility: hidden" color="#FF0000">XXXXXX</font>
 				<br>
 				<br>
 				<div class="well well-sm" style="text-align: right;">
@@ -130,34 +130,91 @@ function chgUrl(url) {
 
 
 $("#login").click(function(){
+	
+	$("#font").html("");
+
 	 
 	var username = $("#username").val();
 	var pwd = $("#pwd").val();
 
 	var code = $("#code").val();
+	var phone ;
+	
+	
+	var re = /^[0-9]+.?[0-9]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/ 
+	if(re.test(username)==true){
+		phone = username;
+	}
 
+	
+	var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
+
+	//验证手机号
+	var flag = reg.test(username); //true
+	
+	if(phone!=null&&flag!=true){
+		alert("手机号不符合规范");
+		return;
+		
+	}
+	
 	if(username==""){
-		alert("用户名不能为空");
+		alert("用户名或手机号不能为空");
 	}else if(pwd==""){
 		alert("密码不能为空");
 	}else if(code==""){ 
 		alert("验证码不能为空");		
+	}else if(flag==true){
+		/*输入是手机号时*/
+		$.ajax({  
+			type : 'post',
+			dataType : 'json',
+	        url : '<%=basePath%>user/checkLogin',
+	        data : {
+					"code" : code,
+					"username" : username,
+					"pwd" : pwd,
+					"status":0
+				},
+				success : function(data) {
+					if(data.msg=="success"){
+							    alert("成功登录");
+							    window.location.href = "<%=basePath%>user/toHome";
+					    }else{
+					    	changeImg();
+					    	$("#font").html(data.msg);
+					    	$("#font").attr("style", "visibility:visible");
+					    	
+					    }
+					 }
+					});
+		
 	}else{
-	$.ajax({  
-        type : 'post',  
-        async : false,  
-        url : '<%=basePath%>user/checkLogin',
-					data : {
-						"code" : code,
-						"username" : username,
-						"pwd" : pwd
-					},
-					success : function(data) {
-						status = data;
-					}
-				});
+		/*输入是用户名时*/
+		$.ajax({  
+	        type : 'post',  
+	        async : false,  
+	        url : '<%=basePath%>user/checkLogin',
+						data : {
+							"code" : code,
+							"username" : username,
+							"pwd" : pwd,
+							"status":1
+						},
+						success : function(data) {
+							if(data.msg=="success"){
+							    alert("成功登录");
+							    window.location.href = "<%=basePath%>user/toHome";
+					    }else{
+					    	changeImg();
+					    	$("#font").html(data.msg);
+					    	$("#font").attr("style", "visibility:visible");
+					    	
+					    }
+						}
+					});
+	}
 
-			}
-
-		});
+	});
+		
 	</script>

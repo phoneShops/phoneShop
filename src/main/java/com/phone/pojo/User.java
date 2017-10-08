@@ -381,6 +381,7 @@ public class User {
 		this.address = address;
 		this.status = status;
 	}
+
     
     
     

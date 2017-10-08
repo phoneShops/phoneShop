@@ -57,5 +57,10 @@ public class MD5 {
         }
         return resultString;
     }
+    
+    public static void main(String[] args) {
+		String pwd = "666666";
+		System.out.println(MD5.MD5Encode(pwd));
+	}
 
 }

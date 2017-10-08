@@ -38,6 +38,35 @@
     from user
     where uid = #{uid,jdbcType=INTEGER}
   </select>
+  
+  <!-- 通过用户名查询用户 -->
+  <select id="selectUserByusername" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select 
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <!-- 通过用户名查询用户 -->
+  <select id="selectUserByPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select 
+    <include refid="Base_Column_List" />
+    from user
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
