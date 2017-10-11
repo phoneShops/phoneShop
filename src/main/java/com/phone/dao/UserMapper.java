@@ -63,4 +63,12 @@ public interface UserMapper {
      * @mbggenerated Sat Oct 07 13:00:32 CST 2017
      */
     int updateByPrimaryKey(User record);
+    
+    /**
+     * 更新登陆时间
+     */
+    
+    int updateLoginTime(User user);
+    
+    
 }

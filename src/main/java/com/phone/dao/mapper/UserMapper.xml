@@ -58,15 +58,6 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -169,6 +160,17 @@
       </if>
     </trim>
   </insert>
+  
+  <!-- 更新登录时间 -->
+  <update id="updateLoginTime" parameterType = "com.phone.pojo.User">
+       update user
+    login_time = now()
+    where uid = #{uid,jdbcType=INTEGER}
+      
+  </update>
+  
+  
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.phone.pojo.User" >
     <!--
       WARNING - @mbggenerated

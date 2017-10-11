@@ -78,8 +78,6 @@ public class userController  extends BaseController{
 //		logger.info(original);
 //		logger.info(status);
 		
-		
-		
 		if(!code.equals(original)){
 			json.addProperty("msg","验证码错误");
 			return new Gson().toJson(json);			
