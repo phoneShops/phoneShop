@@ -55,21 +55,21 @@
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
 						class="glyphicon glyphicon-user" aria-hidden="true"></i></span> <input
-						type="text" class="form-control" placeholder="用户名或昵称"
+						type="text" class="form-control" id="username" placeholder="用户名或昵称"
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
 						class="glyphicon glyphicon-earphone"></i></span> <input type="text"
-						class="form-control" placeholder="电话号码"
+						class="form-control" id="phone" placeholder="电话号码"
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
 						class="glyphicon glyphicon-credit-card"></i></span> <input type="text"
-						class="form-control" placeholder="身份证号"
+						class="form-control" id="card" placeholder="身份证号"
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
@@ -96,10 +96,10 @@
 						class="form-control" placeholder="详细住址"
 						aria-describedby="sizing-addon1">
 				</div>
-
-
-				<br> <br> <span>XXX</span> <br> <br>
-				<button type="button" class="btn btn-success btn-block">注册
+				<br> <br> 
+				<font id="font" style="visibility: hidden" color="#FF0000">XXXXXX</font>
+				<br> <br>
+				<button type="button" id="checkSubmit" class="btn btn-success btn-block">注册
 				</button>
 			</div>
 		</div>
@@ -118,21 +118,21 @@
 
 
 
-	<script type="text/javascript" src="<%=basePath%>js/jquery-2.1.1.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 
 </body>
 </html>
 
-
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-2.1.1.js"></script>
+	
 <script type="text/javascript">
 
-	var sel = $("#Province");
 	
 	var selcity = $("#City");
 	
 function selectProvince(){
 	
+	var sel = $("#Province");
 	
 	$.ajax({
 		url:"<%=basePath%>province/selectAll",
@@ -163,15 +163,39 @@ function selectProvince(){
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
 
-						var op = $("<option value="+data[i].cid+">"+ data[i].cname +"市"+ "</option>");
+						var op = $("<option value="+data[i].cid+">"+ data[i].cname+ "</option>");
 						selcity.append(op);
 					}
 				}
 			});
-		
-		
-
 	}
+	
+	
+	$("#checkSubmit").click(function(){
+		
+		$("#font").html("");
+
+		 
+		var username = $("#username").val();
+		var phone = $("#phone").val();
+
+		var card = $("#card").val();
+		
+		if(username==""||username.equals("")){
+			alert("用户名不能为空");
+		}else if(phone==""||phone.equals("")){
+			alert("电话号码不能为空");
+		}else if(card==""||card.equals("")){
+			alert("身份证号不能为空");
+		}
+		
+		
+		//String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$"; 
+		
+		//if(re.test(username)==true){
+		//	phone = username;
+		//}
+	});
 </script>
 
 
