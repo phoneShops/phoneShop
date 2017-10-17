@@ -30,6 +30,15 @@
     from province
     where pid = #{pid,jdbcType=INTEGER}
   </select>
+  
+  
+  <select id="selectAllProvince" resultMap="BaseResultMap" >
+      select 
+   		 	<include refid="Base_Column_List" />
+      from province
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

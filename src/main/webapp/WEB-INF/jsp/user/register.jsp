@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <html>
 <head>
 <%
@@ -18,7 +19,7 @@
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 
 </head>
-<body>
+<body onload="selectProvince();">
 	<header class="container"> <br>
 	<div class="row">
 		<div class="col-lg-12">
@@ -49,6 +50,8 @@
 				<center>
 					<h4>用户注册</h4>
 				</center>
+				<br>
+				<br>
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
 						class="glyphicon glyphicon-user" aria-hidden="true"></i></span> <input
@@ -69,11 +72,12 @@
 						class="form-control" placeholder="身份证号"
 						aria-describedby="sizing-addon1">
 				</div>
-				<br><br>
+				<br>
 				<div class="input-group input-group-md">
 					<div class="form-group">
 						<div class="col-sm-6">
-							<select class="form-control" name="Province" id="Province">
+							<select onchange="changeCity(this)" class="form-control"
+								name="Province" id="Province" data-dropdown-auto="true">
 								<option value="请选择省份" selected>请选择省份</option>
 							</select>
 						</div>
@@ -84,7 +88,8 @@
 						</div>
 					</div>
 				</div>
-				<br><br>
+				<br>
+				<br>
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
 						class="	glyphicon glyphicon-home"></i></span> <input type="text"
@@ -118,3 +123,61 @@
 
 </body>
 </html>
+
+
+<script type="text/javascript">
+
+	var sel = $("#Province");
+	
+	var selcity = $("#City");
+	
+function selectProvince(){
+	
+	
+	$.ajax({
+		url:"<%=basePath%>province/selectAll",
+			type : "post",
+			dataType : "json",
+			success : function(data) {
+				for (var i = 0; i < data.length; i++) {
+
+					var op = $("<option value="+data[i].pid+">"+ data[i].pname + "</option>");
+					sel.append(op);
+				}
+				
+			}
+		});
+
+	}
+
+	function changeCity(data) {
+
+		var province = $("#Province").val();
+		
+		selcity.empty();
+		
+		$.ajax({
+			url:'<%=basePath%>province/selectCity?pid='+province,
+				type : "post",
+				dataType : "json",
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+
+						var op = $("<option value="+data[i].cid+">"+ data[i].cname +"市"+ "</option>");
+						selcity.append(op);
+					}
+				}
+			});
+		
+		
+
+	}
+</script>
+
+
+
+
+
+
+
+
