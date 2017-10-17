@@ -73,7 +73,7 @@
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
-				<br> <input id="code" style="width: 200px; height: 40px;" type="password" class="form-control" placeholder="验证码" aria-describedby="sizing-addon1"> 
+				<br> <input id="code" style="width: 200px; height: 40px;" type="text" class="form-control" placeholder="验证码" aria-describedby="sizing-addon1"> 
 				<img style="width: 120px; height: 50px; position: absolute; top: 240px; left: 250px" id="imgObj" src="<%=basePath%>captcha/getCaptchaImage" onclick="changeImg()"> 
 				<input id="timestamp" name="timestamp" value="${timestamp }" type="hidden"> 
 				<a style="cursor: pointer; position: absolute; top: 260px; left: 380px" onclick="changeImg();">看不清，换一张？</a>
