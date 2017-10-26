@@ -10,6 +10,7 @@ import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.select.Evaluator.IsEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +72,26 @@ public class UserServiceImpl implements UserService {
 				return 1;
 			}
 		}
+	}
+
+	//用户注册
+	public int registerUser(User user) {
+		
+		if(usermapper.selectUserByPhone(user.getPhone())!=null){
+			return -1;
+		}else if(usermapper.selectUserByusername(user.getUsername())!=null){
+			return 1;
+		}
+		
+		user.setPassword(MD5.MD5Encode("666666"));
+		user.setRegTime(TimeUtil.getTimestamp());
+		user.setStatus(0);
+		int i = usermapper.insertSelective(user);
+		if(i!=1){
+			return 2;
+			
+		}
+		return 0;
 	}
 
 }

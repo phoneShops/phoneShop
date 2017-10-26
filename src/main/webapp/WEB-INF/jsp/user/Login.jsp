@@ -20,7 +20,26 @@
 
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 
-
+<style>
+.loading {
+    width: 160px;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 56px;
+    color: #fff;
+    padding-left: 60px;
+    font-size: 15px;
+    background: #000 url(../loading/image/loading.gif) no-repeat 10px 50%;
+    opacity: 0.7;
+    z-index: 9999;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
 
 <!--[if IE]>
 		<script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -95,10 +114,18 @@
 
 	<div class="col-md-2" style="border-right: 1px solid #ddd;"></div>
 
+ <div class="container">
+        <div id="myModal" class="modal fade" data-keyboard="false"
+            data-backdrop="static" data-role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div id="loading" class="loading"><span id="loadfont">加载中。。。</span></div>
+        </div>
+    </div>
 
 
 
 	<script type="text/javascript" src="<%=basePath%>js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 /**  
  * 更换图片  
@@ -145,8 +172,6 @@ $("#login").click(function(){
 	if(re.test(username)==true){
 		phone = username;
 	}
-
-	
 	var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
 
 	//验证手机号
@@ -165,6 +190,7 @@ $("#login").click(function(){
 	}else if(code==""){ 
 		alert("验证码不能为空");		
 	}else if(flag==true){
+		$('#myModal').modal('show');
 		/*输入是手机号时*/
 		$.ajax({  
 			type : 'post',
@@ -178,9 +204,10 @@ $("#login").click(function(){
 				},
 				success : function(data) {
 					if(data.msg=="success"){
-							    alert("成功登录");
-							    window.location.href = "<%=basePath%>user/toHome";
+						$('#loadfont').html("成功登录");
+					    window.location.href = "<%=basePath%>user/toHome";
 					    }else{
+							$('#myModal').modal('hide');
 					    	changeImg();
 					    	$("#font").html(data.msg);
 					    	$("#font").attr("style", "visibility:visible");
@@ -190,6 +217,7 @@ $("#login").click(function(){
 					});
 		
 	}else{
+		$('#myModal').modal('show');
 		/*输入是用户名时*/
 		$.ajax({  
 	        type : 'post',  
@@ -203,9 +231,10 @@ $("#login").click(function(){
 						},
 						success : function(data) {
 							if(data.msg=="success"){
-							    alert("成功登录");
+								$('#loadfont').html("成功登录");
 							    window.location.href = "<%=basePath%>user/toHome";
 					    }else{
+					    	$('#myModal').modal('hide');
 					    	changeImg();
 					    	$("#font").html(data.msg);
 					    	$("#font").attr("style", "visibility:visible");

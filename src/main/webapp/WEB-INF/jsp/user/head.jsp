@@ -65,6 +65,7 @@
 						<option value="购买记录查询">购买记录查询</option>
 						<option value="密码修改">密码修改</option>
 						<option value="积分查询">积分查询</option>
+						<option value="积分查询">注销</option>
 					</select>
 					<%
 					}

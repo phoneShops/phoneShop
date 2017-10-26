@@ -18,6 +18,29 @@
 
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 
+<style>
+.loading {
+    width: 160px;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 56px;
+    color: #fff;
+    padding-left: 60px;
+    font-size: 15px;
+    background: #000 url(../loading/image/loading.gif) no-repeat 10px 50%;
+    opacity: 0.7;
+    z-index: 9999;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
+
+
+
 </head>
 <body onload="selectProvince();">
 	<header class="container"> <br>
@@ -92,7 +115,7 @@
 				<br>
 				<div class="input-group input-group-md">
 					<span class="input-group-addon" id="sizing-addon1"><i
-						class="	glyphicon glyphicon-home"></i></span> <input type="text"
+						class="	glyphicon glyphicon-home"></i></span> <input id="detail" type="text"
 						class="form-control" placeholder="详细住址"
 						aria-describedby="sizing-addon1">
 				</div>
@@ -117,22 +140,29 @@
 	</div>
 
 
-
+ <div class="container">
+        <div id="myModal" class="modal fade" data-keyboard="false"
+            data-backdrop="static" data-role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+           <div id="loading" class="loading"><span id="loadfont">加载中。。。</span></div>
+        </div>
+    </div>
 
 </body>
 </html>
 
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 	
 <script type="text/javascript">
-
 	
 	var selcity = $("#City");
 	
+	var sel = null;
+	
 function selectProvince(){
 	
-	var sel = $("#Province");
+    sel = $("#Province");
 	
 	$.ajax({
 		url:"<%=basePath%>province/selectAll",
@@ -178,24 +208,77 @@ function selectProvince(){
 		 
 		var username = $("#username").val();
 		var phone = $("#phone").val();
-
 		var card = $("#card").val();
+		var pid = $("#Province").val();
+		var cid = $("#City").val();
+		var address = $("#detail").val();
 		
-		if(username==""||username.equals("")){
+		var regex = /^1[34578]\d{9}$/;
+		var tegx=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		
+		
+		//alert(card.test(tegx));
+		
+		if(username==""||username==null){
 			alert("用户名不能为空");
-		}else if(phone==""||phone.equals("")){
+		}else if(phone==""||phone==null){
 			alert("电话号码不能为空");
-		}else if(card==""||card.equals("")){
+		}else if(card==""||card==null){
 			alert("身份证号不能为空");
+		}else if(pid==""||pid==null){
+			alert("请选择省份");
+		}else if(cid==""||cid==null){
+			alert("请选择您所在的市");
+		}else if(address==""||address==null){
+			alert("请填写家庭详细住址！");
+		}else if(regex.test(phone)!=true){
+			alert("电话号码格式不正确");
+		}else if(tegx.test(card)!=true){
+	        alert("证件号格式不对！");
+		}else{
+			$('#myModal').modal('show');
+			/*输入是手机号时*/
+			$.ajax({  
+				type : 'post',
+				dataType : 'json',
+		        url : '<%=basePath%>user/checkRegister',
+		        data : {
+						"username" : username,
+						"phone" : phone,
+						"pid" : pid,
+						"cid": cid,
+						"card":card,
+						"address":address,
+					},
+					success : function(data) {
+						if(data.msg=="0"){
+							$('#loadfont').html("成功注册");
+							$('#myModal').modal('hide');
+						    window.location.href = "<%=basePath%>user/toHome";
+						    }else{
+						    	$('#myModal').modal('hide');
+						    	$("#font").html(data.msg);
+						    	$("#font").attr("style", "visibility:visible");
+						    	
+						    }
+						 }
+						});
 		}
 		
 		
-		//String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$"; 
 		
-		//if(re.test(username)==true){
-		//	phone = username;
-		//}
+	
 	});
+		
+	/*function  HtmlLoad(url){
+	            $('#myModal').modal('show');
+
+	        setTimeout(function () {
+	       $('#myModal').modal('hide');
+	    }, 3000);
+
+	    }*/
+		
 </script>
 
 

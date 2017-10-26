@@ -10,7 +10,6 @@ public interface UserMapper {
 	 */
 	User selectUserByusername(String username);
 	
-	
 	/**
 	 * 通过手机号查询用户
 	 */

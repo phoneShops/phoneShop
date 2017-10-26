@@ -32,17 +32,11 @@ public class userController  extends BaseController{
 		
 //		HttpServletRequest request = null;
 //		HttpSession session = request.getSession();
-//		
 //		User u = new User();
 //		u.setUid(1);
 //		session.setAttribute("user",u);
-		
 		return "user/Home";
-		
-		
 	}
-	
-	
 	/**
 	 * 跳转到登录界面
 	 * @return
@@ -61,7 +55,6 @@ public class userController  extends BaseController{
 		return "user/register";
 	}
 	
-	
 	/**
 	 * 校验登录信息
 	 */
@@ -69,20 +62,12 @@ public class userController  extends BaseController{
 	@RequestMapping(value="/checkLogin",produces = "application/json; charset=utf-8")
 	public Object checkLogin(String username,String pwd,String code,int status,HttpServletRequest request){
 		JsonObject json = new JsonObject();
-		
 		//原始验证码
 		String original =(String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-//		logger.info(username);
-//		logger.info(pwd);
-//		logger.info(code);
-//		logger.info(original);
-//		logger.info(status);
-		
 		if(!code.equals(original)){
 			json.addProperty("msg","验证码错误");
 			return new Gson().toJson(json);			
 		}else{
-			
 			int result = userService.checkLogin(username, pwd,status,request);
 			if(result==0){
 				json.addProperty("msg","该用户不存在");
@@ -92,11 +77,34 @@ public class userController  extends BaseController{
 				json.addProperty("msg","success");
 			}
 			return new Gson().toJson(json);			
-
 		}
+	}
+	
+	
+	@RequestMapping(value="/checkRegister",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object checkRegister(User user){
+		JsonObject json = new JsonObject();
 		
+		logger.info(user.getCard());
+		logger.info(user.getCid());
+		logger.info(user.getPid());
+		logger.info(user.getPhone());
+		logger.info(user.getAddress());
 		
-//		logger.info(userService);
+		int i = userService.registerUser(user);
+		
+		if(i==1){
+			json.addProperty("msg","用户名已经存在"); 
+		}else if(i==2){
+			json.addProperty("msg","注册出错"); 
+		}else if(i==-1){
+			json.addProperty("msg","电话号码已经存在"); 
+		}else{
+			json.addProperty("msg","0"); 
+		}
+//		String username,String phone,int province,int city,String card,String detail
+		return new Gson().toJson(json);			
 		
 	}
 }
