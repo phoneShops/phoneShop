@@ -14,7 +14,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+
 
 <title>用户登录界面</title>
 
@@ -26,7 +27,7 @@
     height: 56px;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 30%;
     line-height: 56px;
     color: #fff;
     padding-left: 60px;

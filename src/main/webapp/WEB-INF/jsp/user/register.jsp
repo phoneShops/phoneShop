@@ -13,7 +13,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 <title>注册界面</title>
 
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
@@ -24,7 +24,7 @@
     height: 56px;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 30%;
     line-height: 56px;
     color: #fff;
     padding-left: 60px;
@@ -120,7 +120,7 @@
 						aria-describedby="sizing-addon1">
 				</div>
 				<br> <br> 
-				<font id="font" style="visibility: hidden" color="#FF0000">XXXXXX</font>
+				<font id="font" style="visibility: hidden" color="#FF0000"></font>
 				<br> <br>
 				<button type="button" id="checkSubmit" class="btn btn-success btn-block">注册
 				</button>
@@ -139,7 +139,7 @@
 		</div>
 	</div>
 
-
+<!-- 弹出的载入框 -->
  <div class="container">
         <div id="myModal" class="modal fade" data-keyboard="false"
             data-backdrop="static" data-role="dialog"
@@ -147,7 +147,7 @@
            <div id="loading" class="loading"><span id="loadfont">加载中。。。</span></div>
         </div>
     </div>
-
+<!-- end -->
 </body>
 </html>
 
@@ -253,8 +253,14 @@ function selectProvince(){
 					success : function(data) {
 						if(data.msg=="0"){
 							$('#loadfont').html("成功注册");
-							$('#myModal').modal('hide');
-						    window.location.href = "<%=basePath%>user/toHome";
+						    var r=confirm("立即登录？")
+							 if (r==true)
+							 {
+								$('#myModal').modal('hide');
+							    window.location.href = "<%=basePath%>user/tologin";
+							 }else{
+								 window.location.href = "<%=basePath%>user/toregister";   
+						     }
 						    }else{
 						    	$('#myModal').modal('hide');
 						    	$("#font").html(data.msg);

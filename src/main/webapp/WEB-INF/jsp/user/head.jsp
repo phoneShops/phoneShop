@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -43,10 +43,10 @@
 	<nav id="top">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5">
-				    <iframe style="position: absolute;top: 0px" id="fancybox-frame" name="fancybox-frame1507257625138" frameborder="0" scrolling="no" hspace="5"  src="http://i.tianqi.com/index.php?c=code&a=getcode&id=40&h=5&w=310"></iframe>
+				<div class="col-xs-3">
+					<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=99" width="150" height="36" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 				</div>
-				<div class="col-xs-7">
+				<div class="col-xs-9">
 					<ul class="top-link">
 					<%
 						User u = (User)session.getAttribute("user");
@@ -57,24 +57,27 @@
 					<%
 					}else{ 
 					%>
-						<li><a href="account.html"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
-						<li><a href="contact.html"><span class="glyphicon glyphicon-shopping-cart"></span>购物车</a></li>
-						<select class="selectpicker">
-						<option value="" selected>其他</option>
-						<option value="已完成订单">已完成订单</option>
-						<option value="购买记录查询">购买记录查询</option>
-						<option value="密码修改">密码修改</option>
-						<option value="积分查询">积分查询</option>
-						<option value="积分查询">注销</option>
-					</select>
+						<li><a href="account.html"><span class="glyphicon glyphicon-user"></span></a></li>
+						<li><a href="contact.html"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+						<li>
+							<select class="form-control" style="width: 100px">
+								<option value="" selected>其他</option>
+								<option value="已完成订单">已完成订单</option>
+								<option value="购买记录查询">购买记录查询</option>
+								<option value="密码修改">密码修改</option>
+								<option value="积分查询">积分查询</option>
+								<option value="积分查询">注销</option>
+						</select>
 					<%
 					}
 					%>
+					</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</nav>
+	
 	<!--Header-->
 	<header class="container">
 		<div class="row">
