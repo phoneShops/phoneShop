@@ -56,6 +56,16 @@ public class userController  extends BaseController{
 	}
 	
 	/**
+	 * 跳转到密码修改界面
+	 * @return
+	 */
+	@RequestMapping(value="/topassword")
+	public Object topassword(){
+		return "user/password";
+	}
+	
+	
+	/**
 	 * 校验登录信息
 	 */
 	@ResponseBody
@@ -86,14 +96,13 @@ public class userController  extends BaseController{
 	public Object checkRegister(User user){
 		JsonObject json = new JsonObject();
 		
-		logger.info(user.getCard());
-		logger.info(user.getCid());
-		logger.info(user.getPid());
-		logger.info(user.getPhone());
-		logger.info(user.getAddress());
+//		logger.info(user.getCard());
+//		logger.info(user.getCid());
+//		logger.info(user.getPid());
+//		logger.info(user.getPhone());
+//		logger.info(user.getAddress());
 		
 		int i = userService.registerUser(user);
-		
 		if(i==1){
 			json.addProperty("msg","用户名已经存在"); 
 		}else if(i==2){
@@ -103,8 +112,22 @@ public class userController  extends BaseController{
 		}else{
 			json.addProperty("msg","0"); 
 		}
-//		String username,String phone,int province,int city,String card,String detail
 		return new Gson().toJson(json);			
 		
+	}
+	
+	@RequestMapping(value="/checkPassword",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object checkPassword(String pwd,String newpwd,HttpServletRequest request){
+		
+		logger.info(pwd);
+		logger.info(newpwd);
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		logger.info(user.getPassword());
+		
+		return null;
 	}
 }

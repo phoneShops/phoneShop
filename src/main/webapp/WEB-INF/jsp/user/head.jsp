@@ -30,12 +30,6 @@
 	<!-- Core JavaScript Files -->  	 
     <script src="<%=basePath %>js/bootstrap.min.js"></script>
 	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -60,13 +54,14 @@
 						<li><a href="account.html"><span class="glyphicon glyphicon-user"></span></a></li>
 						<li><a href="contact.html"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 						<li>
-							<select class="form-control" style="width: 100px">
+							<select class="form-control" style="width: 100px" onchange="choice(this)">
 								<option value="" selected>其他</option>
-								<option value="已完成订单">已完成订单</option>
-								<option value="购买记录查询">购买记录查询</option>
-								<option value="密码修改">密码修改</option>
-								<option value="积分查询">积分查询</option>
-								<option value="积分查询">注销</option>
+								<option value="1">密码修改</option>
+								<option value="2">已完成订单</option>
+								<option value="3">购买记录查询</option>
+								<option value="4">密码修改</option>
+								<option value="5">积分查询</option>
+								<option value="6">注销</option>
 						</select>
 					<%
 					}
@@ -151,3 +146,19 @@
 
 </body>
 </html>
+
+
+<script type="text/javascript">
+ function choice(data){
+	 
+	 if(data.value==1){
+		   window.location.href = "<%=basePath%>user/topassword";
+		 
+		 
+	 }
+	 
+	 
+ }
+
+
+</script>
