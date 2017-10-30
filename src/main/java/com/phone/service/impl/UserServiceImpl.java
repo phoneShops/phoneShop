@@ -94,4 +94,27 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}
 
+	/**
+	 * 修改用户密码
+	 */
+	public int updatePass(String pwd, String newpwd,HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		User user = (User)session.getAttribute("user");
+		
+		if(!user.getPassword().equals(MD5.MD5Encode(pwd))){
+			return -1;
+		}else{
+			//加密保存
+			user.setPassword(MD5.MD5Encode(newpwd));
+			int i = usermapper.updateByPrimaryKeySelective(user);
+			if(i==1){
+				return 1;
+			}
+    			return 0;
+		}
+		
+	}
+
 }

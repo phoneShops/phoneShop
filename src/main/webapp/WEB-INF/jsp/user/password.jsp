@@ -150,25 +150,19 @@ $("#checkpassword").click(function(){
 	        data : {
 					"pwd" : pwd,
 					"newpwd" : newpwd,
-				},
+				   },
 				success : function(data) {
-					if(data.msg=="0"){
+					if(data.msg=="1"){
 						$('#loadfont').html("成功修改");
-					    var r=confirm("立即登录？")
-						 if (r==true)
-						 {
-							$('#myModal').modal('hide');
-						    window.location.href = "<%=basePath%>user/tologin";
-						 }else{
-							 window.location.href = "<%=basePath%>user/toregister";   
-					     }
-					    }else{
+						$('#myModal').modal('hide');
+						window.location.href = "<%=basePath%>user/toHome";
+					}else{
 					    	$('#myModal').modal('hide');
 					    	$("#font").html(data.msg);
 					    	$("#font").attr("style", "visibility:visible");
 					    	
-					    }
-					 }
+					     }
+				   }
 					});
 	}
 });

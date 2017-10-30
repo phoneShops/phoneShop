@@ -120,14 +120,17 @@ public class userController  extends BaseController{
 	@ResponseBody
 	public Object checkPassword(String pwd,String newpwd,HttpServletRequest request){
 		
-		logger.info(pwd);
-		logger.info(newpwd);
-		
-		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
-		
-		logger.info(user.getPassword());
-		
-		return null;
+		JsonObject json = new JsonObject();
+//		logger.info(pwd);
+//		logger.info(newpwd);
+		int i = userService.updatePass(pwd, newpwd, request);
+		if(i==-1){
+			json.addProperty("msg", "您的旧密码错误！");
+		}else if(i==0){
+			json.addProperty("msg","系统错误");
+		}else{
+			json.addProperty("msg",i);
+		}
+		return new Gson().toJson(json);			
 	}
 }

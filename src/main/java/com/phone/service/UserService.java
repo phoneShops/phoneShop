@@ -8,4 +8,6 @@ public interface UserService {
 		public int checkLogin(String username,String pwd,int status,HttpServletRequest request);
 		
 		public int registerUser(User user);
+		
+		public int updatePass(String pwd,String newpwd,HttpServletRequest request);
 }
