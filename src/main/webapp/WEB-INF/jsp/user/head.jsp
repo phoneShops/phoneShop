@@ -59,9 +59,8 @@
 								<option value="1">密码修改</option>
 								<option value="2">已完成订单</option>
 								<option value="3">购买记录查询</option>
-								<option value="4">密码修改</option>
-								<option value="5">积分查询</option>
-								<option value="6">注销</option>
+								<option value="4">积分查询</option>
+								<option value="5">注销</option>
 						</select>
 					<%
 					}
