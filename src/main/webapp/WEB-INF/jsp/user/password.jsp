@@ -131,8 +131,6 @@ $("#checkpassword").click(function(){
 	var newpwd = $("#newpwd").val();
 	var newpwd2 = $("#newpwd2").val();
 	
-	//alert(card.test(tegx));
-	
 	if(pwd==""||pwd==null){
 		alert("密码不能为空！");
 	}else if(newpwd==""||newpwd==null){
@@ -152,9 +150,9 @@ $("#checkpassword").click(function(){
 					"newpwd" : newpwd,
 				   },
 				success : function(data) {
+					$('#loadfont').html("修改中。。");
 					if(data.msg=="1"){
 						$('#loadfont').html("成功修改");
-						$('#myModal').modal('hide');
 						window.location.href = "<%=basePath%>user/toHome";
 					}else{
 					    	$('#myModal').modal('hide');
