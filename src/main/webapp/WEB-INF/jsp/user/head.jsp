@@ -84,8 +84,8 @@
 			<br>	 
 			
 					 <div class="input-group">
-            			<input style="height: 40px;" placeholder="请输入手机品牌" type="text" class="form-control">
-           				 <span  class="input-group-btn"><button style="height: 40px;"  type="button" class="btn btn-info">搜索</button></span>
+            			<input style="height: 40px;" id = "brand" placeholder="请输入手机型号" type="text" class="form-control">
+           				 <span  class="input-group-btn"><button style="height: 40px;"  type="button" class="btn btn-info" id = "SouSuo">搜索</button></span>
        				 </div>
 			</div>
 		</div>
@@ -159,5 +159,13 @@
 	 
  }
 
+ $("#SouSuo").click(function(){
+	 
+	 var brand = $("#brand").val();
+	 
+	 window.location.href="<%=basePath%>product/toProduct?sousuo="+brand; 
+	 
+	});
+ 
 
 </script>

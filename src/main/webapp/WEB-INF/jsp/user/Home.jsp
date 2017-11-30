@@ -80,7 +80,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="heading"><h2>SPECIAL PRODUCTS</h2></div>
+					<div class="heading"><h2>最新产品</h2></div>
 					<div class="products">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<div class="product">
