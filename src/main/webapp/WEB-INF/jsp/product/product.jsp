@@ -94,6 +94,10 @@ td>div:last-child {
     </div>	
 </body>
 <script type="text/javascript">  
+
+var loading = false;
+	
+	
 $(function(){  
     //query('01');//第一次加载  
 	loading = true;
@@ -111,10 +115,9 @@ function query(type)
     
 	$("#myModal").modal("show");
 	
-	setTimeout('close()',1000);
+	setTimeout('close()',2000);
 	
 	var content = "";
-
 	
     for (var i = 0; i < 1; i++) {
 
@@ -186,7 +189,6 @@ function query(type)
 			}
 		});
 	}
-	var loading = false;
 	Zepto(function($) {
 		$(window).scroll(
 				function() {

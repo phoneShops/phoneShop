@@ -96,20 +96,21 @@
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
-				<div class="input-group input-group-md">
-					<div class="form-group">
-						<div class="col-sm-6">
+				<div class="row">
+						<div class="col-xs-4">
 							<select onchange="changeCity(this)" class="form-control"
 								name="Province" id="Province" data-dropdown-auto="true">
 								<option value="请选择省份" selected>请选择省份</option>
 							</select>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-xs-4">
 							<select class="form-control" name="City" id="City">
 								<option value="请选择城市" selected>请选择城市</option>
 							</select>
 						</div>
-					</div>
+						<div class="col-xs-4">
+							<a href="#idea">查看注册须知</a>
+						</div>
 				</div>
 				<br>
 				<br>
@@ -126,7 +127,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6" id="idea">
 			<h4>欢迎注册本站账号</h4>
 			<br>
 			<ul>

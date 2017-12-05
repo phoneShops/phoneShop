@@ -93,16 +93,29 @@
 						aria-describedby="sizing-addon1">
 				</div>
 				<br>
-				<br> <input id="code" style="width: 200px; height: 40px;" type="text" class="form-control" placeholder="验证码" aria-describedby="sizing-addon1"> 
-				<img style="width: 120px; height: 50px; position: absolute; top: 240px; left: 250px" id="imgObj" src="<%=basePath%>captcha/getCaptchaImage" onclick="changeImg()"> 
-				<input id="timestamp" name="timestamp" value="${timestamp }" type="hidden"> 
-				<a style="cursor: pointer; position: absolute; top: 260px; left: 380px" onclick="changeImg();">看不清，换一张？</a>
+				<br> 
+				
+				<div class="row">
+					<div class="col-xs-3">
+						<input id="code" style="width: 110px; height: 40px;" type="text" class="form-control" placeholder="验证码" aria-describedby="sizing-addon1"> 
+					</div>
+					<div class="col-xs-3">
+						<img style="width: 100px; height: 40px;" id="imgObj" src="<%=basePath%>captcha/getCaptchaImage" onclick="changeImg()"> 
+						<input id="timestamp" name="timestamp" value="${timestamp }" type="hidden"> 
+					</div>
+					<div class="col-xs-5">
+						<a style="cursor: pointer;" onclick="changeImg();">看不清,换一张？</a>
+					</div>
+					<div class="col-xs-1">
+					
+					</div>
+				</div>
 				<br>
 				<font id="font" style="visibility: hidden" color="#FF0000">XXXXXX</font>
 				<br>
 				<br>
 				<div class="well well-sm" style="text-align: right;">
-					<a href="" style="position: absolute; top: 350px; left: 25px">没有账号？马上注册</a>
+					<a href="<%=basePath %>user/toregister" style="position: absolute; top: 350px; left: 25px">没有账号？马上注册</a>
 					<a href="">忘记密码？立即找回</a>
 				</div>
 				<br>
