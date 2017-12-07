@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -68,7 +69,8 @@ td>div:last-child {
 </style>
 </head>
 <body>
-	<input type="hidden" name="pageNo" id="pageNo" value="1" />
+	<input type="hidden" name="pageNo" id="pageNo" value="4" />
+	<input type="hidden" name="oldsousuo" id="oldsousuo" value="s" />
 	<div class="white">
 		<table id="wrapper">
 			
@@ -91,31 +93,35 @@ td>div:last-child {
             aria-labelledby="myModalLabel" aria-hidden="true">
             <div id="loading" class="loading"><span id="loadfont">加载中。。。</span></div>
         </div>
-    </div>	
+    </div>
+    	
 </body>
 <script type="text/javascript">  
 
 var loading = false;
 	
+var SouSuo = "";	
 	
 $(function(){  
-    //query('01');//第一次加载  
+    
+    SouSuo = ${requestScope.sousuo};
+    
+    if(SouSuo!=$("#oldsousuo").val()){
+    	
+    	//$("#products").clear();
+    	$("#oldsousuo").val(SouSuo);
+    	
+    }
+    query();//第一次加载  
+    
 	loading = true;
+    
 });  
 
-
-function close(){
-	
-	$("#myModal").modal("hide");
-
-	
-}
-function query(type)  
+function query()  
 {  
-    
-	$("#myModal").modal("show");
 	
-	setTimeout('close()',2000);
+	$("#myModal").modal("show");
 	
 	var content = "";
 	
@@ -141,12 +147,19 @@ function query(type)
 	}
 	$("#products").append(content);
     
+	//获得初始的加载条数
+	var headnum = 0;
 	
-    
+	var endnum = $("#pageNo").val();
+	
+	
+    /*加载数据*/
     $.ajax({  
-        url : "<%=path%>/query",
+        url : "<%=path%>/product/queryProduct",
 			data : {
-  			pageNo : $("#pageNo").val()
+				headnum:endnum-4,
+				endnum:endnum,
+				pname:SouSuo
 			},
 			cache : false,
 			success : function(data) {
@@ -161,14 +174,6 @@ function query(type)
 							$("#pageNo").val(parseInt($("#pageNo").val()) - 1);
 							return "";
 						}
-						for (var i = 0; i < 8; i++) {
-
-							content = content + '<tr>' + '<td><div>'
-									+ data[i].id + '</div><div>' + 10
-									+ '</div></td>' + '<td>¥' + 6
-									+ '</td>' + '</tr>';
-						}
-						$("#wrapper").append(content);
 					} else {
 
 						for (var i = 0; i < 5; i++) {
@@ -192,12 +197,13 @@ function query(type)
 	Zepto(function($) {
 		$(window).scroll(
 				function() {
+						setTimeout('close()',1000);
 					if (($(window).scrollTop() + $(window).height() > $(
 							document).height() - 10)
 							&& loading) {
 						loading = false;
-						$("#pageNo").val(parseInt($("#pageNo").val()) + 1);
-						query("00");
+						$("#pageNo").val(parseInt($("#pageNo").val()) + 4);
+						query();
 					}
 				});
 	})
@@ -208,5 +214,12 @@ function query(type)
 			"margin-left" : "-25px"
 		});
 	}
+/*关闭加载框*/
+function close(){
+	
+	$("#myModal").modal("hide");
+
+	
+}
 </script>
 </html>
