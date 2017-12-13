@@ -59,9 +59,7 @@ public class ProductServiceImpl  implements ProductService{
 	 */
 	public List<Product> queryProductByType(int type,String headnum,String endnum){
 		
-		
-		
-		return null;
+		return productMapper.queryProductByType(type, headnum, endnum);
 	}
 
 

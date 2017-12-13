@@ -9,7 +9,7 @@ import com.phone.pojo.Product;
 public interface ProductMapper {
 	
 	
-	List<Product> queryProductByType(@Param("type") String type, @Param("headnum") String headnum,
+	List<Product> queryProductByType(@Param("type") int type, @Param("headnum") String headnum,
 			@Param("endnum") String endnum);	
 	
     /**
