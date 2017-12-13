@@ -103,8 +103,9 @@
 						<div class="dropdown-menu">
 							<div class="dropdown-inner">
 								<ul class="list-unstyled">
-									<li><a href="category.html">Window</a></li>
-									<li><a href="category.html">MacBook</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='windows'">Window</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='MacBook'">MacBook</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='Ipad'">Ipad</a></li>
 								</ul>
 							</div>
 						</div>
@@ -113,11 +114,11 @@
 						<div class="dropdown-menu" style="margin-left: -203.625px;">
 							<div class="dropdown-inner">
 								<ul class="list-unstyled">
-									<li><a href="category.html">Iphone</a></li>
-									<li><a href="category.html">Samsung</a></li>
-									<li><a href="category.html">Nokia</a></li>
-									<li><a href="category.html">Lenovo</a></li>
-									<li><a href="category.html">Google</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='苹果'">苹果</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='三星'">三星</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='诺基亚'">诺基亚</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='联想'">联想</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='谷歌'">谷歌</a></li>
 								</ul>
 								<ul class="list-unstyled">
 									<li><a href="category.html">Nexus</a></li>
@@ -163,7 +164,7 @@
 	 
 	 var brand = $("#brand").val();
 	 
-	 window.location.href="<%=basePath%>product/toProduct?sousuo="+brand; 
+	 window.location.href="<%=basePath%>product/toProduct?name="+brand; 
 	 
 	});
  
