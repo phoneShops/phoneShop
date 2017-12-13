@@ -24,6 +24,21 @@
     -->
     pid, pname, price, type_id, picture, detail, avg_price, discount
   </sql>
+  
+  <!-- 根据产品类型查询产品 -->
+  <select id="queryProductByType" resultMap="BaseResultMap" >
+      
+      
+    select 
+    	<include refid="Base_Column_List" />
+    from product
+    where typeId = #{type}
+    order by pid asc limit #{headnum},#{endnum}
+      
+      
+  </select>
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated

@@ -256,4 +256,28 @@ public class Product {
     public void setDiscount(Integer discount) {
         this.discount = discount;
     }
+
+    public Product() {
+		// TODO Auto-generated constructor stub
+	}
+    
+	public Product(Integer pid, String pname, Double price, Integer typeId, String picture, String detail,
+			Double avgPrice, Integer discount) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.price = price;
+		this.typeId = typeId;
+		this.picture = picture;
+		this.detail = detail;
+		this.avgPrice = avgPrice;
+		this.discount = discount;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", pname=" + pname + ", price=" + price + ", typeId=" + typeId + ", picture="
+				+ picture + ", detail=" + detail + ", avgPrice=" + avgPrice + ", discount=" + discount + "]";
+	}
+	
 }

@@ -61,7 +61,24 @@ public class Product_Type {
      *
      * @mbggenerated Fri Oct 27 10:55:21 CST 2017
      */
+    
+    public Product_Type() {
+		// TODO Auto-generated constructor stub
+	}
+    
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
+	public Product_Type(Integer typeId, String typeName) {
+		super();
+		this.typeId = typeId;
+		this.typeName = typeName;
+	}
+
+	@Override
+	public String toString() {
+		return "Product_Type [typeId=" + typeId + ", typeName=" + typeName + "]";
+	}
+    
 }

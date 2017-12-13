@@ -23,27 +23,29 @@ public class productController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/toProduct")
-	public Object toProduct(String sousuo){
+	public Object toProduct(String name){
 		ModelAndView mv=new ModelAndView("/product/product");  
-        mv.addObject("sousuo", sousuo);
-		
+        mv.addObject("name",name);
 		return  mv;
 	}
 	
 	/**
 	 * 查询商品
+	 * @param pname
+	 * @param headnum
+	 * @param endnum
+	 * @param status:标识 手机名称还是手机类型
+	 * @return
 	 */
 	@RequestMapping(value="/queryProduct")
 	@ResponseBody
 	public Object queryProduct(String pname,String headnum,String endnum){
 		
-		System.out.println(pname);
-		System.out.println(headnum);
-		System.out.println(endnum);
+		logger.info(pname);
+		logger.info(headnum);
+		logger.info(endnum);
 		
-		System.out.println(productService);
-		
-		
+		productService.queryProductByName(pname, headnum, endnum);
 		
 		return null;
 	}

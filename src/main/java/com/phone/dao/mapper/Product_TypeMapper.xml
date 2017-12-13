@@ -18,6 +18,15 @@
     -->
     type_id, type_name
   </sql>
+  
+  <!-- 查询所有的产品种类 -->
+  <select id="queryAllProductType" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_type
+  </select>
+  <!-- end -->
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

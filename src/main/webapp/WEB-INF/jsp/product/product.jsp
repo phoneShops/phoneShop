@@ -104,7 +104,7 @@ var SouSuo = "";
 	
 $(function(){  
     
-    SouSuo = ${requestScope.sousuo};
+    SouSuo = ${requestScope.name};
     
     if(SouSuo!=$("#oldsousuo").val()){
     	
@@ -113,18 +113,14 @@ $(function(){
     	
     }
     query();//第一次加载  
-    
 	loading = true;
-    
 });  
 
 function query()  
 {  
 	
 	$("#myModal").modal("show");
-	
 	var content = "";
-	
     for (var i = 0; i < 1; i++) {
 
 		content = content + '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">' 
@@ -141,13 +137,15 @@ function query()
 		        +'<div class="price">$122<span>$98</span></div>'
 		        +'<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>'
 		        +'</span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>'
-		        +'</div></div></div></div></div></div>'
-		        
-		        
+		        +'</div></div></div></div></div></div>'	        
 	}
-	$("#products").append(content);
     
-	//获得初始的加载条数
+	$("#products").append(content);
+	
+	//关闭加载弹框
+    close();
+	
+	//初始的加载条数
 	var headnum = 0;
 	
 	var endnum = $("#pageNo").val();
@@ -155,7 +153,7 @@ function query()
 	
     /*加载数据*/
     $.ajax({  
-        url : "<%=path%>/product/queryProduct",
+        url : "<%=basePath%>/product/queryProduct",
 			data : {
 				headnum:endnum-4,
 				endnum:endnum,
@@ -194,26 +192,28 @@ function query()
 			}
 		});
 	}
-	Zepto(function($) {
-		$(window).scroll(
-				function() {
-						setTimeout('close()',1000);
-					if (($(window).scrollTop() + $(window).height() > $(
-							document).height() - 10)
-							&& loading) {
-						loading = false;
-						$("#pageNo").val(parseInt($("#pageNo").val()) + 4);
-						query();
-					}
-				});
-	})
+/*滚动事件*/
+Zepto(function($) {
+	$(window).scroll(
+			function() {
+			setTimeout('',2000);
+				if (($(window).scrollTop() + $(window).height() > $(
+						document).height() - 10)
+						&& loading) {
+					loading = false;
+					$("#pageNo").val(parseInt($("#pageNo").val()) + 4);
+					query();
+				}
+			});
+})
 
-	var ua = navigator.userAgent.toLowerCase();
-	if (/android/.test(ua)) {
-		$('.date>div>img:last').css({
-			"margin-left" : "-25px"
-		});
-	}
+var ua = navigator.userAgent.toLowerCase();
+if (/android/.test(ua)) {
+	$('.date>div>img:last').css({
+		"margin-left" : "-25px"
+	});
+}
+	
 /*关闭加载框*/
 function close(){
 	
@@ -221,5 +221,7 @@ function close(){
 
 	
 }
+
+	
 </script>
 </html>
