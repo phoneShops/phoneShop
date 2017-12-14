@@ -23,7 +23,7 @@ public class ProductServiceImpl  implements ProductService{
 	
 
 	//根据前台出入的进行查询
-	public List<Product> queryProductByName(String name, String headnum, String endnum) {
+	public List<Product> queryProductByName(String name, int headnum, int endnum) {
 		
 		List<Product_Type> type_list =   product_TypeMapper.queryAllProductType();
 		
@@ -39,7 +39,6 @@ public class ProductServiceImpl  implements ProductService{
 				continue;
 			}
 		}
-		
 		 //状态是1代表是根据产品类型查询
 		if(status==1){
 			return this.queryProductByType(typeid, headnum, endnum);
@@ -58,7 +57,7 @@ public class ProductServiceImpl  implements ProductService{
 	/**
 	 * 根据产品类型进行查询
 	 */
-	public List<Product> queryProductByType(int type,String headnum,String endnum){
+	public List<Product> queryProductByType(int type,int headnum,int endnum){
 		
 		return productMapper.queryProductByType(type, headnum, endnum);
 	}

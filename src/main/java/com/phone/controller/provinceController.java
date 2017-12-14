@@ -26,7 +26,6 @@ public class provinceController {
 	@RequestMapping(value="/selectCity")
 	@ResponseBody
 	public Object selectCity(int pid){
-		System.out.println(pid);
 		return provinceService.selectAllCity(pid);
 		
 	}

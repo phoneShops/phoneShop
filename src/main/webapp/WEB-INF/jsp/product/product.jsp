@@ -10,7 +10,10 @@
 <head>
 <title>产品筛选</title>
 
+<link rel="stylesheet" href="<%=basePath %>css/dropload.css">
+
 <script src="<%=basePath %>js/zepto.min.js"></script>
+<script src="<%=basePath %>js/dropload.min.js"></script>
 
 <style>
 table {
@@ -69,7 +72,7 @@ td>div:last-child {
 </style>
 </head>
 <body>
-	<input type="hidden" name="pageNo" id="pageNo" value="4" />
+	<input type="hidden" name="pageNo" id="pageNo" value="0" />
 	<input type="hidden" name="oldsousuo" id="oldsousuo" value="s" />
 	<div class="white">
 		<table id="wrapper">
@@ -98,111 +101,102 @@ td>div:last-child {
 </body>
 <script type="text/javascript">  
 
-var loading = false;
 	
 var SouSuo = "";	
+
+//初始的加载条数
+var startnum = 0;
 	
 $(function(){  
-    
+	
     SouSuo = ${requestScope.name};
-    
     if(SouSuo!=$("#oldsousuo").val()){
-    	
     	//$("#products").clear();
     	$("#oldsousuo").val(SouSuo);
-    	
     }
     query();//第一次加载  
-	loading = true;
 });  
+
 
 function query()  
 {  
 	
 	$("#myModal").modal("show");
-	var content = "";
-    for (var i = 0; i < 1; i++) {
-
-		content = content + '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">' 
-		        + '<div class="product">'
-		        +'<div class="image" <a href="product.html">>'
-		        +'<img src="<%=basePath %>images/Z1.png" />'
-		        +'</a></div>'
-		        +'<div class="buttons">'
-		        +'<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>'
-		        +'<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>'
-		        +'<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>'
-		        +'</div><div class="caption">'
-		        +'<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>'
-		        +'<div class="price">$122<span>$98</span></div>'
-		        +'<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>'
-		        +'</span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>'
-		        +'</div></div></div></div></div></div>'	        
-	}
+	
+	
+    startnum = $("#pageNo").val();
+	
     
-	$("#products").append(content);
-	
-	//关闭加载弹框
-    close();
-	
-	//初始的加载条数
-	var headnum = 0;
-	
-	var endnum = $("#pageNo").val();
-	
-	
     /*加载数据*/
     $.ajax({  
         url : "<%=basePath%>/product/queryProduct",
 			data : {
-				headnum:endnum-4,
-				endnum:endnum,
+				headnum:startnum,
+				endnum:4,
 				pname:SouSuo
 			},
 			cache : false,
 			success : function(data) {
 				loading = true;
-				if (data == null) {
-
-					$("#pageNo").val(parseInt($("#pageNo").val()) - 1);
-				} else {
+				
+				if (data.length>0 && data.length <= 4) {
 					var content = "";
-					if (type == "00") {
-						if (data.length == 0) {
-							$("#pageNo").val(parseInt($("#pageNo").val()) - 1);
-							return "";
-						}
-					} else {
-
-						for (var i = 0; i < 5; i++) {
-
-							content = content + '<tr>' + '<td><div>'
-									+ data[i].id + '</div><div>' + 12
-									+ '</div></td>' + '<td>¥' + 5
-									+ '</td>' + '</tr>';
-						}
-						$("#wrapper").html(content);
+					
+				    for (var i = 0; i < data.length; i++) {
+				    	
+				    	 content  = "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12'>"
+								+ "<div class='product'>"
+								+ "<div class='image' <a href='product.html'>>"
+								+ "<img src=<%=basePath%>images"+data[i].picture
+								+">"
+								+"</a></div>"
+								+"<div class='buttons'>"
+								+"<a class='btn cart' href='#'><span class='glyphicon glyphicon-shopping-cart'></span></a>"
+								+"<a class='btn wishlist' href='#'><span class='glyphicon glyphicon-heart'></span></a>"
+								+"<a class='btn compare' href='#'><span class='glyphicon glyphicon-transfer'></span></a>"
+								+"</div><div class='caption'>"
+								+"<div class='name'><h3><a href='product.html'>Aliquam erat volutpat</a></h3></div>"
+								+"<div class='price'>$122<span>$98</span></div>"
+								+"<div class='rating'><span class='glyphicon glyphicon-star'>"
+								+"</span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>"
+								+"</span><span class='glyphicon glyphicon-star'></span>"
+								+"<span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></div>"
+								+"</div></div></div></div></div></div>"
+							$("#products").append(content);
 					}
+				    
+					var a = parseInt($("#pageNo").val());
+					
+					$("#pageNo").val(parseInt($("#pageNo").val()+4));
+				} else{
+					$("#pageNo").val(-1);
 				}
+					//关闭加载弹框
+    				close();
 			},
 			error : function() {
 				loading = true;
-				$("#pageNo").val(parseInt($("#pageNo").val()) - 1);
+				$("#pageNo").val(parseInt($("#pageNo").val(-1)));
 				_alert("查询数据出错啦，请刷新再试");
 			}
 		});
 	}
+
+
+
+	
 /*滚动事件*/
 Zepto(function($) {
 	$(window).scroll(
 			function() {
-			setTimeout('',2000);
-				if (($(window).scrollTop() + $(window).height() > $(
-						document).height() - 10)
+				if (($(window).scrollTop() + $(window).height() > $(document).height())
 						&& loading) {
-					loading = false;
-					$("#pageNo").val(parseInt($("#pageNo").val()) + 4);
-					query();
+					if(parseInt($("#pageNo").val())==-1){
+						
+						alert("没有更多数据！");
+						return;
+					}
+						query();
 				}
 			});
 })
@@ -213,6 +207,7 @@ if (/android/.test(ua)) {
 		"margin-left" : "-25px"
 	});
 }
+	
 	
 /*关闭加载框*/
 function close(){

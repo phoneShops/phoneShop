@@ -31,7 +31,7 @@
     select 
     	<include refid="Base_Column_List" />
     from product
-    where typeId = #{type}
+    where type_id = #{type}
     order by pid asc limit #{headnum},#{endnum}
       
   </select>	
