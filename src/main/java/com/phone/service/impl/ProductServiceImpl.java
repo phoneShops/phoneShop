@@ -28,6 +28,7 @@ public class ProductServiceImpl  implements ProductService{
 		List<Product_Type> type_list =   product_TypeMapper.queryAllProductType();
 		
 		int status = 0;
+		//初始化种类id
 		int typeid = 0;
 		for (int i = 0; i < type_list.size(); i++) {
 			if(type_list.get(i).getTypeName().equals(name)){
