@@ -32,9 +32,7 @@ public class UserServiceImpl implements UserService {
 		/**
 		 * 输入的是手机号
 		 */
-
 		User user = null;
-
 		if (status == 0) {
 			user = usermapper.selectUserByPhone(username);
 			if (user == null) {

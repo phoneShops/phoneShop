@@ -96,12 +96,6 @@ public class userController  extends BaseController{
 	public Object checkRegister(User user){
 		JsonObject json = new JsonObject();
 		
-//		logger.info(user.getCard());
-//		logger.info(user.getCid());
-//		logger.info(user.getPid());
-//		logger.info(user.getPhone());
-//		logger.info(user.getAddress());
-		
 		int i = userService.registerUser(user);
 		if(i==1){
 			json.addProperty("msg","用户名已经存在"); 
