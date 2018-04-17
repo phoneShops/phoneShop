@@ -127,4 +127,15 @@ public class userController  extends BaseController{
 		}
 		return new Gson().toJson(json);			
 	}
+	
+	//用户注销
+	@RequestMapping(value="/userLog_On")
+	public Object userLog_On(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		
+		return "user/Home";
+		
+		
+	}
 }

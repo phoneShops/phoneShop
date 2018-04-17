@@ -153,8 +153,9 @@
 	 
 	 if(data.value==1){
 		   window.location.href = "<%=basePath%>user/topassword";
-		 
-		 
+	 }else if(data.value==5){
+		 //用户进行注销
+		 window.location.href = "<%=basePath%>user/userLog_On"
 	 }
 	 
 	 
