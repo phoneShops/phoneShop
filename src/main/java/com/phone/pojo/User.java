@@ -9,8 +9,6 @@ public class User {
      * This field corresponds to the database column user.uid
      *
      * @mbggenerated Tue Oct 10 16:25:09 CST 2017
-     * 
-     * 你好
      */
     private Integer uid; 
 
