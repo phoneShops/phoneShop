@@ -6,7 +6,7 @@ public class City {
      * This field corresponds to the database column city.cid
      *
      * @mbggenerated Tue Oct 10 16:25:09 CST 2017
-     * list
+     * list 
      */
     private Double cid;
 
