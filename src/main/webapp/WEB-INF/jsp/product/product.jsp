@@ -56,10 +56,10 @@ td>div:last-child {
     height: 56px;
     position: absolute;
     top: 50%;
-    left: 35%;
-    line-height: 56px;
+    left: 45%;
+    line-height: 65px;
     color: #fff;
-    padding-left: 60px;
+    padding-left: 50px;
     font-size: 15px;
     background: #000 url(../loading/image/loading.gif) no-repeat 10px 50%;
     opacity: 0.7;

@@ -2,7 +2,6 @@ package com.phone.dao;
 
 import java.util.List;
 
-import com.phone.pojo.Product;
 import com.phone.pojo.Product_Type;
 
 public interface Product_TypeMapper {
