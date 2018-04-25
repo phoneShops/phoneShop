@@ -29,7 +29,7 @@ public class productController extends BaseController {
 	@RequestMapping(value = "/toProduct")
 	public Object toProduct(String name) {
 		ModelAndView mv = new ModelAndView("/product/product");
-		mv.addObject("name", name);
+		mv.addObject("name", name); 
 		return mv;
 	}
 
@@ -51,8 +51,7 @@ public class productController extends BaseController {
 		logger.info(headnum);
 		logger.info(endnum);
 
-		List<Product> list = productService.queryProductByName(pname, Integer.valueOf(headnum),
-				Integer.valueOf(endnum));
+		List<Product> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
 		
 		logger.info(list.size());
 
