@@ -4,12 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.phone.controller.base.BaseController;
 
 @Controller
 @RequestMapping("/ViewManage")
 public class ViewController extends BaseController{
+	private  ModelAndView model = new ModelAndView();
 	@RequestMapping(value="/toViewTop")
 	public Object toHome1(HttpServletRequest request ){
 		return "manage/top";
@@ -22,5 +24,10 @@ public class ViewController extends BaseController{
 	public Object toHome3(HttpServletRequest request ){
 		return "manage/index";
 	}
-	
+	//用户信息管理控制
+	@RequestMapping("/ManagerMession")
+	public ModelAndView toStaff(){
+		model.setViewName("manage/userMession");
+		return model;
+	}
 }
