@@ -5,6 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
 <title>左边栏</title>
 
 <link href="../houtaicss/style.css" rel="stylesheet" type="text/css" />
@@ -40,7 +46,7 @@ $(function(){
     <span><img src="../houtaiimages/leftico01.png" /></span>管理信息
     </div>
     	<ul class="menuson">
-        <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
+        <li><cite></cite><a href="<%=basePath %>ViewManage/ManagerMession" target="rightFrame">用户信息管理</a><i></i></li>
         <li class="active"><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
         <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
         <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
