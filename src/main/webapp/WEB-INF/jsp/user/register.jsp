@@ -172,7 +172,7 @@ function selectProvince(){
 			success : function(data) {
 				for (var i = 0; i < data.length; i++) {
 
-					var op = $("<option value="+data[i].pid+">"+ data[i].pname + "</option>");
+					var op = $("<option value="+data[i].pvId+">"+ data[i].pname + "</option>");
 					sel.append(op);
 				}
 				
@@ -186,6 +186,7 @@ function selectProvince(){
 		var province = $("#Province").val();
 		
 		selcity.empty();
+		
 		
 		$.ajax({
 			url:'<%=basePath%>province/selectCity?pid='+province,
