@@ -1,6 +1,7 @@
 package com.phone.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -51,7 +52,8 @@ public class productController extends BaseController {
 		logger.info(headnum);
 		logger.info(endnum);
 
-		List<Product> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
+//		List<Product> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
+		List<Map<Object,Object>> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
 		
 		logger.info(list.size());
 
