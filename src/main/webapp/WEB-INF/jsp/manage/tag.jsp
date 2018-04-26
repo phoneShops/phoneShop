@@ -5,7 +5,8 @@
 <c:set var="ctx" scope="application" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="img" scope="application" value="http://sggggg.oss-cn-hangzhou.aliyuncs.com/"></c:set>
 <!-- Vendor CSS-->
-<%-- <link rel="stylesheet" href="${request.getContextPath()}/bootstrap/css/bootstrap.css" /> --%>
+
+<link rel="stylesheet" href="${request.getContextPath()}/css/bootstrap.css" /> 
 <link rel="stylesheet" href="${request.getContextPath()}/css/bootstrap.min.css" />
 <script type="text/javascript" src="${request.getContextPath()}/js/jquery-3.1.1.min.js" ></script>
 <script src="${request.getContextPath()}/layer/layer.js" type="text/javascript"></script>

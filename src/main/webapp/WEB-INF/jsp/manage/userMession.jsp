@@ -5,14 +5,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>用户管理</title>  
-        
-          <%@include file="/WEB-INF/jsp/manage/tag.jsp"%>
-        
-      <%
+          <%
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 		%>      
+          <%@include file="/WEB-INF/jsp/manage/tag.jsp"%>
 		
 	
 		
@@ -27,7 +25,7 @@
 		<input type="text" id="queryKey" placeholder="用户姓名或用户ID" style="height: 40px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#" ><i class="icon-search icon-2x" title="搜索" onclick="search()"> </i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- 新增用户 -->
-		<!-- <a href="#" ><i class="icon-plus-sign icon-2x" title="新增员工" onclick="add()"> </i></a> -->
+		<a href="#" ><i class="icon-plus-sign icon-2x" title="新增员工" onclick="add()"> </i></a>
 	
 	</div>
 	
@@ -46,8 +44,8 @@
     	 <p><span style="font-family: '微软雅黑';font-size: 18px;">小时工资：</span><input type="text" id="hourlyPay"/></p>
     	  <p><span style="font-family: '微软雅黑';font-size: 18px;">&nbsp;&nbsp;&nbsp;月工资：</span><input type="text" id="monthlyWages"/></p>
     	 <p><span style="font-family: '微软雅黑';font-size: 18px;">身份证号：</span><input type="text" id="IDNumber"/></p>
-	</div>
-	
+	</div>	
  	</body>
+ 		
 	<script type="text/javascript" src="<%=basePath %>houtaijs/MyJs/userMession.js"></script>
 </html>

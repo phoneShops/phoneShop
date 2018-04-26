@@ -231,4 +231,44 @@
       status = #{status,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+  <!-- 根据索引查询
+  	lirs
+  	2018/4/26
+   -->
+   <!-- 根据索引返回用户信息  -->
+	<select id="queryUser" parameterType="map" resultType="com.phone.pojo.User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE 1=1
+			<if test="key != null and key !='' ">
+		 	AND 
+		 			( username like CONCAT('%',#{key},'%')
+		 		OR 
+		 			card like CONCAT('%',#{key},'%') )
+			</if>
+		ORDER BY 
+			status 	DESC
+		LIMIT 
+			#{pageIndex},#{pageSize}
+	</select>
+	
+	<!-- 返回用户总数  -->
+	<select id="queryUserCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			user
+		WHERE 1=1
+			<if test="key != null and key !='' ">
+		 	AND 
+		 			( username like CONCAT('%',#{key},'%')
+		 		OR 
+		 			card like CONCAT('%',#{key},'%') )
+			</if>
+		ORDER BY 
+		status 	DESC
+	</select>
+	
 </mapper>

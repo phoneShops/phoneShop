@@ -80,7 +80,7 @@ $(function() {
 	 	function loadTable() {
 			$('#table').bootstrapTable(
 							{
-								url : '/petshop/Emp/QueryEmp.do',
+								url : '/csp/mannage/userList',
 								dataType : "json",
 								toolbar : '#toolbar', //工具按钮用哪个容器
 								pagination : true, //分页
@@ -97,10 +97,10 @@ $(function() {
 										key : $("#queryKey").val()
 									}
 								},
-								pageList : [ 10, 25, 50, 100 ], //可供选择的每页的行数（*） 
+								pageList : [ 5, 10, 15, 20 ], //可供选择的每页的行数（*） 
 								columns : [
 										{
-											field : 'E_id',
+											field : 'uid',
 											title : '序号',
 											align : 'center',
 											width:'50',
@@ -109,58 +109,44 @@ $(function() {
 											}
 										},
 										{
-											field : 'E_name',
-											title : '员工姓名',
+											field : 'username',
+											title : '用户姓名',
 											align : 'center',
 											width:'20',
 										},
 										{
-											field : 'E_sex',
-											title : '员工性别',
+											field : 'card',
+											title : '身份证',
 											align : 'center',
 											width:'10'
 										},
 										{
-											field : 'E_tel',
+											field : 'phone',
 											title : '手机号码',
 											align : 'center',
 											width:'50'
 										},
 										{
-											field : 'E_adress',
+											field : 'address',
 											title : '家庭住址',
 											align : 'center',
 											width:'50'
 										},
 										{
-											field : 'E_pwd',
-											title : '登陆密码',
+											field : 'regTime',
+											title : '注册时间',
 											align : 'center',
 											width:'50'
 										},
-										
 										{
-											field : 'E_class',
-											title : '员工等级',
+											field : 'loginTime',
+											title : '登陆时间',
 											align : 'center',
-											width:'10'
-										},
-										
-										{
-											field : 'E_salary',
-											title : '员工薪水',
-											align : 'center',
-											width:'20'
-										},					
-										{
-											field : 'E_time',
-											title : '入职时间',
-											align : 'center',
-											width:'20'
+											width:'50'
 										},
 										{
-											field : 'E_statue',
-											title : '员工状态',
+											field : 'statue',
+											title : '用户状态',
 											align : 'center',
 											width:'10',
 											formatter : function(value, row, index) {
