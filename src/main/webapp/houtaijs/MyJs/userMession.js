@@ -77,10 +77,11 @@ $(function() {
  		})
  	}
  	
+ 	
 	 	function loadTable() {
 			$('#table').bootstrapTable(
 							{
-								url : '/csp/mannage/userList',
+								url : '/phone/mannage/userList',
 								dataType : "json",
 								toolbar : '#toolbar', //工具按钮用哪个容器
 								pagination : true, //分页
