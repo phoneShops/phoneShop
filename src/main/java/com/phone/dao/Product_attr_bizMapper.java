@@ -1,5 +1,7 @@
 package com.phone.dao;
 
+import java.util.List;
+
 import com.phone.pojo.Product_attr_biz;
 
 public interface Product_attr_bizMapper {
@@ -50,4 +52,8 @@ public interface Product_attr_bizMapper {
      * @mbggenerated Wed Apr 25 08:18:24 CST 2018
      */
     int updateByPrimaryKey(Product_attr_biz record);
+
+	List<Product_attr_biz> qryProductAttrByPid(int pid);
+    
+    
 }

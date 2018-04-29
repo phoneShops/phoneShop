@@ -128,4 +128,25 @@ public class Product_picture {
     public void setPrStatus(Integer prStatus) {
         this.prStatus = prStatus;
     }
+    
+    public Product_picture() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Product_picture(Integer prId, Integer pid, String prAddress, Integer prStatus) {
+		super();
+		this.prId = prId;
+		this.pid = pid;
+		this.prAddress = prAddress;
+		this.prStatus = prStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Product_picture [prId=" + prId + ", pid=" + pid + ", prAddress=" + prAddress + ", prStatus=" + prStatus
+				+ "]";
+	}
+    
+    
+    
 }

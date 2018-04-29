@@ -99,7 +99,7 @@
 								<br>
 								<div class="name"><button type="button" style="border:0px;" class="btn-danger btn-primary"><a id="PRODUCT_DETAIL">查看更多配置信息</a></button></div><br><br><br>
 								
-								<div class="name"><button type="button" style="border:0px;width:300px;height:50px" class="btn-danger btn-primary btn-lg">立即购买</button></div><br>								
+								<div class="name"><button type="button" style="border:0px;width:300px;height:50px" class="btn-danger btn-primary btn-lg" onclick="buy();">立即购买</button></div><br>								
 						</div>
 						<div class="clear"></div>
 					</div>	
@@ -151,6 +151,10 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 	
+	<!-- 隐藏域：用于隐藏所需值 -->
+	<input type="text" id="PID_VAL" value="">
+	
+	
 <script>
 
 var pid;
@@ -162,6 +166,9 @@ $(function(){
     $("#myModal").modal("show");
     
     if(pid!=''){
+    	
+    	$("#PID_VAL").val(pid);
+    	
 	  	//查询产品详细信息
 	  	qryProductDetail(pid);
       	//查询产品图片地址信息

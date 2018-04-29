@@ -56,4 +56,7 @@ public interface Product_pictureMapper {
      * @mbggenerated Wed Apr 25 09:35:13 CST 2018
      */
     int updateByPrimaryKey(Product_picture record);
+
+    //查询一个产品的所有图片信息
+	List<Product_picture> qryAllProductPictureByPid(int pid);
 }

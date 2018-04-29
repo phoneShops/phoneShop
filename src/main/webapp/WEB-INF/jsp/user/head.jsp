@@ -1,6 +1,5 @@
 <%@page import="com.phone.pojo.User"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -98,7 +97,7 @@
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="index.html">主页</a></li>
+					<li><a href="/phone/user/toHome">主页</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">平板系列</a>
 						<div class="dropdown-menu">
 							<div class="dropdown-inner">
@@ -121,18 +120,14 @@
 									<li><a href="<%=basePath%>product/toProduct?name='谷歌'">谷歌</a></li>
 								</ul>
 								<ul class="list-unstyled">
-									<li><a href="category.html">Nexus</a></li>
-									<li><a href="category.html">Dell</a></li>
-									<li><a href="category.html">Oppo</a></li>
-									<li><a href="category.html">Blackberry</a></li>
-									<li><a href="category.html">HTC</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='Nexus'">Nexus</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='HTC'">HTC</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='OPPO'">OPPO</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='Blackberry'">Blackberry</a></li>
 								</ul>
 								<ul class="list-unstyled">
-									<li><a href="category.html">LG</a></li>
-									<li><a href="category.html">Q-Mobiles</a></li>
-									<li><a href="category.html">Sony</a></li>
-									<li><a href="category.html">Wiko</a></li>
-									<li><a href="category.html">T&T</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='LG'">LG</a></li>
+									<li><a href="<%=basePath%>product/toProduct?name='SONY'">Q-SONY</a></li>
 								</ul>
 							</div>
 						</div>

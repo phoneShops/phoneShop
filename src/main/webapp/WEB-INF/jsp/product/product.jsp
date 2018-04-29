@@ -16,58 +16,23 @@
 <script src="<%=basePath %>js/dropload.min.js"></script>
 
 <style>
-table {
-	width: 100%;
-	padding: 0 15px;
-	background: #fff;
-	border-collapse: collapse;
-}
-
-table td {
-	padding: 6px 0;
-	width: 33%;
-	border-bottom: 1px solid #e1e1e1;
-}
-
-tr td:nth-child(2) {
-	text-align: center;
-}
-
-tr td img {
-	width: 24px;
-	vertical-align: middle;
-}
-
-tr td:last-child {
-	text-align: right;
-}
-
-td>div:first-child {
-	/*margin-bottom: -6px;*/
-	
-}
-
-td>div:last-child {
-	color: #9C9C9C;
-}
-
-.loading {
-    width: 160px;
-    height: 56px;
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    line-height: 65px;
-    color: #fff;
-    padding-left: 50px;
-    font-size: 15px;
-    background: #000 url(../loading/image/loading.gif) no-repeat 10px 50%;
-    opacity: 0.7;
-    z-index: 9999;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    border-radius: 20px;
-    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+.loading{  
+    width:160px;  
+    height:56px;  
+    position: absolute;  
+    top:50%;  
+    left:45%;  
+    line-height:56px;  
+    color:#fff;  
+    padding-left:60px;  
+    font-size:15px;  
+    background: #000 url(<%=basePath%>images/img/loading.gif) no-repeat 65px 50%;  
+    opacity: 0.7;  
+    z-index:9999;  
+    -moz-border-radius:2px;  
+    -webkit-border-radius:2px;  
+    border-radius:2px;  
+}  
 }
 </style>
 </head>
@@ -82,7 +47,7 @@ td>div:last-child {
 	
 	<div class="row">
 			<div class="col-lg-12">
-				<div class="heading"><h2>最新产品</h2></div>
+				<center><div class="heading"><h6>产品列表</h6></div></center>
 				<div class="products" id = "products">
 							
 				</div>
@@ -94,7 +59,7 @@ td>div:last-child {
         <div id="myModal" class="modal fade" data-keyboard="false"
             data-backdrop="static" data-role="dialog"
             aria-labelledby="myModalLabel" aria-hidden="true">
-            <div id="loading" class="loading"><span id="loadfont">加载中。。。</span></div>
+            <div id="loading" class="loading"><span id="loadfont"></span></div>
         </div>
     </div>
     	
@@ -106,6 +71,15 @@ var SouSuo = "";
 
 //初始的加载条数
 var startnum = 0;
+	
+
+function toDetail(pid){
+	
+	//跳转到详情页并带pid过去
+	window.location.href='<%=basePath %>product/toProductDetail?pid='+pid;
+	
+}
+	
 	
 $(function(){  
 	
@@ -144,10 +118,11 @@ function query()
 					
 				    for (var i = 0; i < data.length; i++) {
 				    	
-				    	 content  = "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12'>"
+				    	 content  = "<div class='col-lg-2 col-md-6 col-sm-6 col-xs-12'>"
+				    	 		+ "<div></div>"
 								+ "<div class='product'>"
-								+ "<div class='image' <a href='product.html'>>"
-								+ "<img src=<%=basePath%>images"+data[i].picture
+								+ "<div class='image' <a onclick='toDetail("+data[i].product.pid+"); '>"
+								+ "<img class='img-responsive'  src=<%=basePath%>images"+data[i].address
 								+">"
 								+"</a></div>"
 								+"<div class='buttons'>"
@@ -155,12 +130,10 @@ function query()
 								+"<a class='btn wishlist' href='#'><span class='glyphicon glyphicon-heart'></span></a>"
 								+"<a class='btn compare' href='#'><span class='glyphicon glyphicon-transfer'></span></a>"
 								+"</div><div class='caption'>"
-								+"<div class='name'><h3><a href='product.html'>Aliquam erat volutpat</a></h3></div>"
-								+"<div class='price'>$122<span>$98</span></div>"
-								+"<div class='rating'><span class='glyphicon glyphicon-star'>"
-								+"</span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>"
-								+"</span><span class='glyphicon glyphicon-star'></span>"
-								+"<span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></div>"
+								+"<div class='name'><font><a href='product.html'>"+data[i].product.pname+"</a></font>  剩余：<span>"+data[i].product.stock+"</span></div>"
+								+"<div class='name'><font>价格：</font><span>"+data[i].product.price+"</span></div>"
+								+"<div class='rating'>"
+								+"<button type='button' class='btn btn-success' onclick='toDetail("+data[i].product.pid+"); '><span class='name'>查看详情</span></button></div>"
 								+"</div></div></div></div></div></div>"
 							$("#products").append(content);
 					}
@@ -170,6 +143,7 @@ function query()
 					$("#pageNo").val(parseInt($("#pageNo").val()+4));
 				} else{
 					$("#pageNo").val(-1);
+					alert("没有更多数据！");
 				}
 					//关闭加载弹框
     				close();
@@ -177,11 +151,11 @@ function query()
 			error : function() {
 				loading = true;
 				$("#pageNo").val(parseInt($("#pageNo").val(-1)));
-				_alert("查询数据出错啦，请刷新再试");
+				$('#loadfont').html("查询数据出错啦，请刷新再试");
+				close();
 			}
 		});
 	}
-
 
 
 	
@@ -207,14 +181,12 @@ if (/android/.test(ua)) {
 		"margin-left" : "-25px"
 	});
 }
+
 	
 	
 /*关闭加载框*/
 function close(){
-	
 	$("#myModal").modal("hide");
-
-	
 }
 
 	

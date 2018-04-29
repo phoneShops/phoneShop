@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.phone.dao.ProductMapper;
 import com.phone.dao.Product_TypeMapper;
+import com.phone.dao.Product_attr_bizMapper;
 import com.phone.dao.Product_pictureMapper;
 import com.phone.pojo.Product;
 import com.phone.pojo.Product_Type;
+import com.phone.pojo.Product_attr_biz;
 import com.phone.pojo.Product_picture;
-import com.phone.pojo.bean.productBean;
 import com.phone.service.ProductService;
 
 @Service("productService")
@@ -29,6 +30,9 @@ public class ProductServiceImpl  implements ProductService{
 	
 	@Resource
 	private Product_pictureMapper product_pictureMapper;
+	
+	@Resource
+	private Product_attr_bizMapper product_attr_bizMapper;
 	
 
 	//根据前台出入的进行查询
@@ -89,6 +93,31 @@ public class ProductServiceImpl  implements ProductService{
 	public List<Map<Object,Object>> queryProductByType(int type,int headnum,int endnum){
 		
 		return productMapper.queryProductByType(type, headnum, endnum);
+	}
+
+	/**
+	 * 根据产品id查询
+	 */
+	public Product qryProductByPid(int pid) {
+		
+		return	productMapper.selectByPrimaryKey(pid);
+	}
+
+	/**
+	 * 查询产品图片信息
+	 */
+	public List<Product_picture> qryProductPictureByPid(int pid) {
+		return product_pictureMapper.selectProductPicture(pid);
+	}
+
+	@Override
+	public List<Product_attr_biz> qryProductAttrByPid(int pid) {
+		return product_attr_bizMapper.qryProductAttrByPid(pid);
+	}
+
+	@Override
+	public List<Product_picture> qryAllProductPictureByPid(int pid) {
+		return product_pictureMapper.qryAllProductPictureByPid(pid);
 	}
 
 

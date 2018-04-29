@@ -288,4 +288,32 @@ public class Product {
     public void setStatus(Integer status) {
         this.status = status;
     }
+    
+    public Product() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", pname=" + pname + ", typeId=" + typeId + ", price=" + price + ", discount="
+				+ discount + ", describes=" + describes + ", detail=" + detail + ", stock=" + stock + ", status="
+				+ status + "]";
+	}
+
+	public Product(Integer pid, String pname, Integer typeId, Double price, Integer discount, String describes,
+			String detail, Integer stock, Integer status) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.typeId = typeId;
+		this.price = price;
+		this.discount = discount;
+		this.describes = describes;
+		this.detail = detail;
+		this.stock = stock;
+		this.status = status;
+	}
+    
+    
+    
 }
