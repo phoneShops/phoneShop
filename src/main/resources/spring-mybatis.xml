@@ -49,7 +49,7 @@
                         <!-- 验证码字体大小 -->  
                         <prop key="kaptcha.textproducer.font.size">80</prop>  
                         <!-- 验证码所属字体样式 -->  
-                        <prop key="kaptcha.textproducer.font.names">楷体</prop>  
+                        <prop key="kaptcha.textproducer.font.names">宋体</prop>  
                         <!-- 干扰线颜色 -->  
                         <prop key="kaptcha.noise.color">black</prop>  
                         <!-- 验证码文本字符间距 -->  
