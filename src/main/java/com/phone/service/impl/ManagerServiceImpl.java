@@ -26,6 +26,16 @@ public class ManagerServiceImpl implements ManagerService{
 				;
 	}
 
-	
+	@Override
+	public int updateUser(User staff) {
+		// TODO Auto-generated method stub
+		return usermapper.updateUser(staff);
+	}
+
+	@Override
+	public int editStatu(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return usermapper.editStatu(map);
+	}
 
 }

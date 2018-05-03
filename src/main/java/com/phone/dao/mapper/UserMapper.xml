@@ -271,4 +271,21 @@
 		status 	DESC
 	</select>
 	
+	<!-- 修改用户信息 -->
+	<update id="updateUser" parameterType="com.phone.pojo.User">
+		UPDATE user
+		SET username = #{username},
+		 phone = #{phone},
+		adress=#{adress}
+		WHERE
+			card = #{card}
+	</update>
+	
+	<!-- 修改用户状态信息 -->
+	<update id="editStatu" parameterType="map">
+		UPDATE user
+		SET status = #{status}
+		WHERE
+			uid = #{uid}
+	</update>
 </mapper>

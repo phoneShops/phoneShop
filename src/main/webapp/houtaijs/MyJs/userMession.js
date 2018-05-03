@@ -16,11 +16,10 @@ $(function() {
  		$("IDCard").val();
  	}
  	/* 
- 	*number:员工编码
- 	*statu:员工状态
- 	*根据员工编码修改员工状态
+ 	*status:用户状态
+ 	*根据用户uid修改员工状态
  	*/
- 	function editStatus(number,status){
+ 	function editStatus(uid,status){
  		layer.confirm('确定修改', {
  	 		btn : [ '确定', '取消' ]
  	 	//按钮
@@ -31,11 +30,11 @@ $(function() {
 			statu = 1;
 		}
  		$.ajax({
- 			url : '/sys/staff/editStatu.do',
+ 			url : '/phone/mannage/editUser',
  			type : 'post',
  			data : {
- 				'repairmanNo' : number,
- 				'statu' : statu
+ 				'uid' : number,
+ 				'status' : status
  			},
  			async:false,
 		  	cache : false,
@@ -51,32 +50,6 @@ $(function() {
  	 	});
  		
  	}
- 	/*
- 	*number:员工编码
- 	*根据编码获取员工信息
- 	*/
- 	function getStaff(repairmanNo){
- 		$.ajax({
- 			url : '/sys/staff/queryStaffByNo.do',
- 			type : 'post',
- 			data : {
-      		  "repairmanNo" : repairmanNo
-	      	  },
-	      	  async:false,
-			  cache : false,
-			  success:function(data){
-				  	console.log(data);
-					var staff =  data.staff;
-					$("#repairmanNo").val(staff.repairmanNo);
-					$("#repairmanName").val(staff.repairmanName);
-					$("#monthlyWages").val(staff.monthlyWages);
-					$("#tel").val(staff.phone);
-					$("#hourlyPay").val(staff.hourlyPay);
-					$("#IDNumber").val(staff.iDNumber);
-			  }
- 		})
- 	}
- 	
  	
 	 	function loadTable() {
 			$('#table').bootstrapTable(
@@ -140,12 +113,6 @@ $(function() {
 											width:'50'
 										},
 										{
-											field : 'loginTime',
-											title : '登陆时间',
-											align : 'center',
-											width:'50'
-										},
-										{
 											field : 'statue',
 											title : '用户状态',
 											align : 'center',
@@ -153,25 +120,25 @@ $(function() {
 											formatter : function(value, row, index) {
 												var statu = "";
 												if (row.statu==0) {
-													statu = "已离职";
+													statu = "已销户";
 												}else{
-													statu = "在职";
+													statu = "正常";
 												}
 												return statu;
 											}
 										},
 										{
 											title : '操作',
-											field : 'E_id',
+											field : 'uid',
 											align : 'center',
 											width:'20',
 											formatter : function(value, row, index) {
-												var e = '<a href="#"><i class="icon-edit" title="编辑" onclick="editRepair(\''+row.E_id +'\')" ></i></a>';
+												var e = '<a href="#"><i class="icon-edit" title="编辑" onclick="editRepair(\''+row.uid +'\')" ></i></a>';
 												var c = "";
 												if (row.statu==0) {
-													c = '<a href="#"><i class="icon-lock" title="重新入职" onclick="editStatus(\''+row.E_id +'\',\''+row.statu +'\')"></i></a>';
+													c = '<a href="#"><i class="icon-lock" title="重新入户" onclick="editStatus(\''+row.uid +'\',\''+row.status +'\')"></i></a>';
 												}else{
-													c = '<a href="#"><i class="icon-unlock" title="离职" onclick="editStatus(\''+row.E_id +'\',\''+row.statu +'\')"></i></a>';
+													c = '<a href="#"><i class="icon-unlock" title="销户" onclick="editStatus(\''+row.uid +'\',\''+row.status+'\')"></i></a>';
 												}
 												
 												return e+ " | " + c;
@@ -181,84 +148,20 @@ $(function() {
 							});
 		}
 	 	
-	 	function loadDialog() {
-	 		$("#add").dialog({
-				autoOpen : false,
-				title:'新增员工',
-				width : 350,
-				height : 350,
-				modal : true,
-				buttons: {
-			        "确定": function() {
-			        	var repairName = $("#repairName").val();
-			        	var phone = $("#phone").val();
-			        	var salary = $("#salary").val();
-			        	var IDCard = $("#IDCard").val();
-			        	var monthlyWages = $("#monthlyWage").val();
-			        	if (repairName=="") {
-			        		layer.msg("请填写姓名", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						}else if (!(/^1[34578]\d{9}$/.test(phone))) {
-							layer.msg("请输入正确的手机号码", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						}else if (!/^(:?(:?\d+.\d+)|(:?\d+))$/.test(monthlyWages)) {
-							layer.msg("请输入正确工资", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						}else if (!/^(:?(:?\d+.\d+)|(:?\d+))$/.test(salary)) {
-							layer.msg("请正确输入小时工资", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						} else if(!/(^\d{15}$)|(^\d{17}(\d|X)$)/.test(IDCard)){
-							layer.msg("请输入合法身份证号", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						}else{
-					          $.ajax({
-					        	  url : '/sys/staff/addStaff.do',
-					        	  type : 'post',
-					        	  data : {
-					        		  'repairName' : repairName,
-					        		  'phone' : phone,
-					        		  'salary' : salary,
-					        		  'monthlyWages' :  monthlyWages,
-					        		  'IDCard' : IDCard
-					        	  },
-					        	  async:false,
-								  cache : false,
-								  success:function(data){
-										if (data=="success") {
-											layer.msg('入职成功', {time : 2000,});
-											$('#table').bootstrapTable("refresh");
-											$('#add').dialog( "close" );
-										}else{
-											layer.msg('请重新操作', {time : 2000,});
-										}
-								  }
-					          })
-						}
-			        },
-			        "取消": function() {
-			        	 $( this ).dialog( "close" );
-			        }
-			      }
-			});
+	 	function loadDialog() {	 		
 	 		$("#edit").dialog({
 				autoOpen : false,
-				title:'修改员工信息',
+				title:'修改用户信息',
 				width : 350,
 				height : 350,
 				modal : true,
 				buttons: {
 			        "确定": function() {
-			        	var repairName = $("#repairmanName").val();
-			        	var phone = $("#tel").val();
-			        	var salary = $("#hourlyPay").val();
-			        	var IDCard = $("#IDNumber").val();
-			        	var monthlyWages = $("#monthlyWages").val();
-			        	if (repairName=="") {
+			        	var username = $("#username").val();
+			        	var phone = $("#phone").val();
+			        	var adress = $("#adress").val();
+			        
+			        	if (username=="") {
 			        		layer.msg("请填写姓名", {
 			     				time : 2000, //2s后自动关闭
 			     			});
@@ -266,25 +169,15 @@ $(function() {
 							layer.msg("请输入正确的手机号码", {
 			     				time : 2000, //2s后自动关闭
 			     			});
-						}else if (!/^(:?(:?\d+.\d+)|(:?\d+))$/.test(salary)) {
-							layer.msg("请正确输入小时工资", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						} else if(!/(^\d{15}$)|(^\d{17}(\d|X)$)/.test(IDCard)){
-							layer.msg("请输入合法身份证号", {
-			     				time : 2000, //2s后自动关闭
-			     			});
-						}else{
+						} else{
 					          $.ajax({
-					        	  url : '/sys/staff/editStaff.do',
+					        	  url : '/phone/mannage/editUser',
 					        	  type : 'post',
 					        	  data : {
-					        		  'repairmanNo' : $("#repairmanNo").val(),
-					        		  'repairName' : repairName,
+					        		  'uid' : $("#uid").val(),
+					        		  'username' : username,
 					        		  'phone' : phone,
-					        		  'monthlyWages' : monthlyWages,
-					        		  'salary' : salary,
-					        		  'IDCard' : IDCard
+					        		  'adress' : adress,
 					        	  },
 					        	  async:false,
 								  cache : false,
