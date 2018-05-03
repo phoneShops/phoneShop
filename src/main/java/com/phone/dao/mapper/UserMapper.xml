@@ -276,7 +276,7 @@
 		UPDATE user
 		SET username = #{username},
 		 phone = #{phone},
-		adress=#{adress}
+		address=#{address}
 		WHERE
 			card = #{card}
 	</update>
@@ -286,6 +286,16 @@
 		UPDATE user
 		SET status = #{status}
 		WHERE
-			uid = #{uid}
+			card = #{card}
 	</update>
+	
+	<!-- 根据用户card获取用户信息 -->
+	<select id="getUser" parameterType="map" resultType="com.phone.pojo.User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			card = #{card}
+	</select>
 </mapper>

@@ -6,42 +6,77 @@ $(function() {
  	})
  	//搜索查询
 	function search(){$('#table').bootstrapTable('refresh');}
- 	function add(){resetAdd();$("#add").dialog("open");}
- 	function editRepair(number){getStaff(number);$("#edit").dialog("open");}
- 	function resetAdd(){
- 		$("#repairName").val;
- 		$("#monthlyWage").val;
- 		$("#phone").val();
- 		$("#salary").val();
- 		$("IDCard").val();
- 	}
- 	/* 
- 	*status:用户状态
- 	*根据用户uid修改员工状态
+ 	function add(){resetAdd();$("#add").dialog("open");}	
+ 	function editUser(number){getUser(number);$("#edit").dialog("open");}
+ 
+ 	/*
+ 	*number:用户证件
+ 	*根据证件获取用户信息
  	*/
- 	function editStatus(uid,status){
- 		layer.confirm('确定修改', {
- 	 		btn : [ '确定', '取消' ]
- 	 	//按钮
- 	 	}, function() {
- 	 	//点击确定
- 	 	var statu = 0;
- 		if (status==0) {
-			statu = 1;
-		}
+ 	function getUser(card){
  		$.ajax({
- 			url : '/phone/mannage/editUser',
+ 			url : '/phone/mannage/queryUserByNo',
  			type : 'post',
  			data : {
- 				'uid' : number,
- 				'status' : status
+      		  "card" : card
+	      	  },
+	      	  async:false,
+			  cache : false,
+			  success:function(data){
+				  	console.log(data);
+					var user =  data.user;
+					$("#card").val(user.card);
+					$("#username").val(user.username);
+					$("#phone").val(user.phone);
+					$("#address").val(user.address);
+					$("#regtime").val(user.regTime);
+					$("#u_id").val(user.uid);					
+			  }
+ 		})
+ 	}
+ 	
+
+ 	
+ 	
+ 	/* 
+ 	*status:用户状态
+ 	*根据用户card修改用户状态
+ 	*/
+ 	function editStatus(card,status){
+ 		
+ 			layer.confirm('确定此操作？', {
+ 	 		btn : [ '确定', '取消' ]
+ 	 	//按钮
+ 	 	}, 
+ 	 	
+ 	 	function() {
+ 	 	//点击确定
+ 	 	var statu = 1;
+ 		if (status==1) {
+			statu = 0;
+		}
+ 		$.ajax({
+ 			url : '/phone/mannage/editStatu',
+ 			type : 'post',
+ 			data : {
+ 				'card' : card,
+ 				'status' : statu
  			},
  			async:false,
 		  	cache : false,
 		  	success:function(data){
-		  		layer.msg('修改成功', {
-					time : 2000, //2s后自动关闭
-				});
+		  		if(statu==0){
+		  			
+		  			layer.msg('入户成功', {
+		  				time : 2000, //2s后自动关闭
+		  			}
+		  			);
+		  		}else{
+		  			layer.msg('销户成功', {
+		  				time : 2000, //2s后自动关闭
+		  			}
+		  			);
+		  		}
 		  		$('#table').bootstrapTable("refresh");
 		  	}
  		})
@@ -113,18 +148,18 @@ $(function() {
 											width:'50'
 										},
 										{
-											field : 'statue',
+											field : 'status',
 											title : '用户状态',
 											align : 'center',
 											width:'10',
 											formatter : function(value, row, index) {
-												var statu = "";
-												if (row.statu==0) {
-													statu = "已销户";
+												var status = "";
+												if (row.status==1) {
+													status = "已销户";
 												}else{
-													statu = "正常";
+													status = "正常状态";
 												}
-												return statu;
+												return status;
 											}
 										},
 										{
@@ -133,12 +168,12 @@ $(function() {
 											align : 'center',
 											width:'20',
 											formatter : function(value, row, index) {
-												var e = '<a href="#"><i class="icon-edit" title="编辑" onclick="editRepair(\''+row.uid +'\')" ></i></a>';
+												var e = '<a href="#"><i class="icon-edit" title="编辑" onclick="editUser(\''+row.card+'\')" ></i></a>';
 												var c = "";
-												if (row.statu==0) {
-													c = '<a href="#"><i class="icon-lock" title="重新入户" onclick="editStatus(\''+row.uid +'\',\''+row.status +'\')"></i></a>';
+												if (row.status==1) {
+													c = '<a href="#"><i class="icon-lock" title="重新入户" onclick="editStatus(\''+row.card+'\',\''+row.status +'\')"></i></a>';
 												}else{
-													c = '<a href="#"><i class="icon-unlock" title="销户" onclick="editStatus(\''+row.uid +'\',\''+row.status+'\')"></i></a>';
+													c = '<a href="#"><i class="icon-unlock" title="销户" onclick="editStatus(\''+row.card+'\',\''+row.status+'\')"></i></a>';
 												}
 												
 												return e+ " | " + c;
@@ -159,8 +194,7 @@ $(function() {
 			        "确定": function() {
 			        	var username = $("#username").val();
 			        	var phone = $("#phone").val();
-			        	var adress = $("#adress").val();
-			        
+			        	var address = $("#address").val();        
 			        	if (username=="") {
 			        		layer.msg("请填写姓名", {
 			     				time : 2000, //2s后自动关闭
@@ -174,10 +208,10 @@ $(function() {
 					        	  url : '/phone/mannage/editUser',
 					        	  type : 'post',
 					        	  data : {
-					        		  'uid' : $("#uid").val(),
+					        		  'card' : $("#card").val(),
 					        		  'username' : username,
 					        		  'phone' : phone,
-					        		  'adress' : adress,
+					        		  'address' : address,
 					        	  },
 					        	  async:false,
 								  cache : false,

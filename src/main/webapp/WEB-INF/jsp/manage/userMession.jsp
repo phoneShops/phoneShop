@@ -55,13 +55,15 @@
 		<input type="text" id="queryKey" placeholder="用户姓名或用户身份证" style="height: 40px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#" ><i class="icon-search icon-2x" title="搜索" onclick="search()"> </i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
+	
 	<div id="edit">
-		 <p><span style="font-family: '微软雅黑';font-size: 18px;">用户编号：</span><input type="text" id="uid" readonly="readonly" /></p>
+		 <p><span style="font-family: '微软雅黑';font-size: 18px;">序列号：</span><input type="text" id="u_id" readonly="readonly" /></p>		
+		 <p><span style="font-family: '微软雅黑';font-size: 18px;">证件号：</span><input type="text" id="card" readonly="readonly" /></p>		
 		 <p><span style="font-family: '微软雅黑';font-size: 18px;">用户姓名：</span><input type="text" id="username"/></p>
-    	 <p><span style="font-family: '微软雅黑';font-size: 18px;">&nbsp;&nbsp;&nbsp;手机号：</span><input type="text" id="phone"/></p>
-    	 <p><span style="font-family: '微软雅黑';font-size: 18px;">家庭住址：</span><input type="text" id="adress"/></p>
+		 <p><span style="font-family: '微软雅黑';font-size: 18px;">注册时间：</span><input type="text" id="regtime" readonly="readonly" /></p>
+    	 <p><span style="font-family: '微软雅黑';font-size: 18px;">手机号：</span><input type="text" id="phone"/></p>
+    	 <p><span style="font-family: '微软雅黑';font-size: 18px;">家庭住址：</span><input type="text" id="address"/></p>
 	</div>	
-
  	</body>	
  		<script src="<%=basePath %>houtaijs/MyJs/userMession.js"></script>	
 </html>

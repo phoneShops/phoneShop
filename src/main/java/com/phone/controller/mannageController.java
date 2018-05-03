@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+
 import com.phone.pojo.User;
 import com.phone.service.ManagerService;
 
@@ -59,31 +61,44 @@ public class mannageController{
 	}
 	
 	@RequestMapping("/editUser")
-	public @ResponseBody String editStaff(HttpSession session,String address, String username, String phone,Integer uid){
+	public @ResponseBody String editStaff(HttpSession session,String address, String username, String phone, String card){
 		User user = new User();
 		try {
-			user.setUid(uid);
-			user.setUsername(username);
-			user.setPhone(phone);
 			user.setAddress(address);
+			user.setCard(card);
+			user.setPhone(phone);
+			user.setUsername(username);
+			System.out.println("gg");
 			Manservice.updateUser(user);
-			User user2 = (User) session.getAttribute("user");
+			System.out.println("给我滚");
+		//	User user2 = (User) session.getAttribute("user");
 			return "success";
 		} catch (Exception e) {
 			return null;
 		}
 	}
 	@RequestMapping("/editStatu")
-	public @ResponseBody String editStatu(HttpSession session,Integer uid,Integer status){
+	public @ResponseBody String editStatu(HttpSession session,String card,Integer status){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			map.put("uid", uid);
+			map.put("card", card);
 			map.put("status", status);
 			Manservice.editStatu(map);
 			User user = (User) session.getAttribute("user");
 			return "success";
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	@RequestMapping(value = "/queryUserByNo",produces = "application/json;charset=utf-8")
+	public @ResponseBody String queryUserByNo(HttpSession session,String card){
+		JSONObject json = new JSONObject();
+		try {
+			User user =Manservice.getUser(card);
+			json.put("user", user);
+			return json.toString();
+		} catch (Exception e) {
+			return "出错了";
 		}
 	}
 	
