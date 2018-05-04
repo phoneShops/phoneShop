@@ -45,7 +45,7 @@
 		<script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body style="background-color: #F5F5F5">
 	<header class="container"> <br>
 	<div class="row">
 		<div class="col-lg-12">
@@ -69,8 +69,8 @@
 
 	</header>
 	<div class="row" style="margin-top: 30px;">
-		<div class="col-md-3" style="border-right: 1px solid #ddd;"></div>
-		<div class="col-md-7" style="border-right: 1px solid #ddd;">
+		<div class="col-md-1" style="border-right: 1px solid #ddd;"></div>
+		<div class="col-md-5" style="border-right: 1px solid #ddd;">
 			<div class="well col-md-10">
 				<center>
 					<h4>用户登录</h4>
@@ -125,7 +125,7 @@
 	</div>
 
 
-	<div class="col-md-2" style="border-right: 1px solid #ddd;"></div>
+	<div class="col-md-6" style="border-right: 1px solid #ddd;"></div>
 
  <div class="container">
         <div id="myModal" class="modal fade" data-keyboard="false"
