@@ -21,13 +21,21 @@
     cid, cname,pv_id
   </sql>
   
-    <select id="selectAllCity" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+   <select id="selectAllCity" resultMap="BaseResultMap" parameterType="java.lang.Integer">
       
      select 
     	<include refid="Base_Column_List" />
     from city
     where pv_id = #{pv_id,jdbcType=INTEGER}
       
+  </select>
+  
+   <select id="seleCityById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+      
+     select 
+    	<include refid="Base_Column_List" />
+    from city
+    where cid = #{cid,jdbcType=INTEGER}
       
   </select>
   

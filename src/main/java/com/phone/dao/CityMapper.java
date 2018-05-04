@@ -28,4 +28,6 @@ public interface CityMapper {
      * @mbggenerated Thu Apr 26 09:56:12 CST 2018
      */
     int insertSelective(City record);
+
+	City seleCityById(int city);
 }
