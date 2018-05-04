@@ -8,6 +8,7 @@
 
 <link type="text/css" href="<%=basePath%>assets/css/bootstrap-table.min.css" rel="stylesheet">
 <link href="<%=basePath%>assets/css/add-ons.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/sweetalert.css">
 
 <title>订单管理</title>
 </head>
@@ -24,6 +25,7 @@
 						<li><a href="#buyed" data-toggle="tab">已成交订单</a></li>
 						<li><a href="#address_manager" onclick="managerAddress();"
 							data-toggle="tab">地址管理</a></li>
+						<li><a href="#person_manager"  data-toggle="tab">个人信息</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="buying"></div>
@@ -91,8 +93,6 @@
 								</div>
 							</form>
 							<br>
-							
-
 							<div class="heading">
 								<font size="2px;">已有地址</font>
 							</div>
@@ -100,6 +100,9 @@
 							<table id="address">
 							</table>
 						</div>
+						
+						<div class="tab-pane" id="person_manager"></div>
+						
 					</div>
 				</div>
 			</div>
@@ -192,6 +195,7 @@
 <script type="text/javascript" src="<%=basePath%>js/UserJs/AddressJs.js"></script>
 <script src="<%=basePath%>assets/js/bootstrap-table.min.js"type="text/javascript"></script>
 <script src="<%=basePath%>assets/js/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/sweetalert.min.js"></script> 
 
 
 
@@ -213,7 +217,7 @@ $.ajax({
 	success : function(data) {
 		for (var i = 0; i < data.length; i++) {
 
-			var op = $("<option vname="+data[i].pvId+" value="+data[i].pvId+">"+ data[i].pname + "</option>");
+			var op = $("<option vname="+data[i].pname+" value="+data[i].pvId+">"+ data[i].pname + "</option>");
 			sel.append(op);
 		}
 		
@@ -227,7 +231,6 @@ function changeCity(data) {
 	var province = $("#Province").val();
 	
 	selcity.empty();
-	
 	
 	$.ajax({url:'<%=basePath%>province/selectCity?pid=' + province,
 			type : "post",

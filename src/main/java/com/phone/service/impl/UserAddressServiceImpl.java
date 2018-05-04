@@ -41,7 +41,6 @@ public class UserAddressServiceImpl  implements UserAddressService{
 			int result = userAddressMapper.updateToUnStatus(uid);
 			
 			if(result>=1){
-				
 				//翻译省名
 				Province provinces = provinceMapper.selectProvinceById(province);
 				//翻译城市名
@@ -64,8 +63,88 @@ public class UserAddressServiceImpl  implements UserAddressService{
 			}
 			//修改其他地址出错
 			return -1;
+		}else{
+			//翻译省名
+			Province provinces = provinceMapper.selectProvinceById(province);
+			//翻译城市名
+			City citys =  cityMapper.seleCityById(city);
+			
+			String proname = provinces.getPname();
+			String cityname = citys.getCname();
+			
+			UserAddress ua = new UserAddress(cid, uid, name, phone, proname, cityname, detail, status);
+			
+			int code = userAddressMapper.updateByPrimaryKeySelective(ua);
+			
+			if(code==1){
+				//修改成功
+				return 0;
+			}else{
+				//修改失败
+				return 1;
+			}
+			
 		}
-		return 0;
+	}
+
+
+	/**
+	 * 添加地址
+	 */
+	public int addAddress(int uid,String name, String phone, String detail, int province, int city, String status) {
+		//判断status是否是0：默认 如果是默认，则将其他地址置为 非默认：1
+		
+				if(status.equals("0")){
+					//将其他的置为1
+					int result = userAddressMapper.updateToUnStatus(uid);
+					
+					if(result>=1){
+						//翻译省名
+						Province provinces = provinceMapper.selectProvinceById(province);
+						//翻译城市名
+						City citys =  cityMapper.seleCityById(city);
+						
+						String proname = provinces.getPname();
+						String cityname = citys.getCname();
+						
+						UserAddress ua = new UserAddress(null, uid, name, phone, proname, cityname, detail, status);
+						int code = userAddressMapper.insert(ua);
+						
+						if(code==1){
+							//添加成功
+							return 0;
+						}else{
+							//修改失败
+							return 1;
+						}
+					}
+					//修改其他地址出错
+					return -1;
+				}else{
+					//翻译省名
+					Province provinces = provinceMapper.selectProvinceById(province);
+					//翻译城市名
+					City citys =  cityMapper.seleCityById(city);
+					
+					String proname = provinces.getPname();
+					String cityname = citys.getCname();
+					
+					UserAddress ua = new UserAddress(null, uid, name, phone, proname, cityname, detail, status);
+					
+					int code = userAddressMapper.insert(ua);
+					
+					if(code==1){
+						//添加成功
+						return 0;
+					}else{
+						//修改失败
+						return 1;
+					}
+				}
+	}
+
+	public int delAddress(int uid, int cid) {
+		return userAddressMapper.deleteByPrimaryKey(cid);
 	}
 
 }
