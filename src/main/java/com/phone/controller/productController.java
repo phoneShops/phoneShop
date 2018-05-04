@@ -126,14 +126,110 @@ public class productController extends BaseController {
 		
 		if(user==null){
 			json.addProperty("code","-1");
+		}else{
+			//将用户的加入购物车
+			int uid = user.getUid();
+			int result = productService.insertCart(uid,pid);
+			json.addProperty("code",result);
 		}
+		return new Gson().toJson(json);			
+	}
+	
+	
+	/**
+	 * 跳转到购物车
+	 * @return
+	 */
+	@RequestMapping(value = "/toCart")
+	public String toCart(HttpServletRequest request,Model model) {
+		
+		HttpSession session = request.getSession();
+		
+		User user = (User) session.getAttribute("user");
+		
+		model.addAttribute("uid", user.getUid());
 		
 		
+		
+		return "product/Cart";
+	}
+	
+	/**
+	 * 查询当前用户的购物车
+	 * @return
+	 */
+	@RequestMapping(value = "/qryCartByUid",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object qryCartByUid(int uid,HttpServletRequest request,Model model) {
+		
+		//查询当前用户购物车信息
+		List<Map<Object, Object>> cartList = productService.qryCartByUid(uid);
+		
+		
+		return cartList;
+	}
+	
+	/**
+	 * 删除购物车条目
+	 * @return
+	 */
+	@RequestMapping(value="/deleteCartOpt",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object updateStock(int uid,int pid,int cid){
+		
+		int result = productService.deleteCartOpt(uid,pid,cid);
+		
+		JsonObject json = new JsonObject();
+		
+		json.addProperty("result",result);
 		
 		return new Gson().toJson(json);			
 		
 	}
 	
+	/**
+	 * 减少购物车条目
+	 * @return
+	 */
+	@RequestMapping(value="/reduceCartOpt",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object reduceCartOpt(int uid,int pid,int cid){
+		
+		int result = productService.updateCartOpt(uid,pid,cid);
+		
+		JsonObject json = new JsonObject();
+		
+		json.addProperty("result",result);
+		return new Gson().toJson(json);			
+	}
 	
-
+	
+	//增加购物车
+	@RequestMapping(value="/addCart",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object addCart(int uid,int pid,int cid){
+		
+		int result = productService.addCartOpt(uid,pid,cid);
+		
+		JsonObject json = new JsonObject();
+		
+		json.addProperty("result",result);
+		return new Gson().toJson(json);			
+	}
+	
+	//移除购物车当条条目
+	@RequestMapping(value="/removeCartOpt",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object removeCartOpt(int uid,int pid,int cid){
+		
+		int result = productService.removeCartOpt(uid,pid,cid);
+		
+		JsonObject json = new JsonObject();
+		
+		json.addProperty("result",result);
+		return new Gson().toJson(json);			
+	}
+	
+	
 }
+

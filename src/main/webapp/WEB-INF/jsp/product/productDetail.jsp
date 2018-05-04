@@ -47,7 +47,7 @@
 
 <title>产品详情</title>
 </head>
-<body>
+<body style="background-color: #F5F5F5">
 
 <center><div id="myModal" class="modal fade" data-keyboard="false" data-backdrop="static" data-role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
          <div id="loading" class="">
@@ -97,7 +97,7 @@
 									</ul>
 								</div>
 								<br>
-								<div class="name"><button type="button" style="border:0px;" class="btn-danger btn-primary"><a id="PRODUCT_DETAIL">查看更多配置信息</a></button></div><br><br><br>
+								<div class="name"><button type="button" style="border:1px;" class="btn-danger btn-primary btn-lg"><a id="PRODUCT_DETAIL">查看更多配置信息</a></button></div><br><br><br>
 								
 								<div class="name"><button type="button" style="border:0px;width:300px;height:50px" class="btn-danger btn-primary btn-lg" onclick="buy();">立即购买</button></div><br>								
 						</div>

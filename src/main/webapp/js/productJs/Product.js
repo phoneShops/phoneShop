@@ -93,8 +93,6 @@ function qryProductAttr(pid){
 //点击 立即购买事件
 function buy(){
 	
-	debugger;
-	
 	var pid = $("#PID_VAL").val();
 	
 	/*加载产品属性信息数据*/
@@ -112,9 +110,18 @@ function buy(){
 					 {
 					    window.location.href = "/phone/user/tologin";
 					 }else{
-						 //window.location.href = "<%=basePath%>user/toregister";   
-				     }0
+//						 window.location.href = "<%=basePath%>product/toCart";   
+				     }
 					
+				}else if(data.code==1){
+					alert("库存不够！！ 添加购物车失败");
+				}else if(data.code==2){
+					//添加 成功直接跳到购物车
+					window.location.href = "/phone/product/toCart";   
+				}else if(data.code==3){
+					alert("修改库存失败！");
+				}else if(data.code==4){
+					alert("加入购物车失败！ 请重试！");
 				}
 			},
 			error : function() {

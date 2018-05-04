@@ -29,4 +29,6 @@ public interface ProvinceMapper {
      * @mbggenerated Thu Apr 26 09:56:12 CST 2018
      */
     int insertSelective(Province record);
+
+	Province selectProvinceById(int pv_id);
 }

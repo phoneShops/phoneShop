@@ -23,20 +23,16 @@
     top:50%;  
     left:45%;  
     line-height:56px;  
-    color:#fff;  
     padding-left:60px;  
     font-size:15px;  
     background: #000 url(<%=basePath%>images/img/loading.gif) no-repeat 65px 50%;  
     opacity: 0.7;  
     z-index:9999;  
-    -moz-border-radius:2px;  
-    -webkit-border-radius:2px;  
-    border-radius:2px;  
 }  
 }
 </style>
 </head>
-<body>
+<body style="background-color: #F5F5F5">
 	<input type="hidden" name="pageNo" id="pageNo" value="0" />
 	<input type="hidden" name="oldsousuo" id="oldsousuo" value="s" />
 	<div class="white">
@@ -44,7 +40,7 @@
 			
 		</table>
 	</div>
-	
+	<div class="container">
 	<div class="row">
 			<div class="col-lg-12">
 				<center><div class="heading"><h6>产品列表</h6></div></center>
@@ -53,7 +49,7 @@
 				</div>
 			</div>
 	</div>	
-			
+	</div>		
 	<!-- 加载中的框 -->		
 	<div class="container">
         <div id="myModal" class="modal fade" data-keyboard="false"
@@ -122,7 +118,7 @@ function query()
 				    	 		+ "<div></div>"
 								+ "<div class='product'>"
 								+ "<div class='image' <a onclick='toDetail("+data[i].product.pid+"); '>"
-								+ "<img class='img-responsive'  src=<%=basePath%>images"+data[i].address
+								+ "<img class='img-responsive' width='240px' height='140px'  src=<%=basePath%>images"+data[i].address
 								+">"
 								+"</a></div>"
 								+"<div class='buttons'>"

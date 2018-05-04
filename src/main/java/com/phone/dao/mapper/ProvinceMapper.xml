@@ -21,11 +21,21 @@
   </sql>
   
   
-    <select id="selectAllProvince" resultMap="BaseResultMap" >
+  <select id="selectAllProvince" resultMap="BaseResultMap" >
       select 
    		 	<include refid="Base_Column_List" />
       from province
   </select>
+  
+  <!-- 查询单个省名字 -->
+  <select id="selectProvinceById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+      select 
+   		 	<include refid="Base_Column_List" />
+      from province
+      where pv_id = #{pv_id,jdbcType=INTEGER}
+  </select>
+  
+    
   
   <insert id="insert" parameterType="com.phone.pojo.Province" >
     <!--
