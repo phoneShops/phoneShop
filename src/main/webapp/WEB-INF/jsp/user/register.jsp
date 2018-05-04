@@ -42,7 +42,7 @@
 
 
 </head>
-<body onload="selectProvince();">
+<body onload="selectProvince();" style="background-color: #F5F5F5">
 	<header class="container"> <br>
 	<div class="row">
 		<div class="col-lg-12">

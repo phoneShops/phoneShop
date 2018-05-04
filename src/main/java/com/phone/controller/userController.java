@@ -133,9 +133,14 @@ public class userController  extends BaseController{
 	public Object userLog_On(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
-		
 		return "user/Home";
-		
-		
 	}
+	
+	//调到个人订单和地址管理界面
+	@RequestMapping(value="/toPerson_Order")
+	public Object toPerson_Order(){
+		return "user/PersonOrder";
+	}
+	
+	
 }
