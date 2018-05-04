@@ -28,7 +28,7 @@ function loadTable() {
 						},
 						pageList : [ 5, 10, 15, 20 ], // 可供选择的每页的行数（*）
 						columns : [
-								{
+								/*{
 									field : 'cid',
 									title : '序号',
 									align : 'center',
@@ -36,7 +36,7 @@ function loadTable() {
 									formatter : function(value, row, index) {
 										return index + 1;
 									}
-								},
+								},*/
 								{
 									field : 'aname',
 									title : '收件人',
@@ -51,7 +51,12 @@ function loadTable() {
 								},
 								{
 									field : 'areaprovince',
-									title : '所在 区域',
+									title : '所在 省份',
+									align : 'center',
+									width : '50'
+								},{
+									field : 'areacity',
+									title : '所在城市',
 									align : 'center',
 									width : '50'
 								},
@@ -98,7 +103,7 @@ function loadTable() {
 										var c = '<a href="#"><i class="glyphicon glyphicon-remove" title="删除" onclick="removeAddress(\''
 												+ row.uid
 												+ '\',\''
-												+ row.uid
+												+ row.cid
 												+ '\')"></i></a>';
 
 										return e + " | " + c;
@@ -145,97 +150,229 @@ function updateAddress() {
 	
 	if(name==""||phone==""||areadetail==""||cid==""||province==""||city==""||uid==""){
 		
-		Ewin.alert({ message: "不能有空值！！" }).on(function (e) {
-			if (!e) {
-				return;
-			}
-		});
+		sweetAlert("提示", "不能有空值！", "error");
 		
 		return;
 		
 	}
 	
-	Ewin.confirm({ message: "确认要修改该数据吗？" }).on(function (e) {
-		if (!e) {
-		 return;
-		}
-		
-		//获得状态
-		var statusBox = $("#UPDATE_MAIN_STATUS").is(':checked');
-		
-		var status;
-		
-		if(statusBox==true){
-			status = 0;
-		}else{
-			status = 1;
-		}
-		
-		$.ajax({
-		 type: "post",
-		 url: "/phone/address/updateAddress",
-		 data: { 
-			 cid:cid,
-			 uid:uid,
-			 name:name,
-			 phone:phone,
-			 detail:areadetail,
-			 province:province,
-			 city:city,
-			 status:status
-			 
-		 },
-		 success: function (data) {
-			 
-			if(data.code==0){
-				alert("修改成功！");
-				$('#myModal').modal('hide');
-				
-				$('#address').bootstrapTable('refresh');
-				
-			}else if(data.code==1){
-				alert("修改失败");
-			}else{
-				alert("修改其他地址出错!");
-			}
-		 },
-		 error: function () {
-		 toastr.error('Error');
-		 },
-		 complete: function () {
-		 
-		 }
-		 
-		});
-		});
-
+	
+	
+	swal(
+            {title:"确认要添加该数据吗？",
+                text:"",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定添加！",
+                cancelButtonText:"取消",
+                closeOnConfirm:false,
+                closeOnCancel:false
+            },
+            function(isConfirm)
+            {
+                if(isConfirm)
+                {
+                	
+                	//获得状态
+            		var statusBox = $("#UPDATE_MAIN_STATUS").is(':checked');
+            		
+            		var status;
+            		
+            		if(statusBox==true){
+            			status = 0;
+            		}else{
+            			status = 1;
+            		}
+            		
+            		$.ajax({
+            		 type: "post",
+            		 url: "/phone/address/updateAddress",
+            		 data: { 
+            			 cid:cid,
+            			 uid:uid,
+            			 name:name,
+            			 phone:phone,
+            			 detail:areadetail,
+            			 province:province,
+            			 city:city,
+            			 status:status
+            			 
+            		 },
+            		 success: function (data) {
+            			 
+            			if(data.code==0){
+            				swal({title:"提示信息",
+                                text:"您已经成功修改地址。",
+                                type:"success"},function(){
+                                	$("#myModal").modal('hide');
+                     				$('#address').bootstrapTable('refresh');
+                     				
+                                })
+            				
+            			}else if(data.code==1){
+            				alert("修改失败");
+            			}else{
+            				alert("修改其他地址出错!");
+            			}
+            		 }
+            		});
+                }
+                else{
+                    swal({title:"已取消",
+                        text:"您取消了修改操作！",
+                        type:"error"})
+                }
+            }
+        )
 }
 
 //增加地址
 function addAddress(){
 	
-	username
-	phoneNumber
-	Province
-	City
-	detailAddress
-	STATUS
-	
 	var name = $("#username").val();
 	var phoneNumber = $("#phoneNumber").val();
-	var Province = $("#Province").getAttribute("vname");
-	var City = $("#City").getAttribute("cname");
+	var Province = $("#Province").val();
+	var City = $("#City").val();
 	var detailAddress = $("#detailAddress").val();
 	var STATUS = $("#STATUS").val();
 	
+	if(name==""||phoneNumber==""||Province==""||City==""||detailAddress==""){
+		
+		sweetAlert("提示", "不能有空值！", "error");
+		return;
+	}
 	
+	 swal(
+             {title:"确认要添加该数据吗？",
+                 text:"",
+                 type:"warning",
+                 showCancelButton:true,
+                 confirmButtonColor:"#DD6B55",
+                 confirmButtonText:"确定添加！",
+                 cancelButtonText:"取消",
+                 closeOnConfirm:false,
+                 closeOnCancel:false
+             },
+             function(isConfirm)
+             {
+                 if(isConfirm)
+                 {
+                	//获得状态
+             		var statusBox = $("#STATUS").is(':checked');
+             		
+             		var status;
+             		
+             		if(statusBox==true){
+             			status = 0;
+             		}else{
+             			status = 1;
+             		}
+             		$.ajax({
+             		 type: "post",
+             		 url: "/phone/address/addAddress",
+             		 data: { 
+             			 name:name,
+             			 phone:phoneNumber,
+             			 detail:detailAddress,
+             			 province:Province,
+             			 city:City,
+             			 status:status
+             			 
+             		 },
+             		 success: function (data) {
+             			 
+             			if(data.code==0){
+             				 swal({title:"提示信息",
+                                 text:"您已经成功添加地址。",
+                                 type:"success"},function(){
+                                	//将所有选项置空
+                      				removeNUll();
+                      				$('#address').bootstrapTable('refresh');
+                      				
+                                 })
+             				
+             				
+             			}else if(data.code==1){
+             				alert("添加失败");
+             			}else{
+             				alert("修改其他地址出错!");
+             			}
+             		 }
+             		 
+             		});
+                	 
+                 }
+                 else{
+                     swal({title:"已取消",
+                         text:"您取消了添加操作！",
+                         type:"error"})
+                 }
+             }
+         )
+	
+}
+
+function removeNUll(){
+	
+	$("#username").val('');
+	 $("#phoneNumber").val('');
+//	var Province = $("#Province").val();
+//	var City = $("#City").val();
+	 $("#detailAddress").val('');
+	$("#STATUS").val('');
 	
 	
 }
 
-
 // 删除功能
-function removeAddress(uid) {
+function removeAddress(uid,cid) {
+	
+	swal(
+            {title:"确认要删除该数据吗？",
+                text:"",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定删除！",
+                cancelButtonText:"取消",
+                closeOnConfirm:false,
+                closeOnCancel:false
+            },
+            function(isConfirm)
+            {
+                if(isConfirm)
+                {
+               	 
+               	$.ajax({
+		 type: "post",
+		 url: "/phone/address/delAddress",
+		 data: { 
+			 uid:uid,
+			 cid:cid
+		 },
+		 success: function (data) {
+			 
+			if(data.code==1){
+				 swal({title:"提示信息",
+                     text:"您已经成功删除地址。",
+                     type:"success"},function(){
+          				$('#address').bootstrapTable('refresh');
+                     })
+			}else{
+				alert("删除失败");
+			}
+		 }
+         });
+            	 
+             }
+             else{
+                 swal({title:"已取消",
+                     text:"您取消了取消操作！",
+                     type:"error"})
+             }
+         }
+     )
 
 }
 

@@ -174,7 +174,9 @@ function reduce(object){
 						success : function(data) {
 							if(data.result==1){
 								//直接刷新购物车
-								window.location.href = "/phone/product/toCart";
+//								window.location.href = "/phone/product/toCart";
+								tdObject.find("input").eq(0).val(--qty);
+								calcPrice(object);
 								
 							}else if(data.result==-1){
 								alert("库存更新失败");
@@ -201,7 +203,9 @@ function reduce(object){
 					success : function(data) {
 						if(data.result==1){
 							//直接刷新购物车
-							window.location.href = "/phone/product/toCart";
+//							window.location.href = "/phone/product/toCart";
+							tdObject.find("input").eq(0).val(--qty);
+							calcPrice(object);
 							
 						}else if(data.result==-1){
 							alert("更新失败!");
@@ -241,7 +245,9 @@ function add(object){
 				success : function(data) {
 					if(data.result==0){
 						//直接刷新购物车
-						window.location.href = "/phone/product/toCart";
+//						window.location.href = "/phone/product/toCart";
+						tdObject.find("input").eq(0).val(++qty);
+						calcPrice(object);
 						
 					}else if(data.result==-1){
 						alert("库存不够!");

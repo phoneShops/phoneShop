@@ -70,10 +70,38 @@ public class AddressController  extends BaseController{
 		JsonObject json = new JsonObject();
 		
 		json.addProperty("code",result);
-		
 		return new Gson().toJson(json);			
+	}
+	
+	
+	@RequestMapping(value = "/addAddress",produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public  Object addAddress(HttpServletRequest request,String name,String phone,String detail,int province,int city,String status ){
 		
+		HttpSession session = request.getSession();
 		
+		User user = (User) session.getAttribute("user");
+		int uid = 0; 
+		if(user!=null){
+			 uid = user.getUid();
+		}
+		int result = userAddressService.addAddress(uid,name,phone,detail,province,city,status);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("code",result);
+		return new Gson().toJson(json);			
+	}
+	
+	
+	@RequestMapping(value = "/delAddress",produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public  Object delAddress(HttpServletRequest request,int uid,int cid){
+		
+		int result = userAddressService.delAddress(uid,cid);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("code",result);
+		return new Gson().toJson(json);			
 	}
 	
 }
