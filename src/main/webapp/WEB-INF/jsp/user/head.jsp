@@ -22,12 +22,15 @@
 	<!-- Custom Fonts -->
     <link rel="stylesheet" href="<%=basePath %>css/font-awesome.min.css"  type="text/css">
     <link rel="stylesheet" href="<%=basePath %>css/font-slider.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/sweetalert.css">
 	
 	<!-- jQuery and Modernizr-->
 	<script src="<%=basePath %>js/jquery-2.1.1.js"></script>
 	
 	<!-- Core JavaScript Files -->  	 
     <script src="<%=basePath %>js/bootstrap.min.js"></script>
+    
+    <script src="<%=basePath%>js/sweetalert.min.js"></script>
 	
 </head>
 
@@ -90,7 +93,7 @@
 		</div>
 	</header>
 	<!--Navigation-->
-    <nav id="menu" class="navbar" style="background-color: #333">
+    <nav id="menu" class="navbar" style="background-color: #F5F5F5">
 		<div class="container">
 			<div class="navbar-header"><span id="heading" class="visible-xs">Categories</span>
 			  <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
