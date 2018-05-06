@@ -80,7 +80,7 @@
  -->                </div>  
                 <div style="margin-left:40px;" class="pull-right total">  
                     <label>金额合计:<span class="currency">￥</span><span id="priceTotal" class="large-bold-red">0.00</span></label>  
-                    <button class="btn btn-danger" type="button" onclick="toOrder();">下一步</button>
+                    <button class="btn btn-success active" type="button" onclick="toOrder();">下一步</button>
                 </div>  
                 <div class="pull-right selected" id="selected">  
                     <span id="selectedTotal"></span>  
@@ -88,7 +88,13 @@
             </div>  
         </div>  
     </div>  
+    <br><br>
 </div>  
+
+<!-- 隐藏域 -->
+<input type="hidden" name="checkedIdArray" value="" id="checkedIdArray">
+
+<!-- 隐藏域 end -->
 </body>
 </html>  
 <script type="text/javascript" src="<%=basePath%>js/productJs/CartJs.js"></script>  

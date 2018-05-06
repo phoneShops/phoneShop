@@ -294,7 +294,35 @@ function calcPrice(obj){
 //跳转到订单环节
 function toOrder(){
 	
-	window.location.href = "/phone/user/toOrder";
+	var status = 0;
+	
+	//定义传到后台的数组
+	var checkedIdArray=new Array();
+	
+	//循环被选中的复选框
+	$("input[name='check']:checkbox:checked").each(function(){ 
+		
+		var obj = $(this).parent().parent();
+		//获得cid
+		var cid =  obj.find("td").eq(9).text();
+		
+		 checkedIdArray.push(cid);
+		
+		status = 1;
+	}) 
+	
+	
+	
+	if(status==0){
+		sweetAlert("提示", "请选择要购买的产品！", "error");
+		return;
+	}else{
+		$("#checkedIdArray").val(checkedIdArray);
+	}
+	
+	var array = $("#checkedIdArray").val();
+	
+	window.location.href = "/phone/user/toOrder?array="+array;
 	
 }
 

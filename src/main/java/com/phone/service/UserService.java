@@ -10,4 +10,8 @@ public interface UserService {
 		public int registerUser(User user);
 		
 		public int updatePass(String pwd,String newpwd,HttpServletRequest request);
+
+		public User qryUser(int uid);
+
+		public int updatePersonMsg(User user);
 }

@@ -115,4 +115,14 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	//查询单个用户
+	public User qryUser(int uid) {
+		return usermapper.selectByPrimaryKey(uid);
+	}
+
+	//更新一个用户信息
+	public int updatePersonMsg(User user) {
+		return usermapper.updateByPrimaryKey(user);
+	}
+
 }
