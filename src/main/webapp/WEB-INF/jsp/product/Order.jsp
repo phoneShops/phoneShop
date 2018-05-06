@@ -50,17 +50,24 @@
 	<div class="container">
 		<div class="col-lg-12">
 			<div class="heading">
-				<font>订单号：<span id="ORDER_ID">20185421566901</font>
-				</h6>
+				<font size="4px">订单号：<span id="ORDER_ID"></span></font>
 			</div>
 		</div>
-		<table id="orderTable" class="cart table">
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
+		
+		<div class="row">
+				<table class="table table-striped"  id="orderTable" >
+					<thead>
+						<tr>
+							<th>产品型号</th>
+							<th>价格</th>
+							<th>数量</th>
+						</tr>
+				</thead>
+				<tbody id="ORDER_TABLE">
+			
+				</tbody>
+			</table>
+		</div>
 
 		<br><br>
 
@@ -118,7 +125,7 @@
 					<div style="margin-left: 2px;" class="pull-left total"></div>
 					<div style="margin-left: 0px;" class="pull-right total">
 						<label>金额共计:<span class="currency">￥</span><span id="priceTotal" class="large-bold-red">0.00</span></label>
-						<button class="btn btn-success" type="button" onclick="toOrder();">提交订单</button>
+						<button class="btn-lg btn-success" type="button" onclick="toOrder();">提交订单</button>
 					</div>
 					<div class="pull-right selected" id="selected">
 						<span id="selectedTotal"></span>
@@ -132,15 +139,18 @@
 		
 </div>
 <br><br>
+<!-- 隐藏域 -->
+<input type="hidden" id="DataArray" value="">
+<!-- 隐藏域end -->
 </body>
-	<script type="text/javascript">
-		$(function() {
+<script src="<%=basePath%>js/UserJs/Order.js"></script>
+<script type="text/javascript">
+	$(function() {
 
-			var array = ${requestScope.array};
+			var array=new Array();
+			var data = ${array};
 			
-			alert(array);
-			
-			query();//查询 
-		});
-	</script>
+			queryOrder(data.toString());//查询 
+	});
+</script>
 </html>

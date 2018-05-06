@@ -8,7 +8,6 @@
 
 <link type="text/css" href="<%=basePath%>assets/css/bootstrap-table.min.css" rel="stylesheet">
 <link href="<%=basePath%>assets/css/add-ons.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="<%=basePath%>css/sweetalert.css">
 
 <title>订单管理</title>
 </head>
@@ -333,11 +332,8 @@
 </body>
 
 <script type="text/javascript" src="<%=basePath%>js/UserJs/AddressJs.js"></script>
-<script src="<%=basePath%>assets/js/bootstrap-table.min.js"
-	type="text/javascript"></script>
-<script src="<%=basePath%>assets/js/bootstrap-table-zh-CN.min.js"
-	type="text/javascript"></script>
-<script src="<%=basePath%>js/sweetalert.min.js"></script>
+<script src="<%=basePath%>assets/js/bootstrap-table.min.js"type="text/javascript"></script>
+<script src="<%=basePath%>assets/js/bootstrap-table-zh-CN.min.js"type="text/javascript"></script>
 
 
 

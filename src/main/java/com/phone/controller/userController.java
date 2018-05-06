@@ -1,18 +1,27 @@
 package com.phone.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.Constants;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.phone.controller.base.BaseController;
 import com.phone.pojo.User;
+import com.phone.pojo.UserAddress;
 import com.phone.service.UserService;
 
 @Controller
@@ -142,5 +151,65 @@ public class userController  extends BaseController{
 		return "user/PersonOrder";
 	}
 	
+	//查询个人信息
+	@RequestMapping(value = "/qryUserMessage",produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public  String qryUserMessage(HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+		
+		User user = (User) session.getAttribute("user");
+		
+		int uid = user.getUid();
+		String username = user.getUsername();
+		String phone = user.getPhone();
+		String card = user.getCard();
+		
+		
+		JsonObject json = new JsonObject();
+		
+		json.addProperty("uid",uid);
+		json.addProperty("username",username);
+		json.addProperty("phone",phone);
+		json.addProperty("card",card);
+		
+		return  new Gson().toJson(json);
+	}
+	
+	//更新个人信息
+	@RequestMapping(value="/updatePersonMsg",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object updatePersonMsg(HttpServletRequest request,int uid,String username,String phone,String card){
+		
+		JsonObject json = new JsonObject();
+		
+		HttpSession session = request.getSession();
+		
+		User user = (User) session.getAttribute("user");
+		
+		user.setUsername(username);
+		user.setPhone(phone);
+		user.setCard(card);
+		
+		
+		int result = userService.updatePersonMsg(user);
+		
+		json.addProperty("result",result);
+		return new Gson().toJson(json);			
+	}
+	
+	/**
+	 * 跳转到订单页
+	 */
+	@RequestMapping(value="/toOrder")
+	public Object toOrder(HttpServletRequest request ,String[] array,Model model){
+		List<String> lists = new ArrayList<>();
+		for (int i = 0; i < array.length; i++) {
+			lists.add(array[i]);
+		}
+		model.addAttribute("array",new Gson().toJson(lists));
+		
+		return "product/Order";
+	}
 	
 }

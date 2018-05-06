@@ -319,5 +319,44 @@ public class ProductServiceImpl  implements ProductService{
 		return -1;
 	}
 
+	//展示订单信息
+	public List<Map<Object, Object>> showOrderByCid(String data) {
+		
+		//最后返回的bean
+		List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
+
+		String []array = data.split(",");
+		
+		//获取订单号
+		String order_id = CreateOrderId.getId();
+		
+		for (int i = 0; i < array.length; i++) {
+			//获得cid
+			int cid = Integer.valueOf(array[i]);
+			
+			Cart cart = cartmapper.selectByPrimaryKey(cid);
+			
+			int pid = cart.getPid();
+			
+			Product product = productMapper.selectByPrimaryKey(pid);
+			
+//			//查询产品图片信息
+			List<Product_picture> picturelist =  product_pictureMapper.selectProductPicture(pid);
+			
+			
+			Map<Object, Object> map = new HashMap<>();
+			map.put("cart",cart);
+			map.put("product",product);
+			map.put("order_id",order_id);
+			map.put("address",picturelist.get(0).getPrAddress());
+			//将cid集合 回放进集合
+			map.put("data", data);
+			
+			listbean.add(map);
+		}
+		
+		return listbean;
+	}
+
 
 }
