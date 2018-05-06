@@ -18,12 +18,12 @@ function queryCart(uid){
 				for (var i = 0; i < data.length; i++) {
 					
 					content  = "<tr>" +
-							"<td ><input  type='checkbox' name = 'check' /> </td>" 
-							+"<td class='goods'><img alt='' width='50px' height='50px;' src=/phone/images"+data[i].address+"  class='img-thumbnail'><label>" +data[i].product.pname +"</label></td>"
-							+"<td class='number small-bold-red'><span name='onePrice'>"+data[i].product.price+"</span></td>"
-							+"<td><button onclick='reduce(this)'>-</button><input style='width:100px' type='text' value='"+data[i].cart.count+"' readonly='readonly' class='num'  ng-change='change($index)' /><button onclick='add(this)'>+</button></td>"
-							+"<td class='subtotal number small-bold-red' name='total'>"+data[i].product.price*data[i].cart.count+"</td> "
-							+"<td class='operation'><a onclick='remove(this);' class='btn btn-danger btn-info btn-md'><span class='glyphicon glyphicon-remove-sign'></span></a></td>"
+							"<td style='vertical-align:middle;'><input  type='checkbox' name = 'check' /> </td>" 
+							+"<td style='vertical-align:middle;' class='goods'><img alt='' width='100px' height='100px;' src=/phone/images"+data[i].address+"  class='img-thumbnail'><label>" +data[i].product.pname +"</label></td>"
+							+"<td style='vertical-align:middle;' class='number small-bold-red'><span name='onePrice'>"+data[i].product.price+"</span></td>"
+							+"<td style='vertical-align:middle;'><button onclick='reduce(this)'>-</button><input style='width:100px;text-align' type='text' value='"+data[i].cart.count+"' readonly='readonly' class='num'  ng-change='change($index)' /><button onclick='add(this)'>+</button></td>"
+							+"<td style='vertical-align:middle;' class='subtotal number small-bold-red' name='total'>"+data[i].product.price*data[i].cart.count+"</td> "
+							+"<td style='vertical-align:middle;' class='operation'><a onclick='remove(this);' class='btn btn-danger btn-info btn-md'><span class='glyphicon glyphicon-remove-sign'></span></a></td>"
 							+"<td style='display:none;' name='PID'>"+data[i].product.pid+"</td>"
 							+"<td style='display:none;' name='UID'>"+data[i].cart.uid+"</td>"
 							+"<td style='display:none;' name='COUNT'>"+data[i].cart.count+"</td>"
@@ -174,9 +174,9 @@ function reduce(object){
 						success : function(data) {
 							if(data.result==1){
 								//直接刷新购物车
-//								window.location.href = "/phone/product/toCart";
-								tdObject.find("input").eq(0).val(--qty);
-								calcPrice(object);
+								window.location.href = "/phone/product/toCart";
+//								tdObject.find("input").eq(0).val(--qty);
+//								calcPrice(object);
 								
 							}else if(data.result==-1){
 								alert("库存更新失败");
@@ -290,5 +290,12 @@ function calcPrice(obj){
 	TotalPrice();
 }
 
+
+//跳转到订单环节
+function toOrder(){
+	
+	window.location.href = "/phone/user/toOrder";
+	
+}
 
 

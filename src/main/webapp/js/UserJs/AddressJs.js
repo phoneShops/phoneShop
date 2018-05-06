@@ -6,8 +6,7 @@ function managerAddress() {
 }
 
 function loadTable() {
-	$('#address')
-			.bootstrapTable(
+	$('#address').bootstrapTable(
 					{
 						url : '/phone/address/qryUserAddress',
 						dataType : "json",
@@ -419,3 +418,126 @@ function changesCity(data) {
 		}
 	});
 }
+
+
+//点击个人信息的时候事件
+function managerMessage(){
+	
+	loadPersonTable();
+	
+}
+
+
+//加载个人信息
+function loadPersonTable(){
+	
+	$.ajax({  
+        url : "/phone/user/qryUserMessage",
+			cache : false,
+			success : function(data) {
+				
+				if(data!=null){
+					
+					$("#UID").html(data.uid);
+					$("#USERNAMES").html(data.username);
+					$("#PHONE").html(data.phone);
+					$("#CARD").html(data.card);
+				}else{
+					$("#msg").css('display','block');
+				}
+				
+				
+			},
+			error : function() {
+				sweetAlert("提示", "查询错误！", "error");
+			}
+		});
+}
+
+//弹出个人信息修改弹框
+function updateMessage(){
+	
+	
+	$("#UPDATE_SNAME").val($("#USERNAMES").text());
+	$("#UPDATE_PERSON_PHONE").val($("#PHONE").text());
+	$("#UPDATE_CARD").val($("#CARD").text());
+	
+	$("#PersonModal").modal();
+	
+}
+
+function updatePerson(){
+	
+	
+	
+	var uid = $("#UID").html()
+	var username = $("#UPDATE_SNAME").val();
+	var phone = $("#UPDATE_PERSON_PHONE").val();
+	var card = $("#UPDATE_CARD").val();
+
+	if(username==""||phone==""||card==""){
+		sweetAlert("提示", "不能有空值！", "error");
+		return;
+	}
+	
+	
+	
+	
+	swal(
+            {title:"确认要修改该数据吗？",
+                text:"",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定修改",
+                cancelButtonText:"取消",
+                closeOnConfirm:false,
+                closeOnCancel:false
+            },
+            function(isConfirm)
+            {
+                if(isConfirm)
+                {
+                	$.ajax({  
+                        url : "/phone/user/updatePersonMsg",
+                			cache : false,
+                			data:{
+                				uid:uid,
+                				username:username,
+                				phone:phone,
+                				card:card
+                			},
+                			success : function(data) {
+                				if(data.result==1){
+                					 swal({title:"提示信息",
+                	                     text:"您已经成功修改个人信息。",
+                	                     type:"success"},function(){
+                	                    	 
+                	                    	 loadPersonTable();
+                	                    	 $("#PersonModal").modal('hide');;
+                	                     });
+                					
+                				}else{
+                					
+                					sweetAlert("提示", "修改出现错误！", "error");
+                				}
+                				
+                			},
+                			error : function() {
+                				sweetAlert("提示", "修改出现错误！", "error");
+                			}
+                		});
+                }
+             else{
+                 swal({title:"已取消",
+                     text:"您取消了修改操作！",
+                     type:"error"})
+             }
+         }
+     )
+	
+}
+
+
+
+
