@@ -1,6 +1,7 @@
 package com.phone.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.phone.pojo.Product_attr_biz;
 
@@ -56,4 +57,8 @@ public interface Product_attr_bizMapper {
 	List<Product_attr_biz> qryProductAttrByPid(int pid);
     
     
+  //返回产品总数
+  	public int queryMessionCount(Map<String, Object> map);
+  //返回产品信息
+  	public List<Product_attr_biz> queryMession(Map<String, Object> map);
 }

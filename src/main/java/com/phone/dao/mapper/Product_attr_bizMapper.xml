@@ -136,4 +136,33 @@
       attr_desc = #{attrDesc,jdbcType=VARCHAR}
     where pid = #{pid,jdbcType=INTEGER}
   </update>
+  
+  <!-- 查询手机详细信息 -->
+  <!-- 根据商品具体类查询信息  -->
+	<select id="queryMession" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+			*
+		FROM
+			product_attr_biz
+		WHERE 1=1
+			<if test="key != null and key !='' ">
+		 	AND 
+		 		( pid like CONCAT('%',#{key},'%') )
+			</if>
+		LIMIT 
+			#{pageIndex},#{pageSize} 
+	</select>
+	<!-- 返回产品表总数  -->
+	<select id="queryMessionCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			product_attr_biz
+		WHERE 1=1
+			<if test="key != null and key !='' ">
+		 	AND  
+		 	( pid like CONCAT('%',#{key},'%') )
+			</if>
+	</select>
+  
 </mapper>

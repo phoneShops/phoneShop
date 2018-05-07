@@ -55,6 +55,7 @@ public class mannageController{
 			json.put("rows", list);
 			json.put("total", count);
 			page = json.toString();
+			System.out.println(page);
 		} catch (Exception e) {
 		}
 		return page;

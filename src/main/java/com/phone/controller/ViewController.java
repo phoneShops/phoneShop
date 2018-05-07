@@ -30,4 +30,10 @@ public class ViewController extends BaseController{
 		model.setViewName("manage/userMession");
 		return model;
 	}
+	//跳转到产品数据表
+	@RequestMapping("/productData")
+	public ModelAndView toProductData(){
+		model.setViewName("manage/productData");
+		return model;
+	}
 }

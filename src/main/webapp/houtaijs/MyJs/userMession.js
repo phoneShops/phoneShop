@@ -182,8 +182,7 @@ $(function() {
 								]
 							});
 		}
-	 	
-	 	function loadDialog() {	 		
+	 		
 	 		$("#edit").dialog({
 				autoOpen : false,
 				title:'修改用户信息',
@@ -233,4 +232,4 @@ $(function() {
 			        }
 			      }
 			});
-	 	}
+	// 	}
