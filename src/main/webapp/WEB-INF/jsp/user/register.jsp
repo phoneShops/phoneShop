@@ -17,6 +17,7 @@
 <title>注册界面</title>
 
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/sweetalert.css">
 
 <style>
 .loading {
@@ -154,6 +155,7 @@
 
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.1.1.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<script src="<%=basePath%>js/sweetalert.min.js"></script>
 	
 <script type="text/javascript">
 	
@@ -222,7 +224,7 @@ function selectProvince(){
 		//alert(card.test(tegx));
 		
 		if(username==""||username==null){
-			alert("用户名不能为空");
+			sweetAlert("提示", "用户名不能为空！", "error");
 		}else if(phone==""||phone==null){
 			alert("电话号码不能为空");
 		}else if(card==""||card==null){

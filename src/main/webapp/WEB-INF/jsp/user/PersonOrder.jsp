@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="head.jsp"%>
 
-<link type="text/css" href="<%=basePath%>assets/css/bootstrap-table.min.css" rel="stylesheet">
+<link type="text/css"
+	href="<%=basePath%>assets/css/bootstrap-table.min.css" rel="stylesheet">
 <link href="<%=basePath%>assets/css/add-ons.min.css" rel="stylesheet" />
 
 <title>订单管理</title>
@@ -28,9 +29,69 @@
 							data-toggle="tab">个人信息</a></li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane active" id="buying"></div>
+						<div class="tab-pane active" id="buying">
 
-						<div class="tab-pane" id="buyed"></div>
+							<div class="heading">
+								<font size="3px;">交易中的订单</font>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading"><font size="3px;" color="red">待付款</font></div>
+								<div class="panel-body">
+									
+									<span>订单号：</span>20180545782152
+									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
+									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
+									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去支付</button>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading"><font size="3px;" color="red">待付款</font></div>
+								<div class="panel-body">
+									
+									<span>订单号：</span>20180545782152
+									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
+									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
+									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去支付</button>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading"><font size="3px;" color="red">待付款</font></div>
+								<div class="panel-body">
+									
+									<span>订单号：</span>20180545782152
+									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
+									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
+									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去支付</button>
+								</div>
+							</div>
+						</div>
+						
+						
+
+
+						<!-- 已经购买的商品 -->
+						<div class="tab-pane" id="buyed">
+							<div class="heading">
+								<font size="3px;">已经完成的订单</font>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading"><font size="3px;" color="red">已完成</font></div>
+								<div class="panel-body">
+									
+									<span>订单号：</span>20180545782152
+									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
+									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
+									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去评价</button>
+								</div>
+							</div>
+							
+						</div>
+						<!-- 已经购买的商品 end -->
+						
 
 
 						<div class="tab-pane" id="address_manager">
@@ -113,7 +174,8 @@
 								<tbody>
 									<tr>
 										<td style='display: none' id="UID"></td>
-										<td style='vertical-align: middle;'>昵称：<span id="USERNAMES"></span></td>
+										<td style='vertical-align: middle;'>昵称：<span
+											id="USERNAMES"></span></td>
 										<td style='vertical-align: middle;'>身份证：<span id="CARD"></span></td>
 										<td style='vertical-align: middle;'>电话号码：<span id="PHONE"></span></td>
 									</tr>
@@ -123,8 +185,7 @@
 								</tbody>
 
 							</table>
-							<br>
-							<br>
+							<br> <br>
 
 							<div class="heading">
 								<font size="3px;">快递信息</font>
@@ -132,7 +193,7 @@
 							<td>&nbsp;</td>
 							</tr>
 							<tr>
-								<td >&nbsp;</td>
+								<td>&nbsp;</td>
 							</tr>
 							<tr>
 								<td>
@@ -140,10 +201,10 @@
 								</td>
 							</tr>
 							<tr>
-								<td >&nbsp;</td>
+								<td>&nbsp;</td>
 							</tr>
 							<tr>
-								<td >
+								<td>
 									<p style="width: 90%; margin: 0 auto; line-height: 25px;">收件人：手机销售网</p>
 									<p style="width: 90%; margin: 0 auto; line-height: 25px;">联系电话：0731-84415099</p>
 									<p style="width: 90%; margin: 0 auto; line-height: 25px;">邮寄地址：长沙市芙蓉路与八一路交叉路口西北角，金帆大厦8楼806</p>
@@ -332,8 +393,8 @@
 </body>
 
 <script type="text/javascript" src="<%=basePath%>js/UserJs/AddressJs.js"></script>
-<script src="<%=basePath%>assets/js/bootstrap-table.min.js"type="text/javascript"></script>
-<script src="<%=basePath%>assets/js/bootstrap-table-zh-CN.min.js"type="text/javascript"></script>
+<script src="<%=basePath%>assets/js/bootstrap-table.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>assets/js/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
 
 
 

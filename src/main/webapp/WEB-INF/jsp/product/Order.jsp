@@ -81,30 +81,30 @@
 								<div class="form-group">
 									<label for="firstname" class="col-sm-2 control-label">*联系人：</label>
 									<div class="col-sm-3">
-										<input type="text" class="form-control" id="username" readonly="readonly">
+										<input type="text" class="form-control" id="username" value="庞攀" readonly="readonly">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">*手机号码：</label>
 									<div class="col-sm-3">
-										<input type="text" class="form-control" id="phoneNumber" readonly="readonly">
+										<input type="text" value="13787019873" class="form-control" id="phoneNumber" readonly="readonly">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">*我的地址：</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" id="province" readonly="readonly">
+										<input type="text" value="湖南省" class="form-control" id="province" readonly="readonly">
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" id="province" readonly="readonly">
+										<input type="text" value="长沙市" class="form-control" id="province" readonly="readonly">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">*详细地址：</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="detailAddress" readonly="readonly">
+										<input type="text" value="八方小区  6栋  XXX房间" class="form-control" id="detailAddress" readonly="readonly">
 									</div>
 								</div>
 							</form>
