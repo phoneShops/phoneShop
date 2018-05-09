@@ -49,27 +49,38 @@
 	<header class="container"> <br>
 	<div class="row">
 		<div class="col-lg-12">
+			<div class="col-lg-12">
 			<ul class="breadcrumb">
 				<li><a href="<%=basePath%>user/toHome">Home</a></li>
 				<li><a href="<%=basePath%>user/tologin">Login</a></li>
 			</ul>
 		</div>
+		</div>
 	</div>
 	<br>
-	<br>
-	<br>
 	<div class="row">
-
-		<center>
+		<div class="col-md-4" style="border-right: 1px solid #ddd;">
 			<div id="logo">
 				<img src="../images/logo.png" />
 			</div>
-		</center>
+		</div>
+		<div class="col-md-8" style="border-right: 1px solid #ddd;">
+			<font size="6px;" color="#D1D1D1">欢迎登陆</font>
+		
+		</div>
 	</div>
 
 	</header>
-	<div class="row" style="margin-top: 30px;">
-		<div class="col-md-1" style="border-right: 1px solid #ddd;"></div>
+	<div class="row" style="margin-top: 30px;background-color: #E5E5E5">
+		
+		<div class="col-md-4" style="border-right: 1px solid #ddd;">
+		 	<font size="5px;">
+		 			说明：第一次登陆的用户的初始密码是：6个6
+		 	</font>
+		</div>
+		
+		<div class="col-md-3" style="border-right: 1px solid #ddd;">
+		</div>
 		<div class="col-md-5" style="border-right: 1px solid #ddd;">
 			<div class="well col-md-10">
 				<center>
@@ -120,12 +131,15 @@
 				<br>
 				<br>
 				<button id="login" type="button" class="btn btn-success btn-block">登录</button>
+				<br>
+				<button id="register" type="button" class="btn btn-success btn-block">立即注册</button>
 			</div>
 		</div>
 	</div>
 
+	<!-- 引入footer.jsp -->
+	<jsp:include page="footer.jsp"></jsp:include>
 
-	<div class="col-md-6" style="border-right: 1px solid #ddd;"></div>
 
  <div class="container">
         <div id="myModal" class="modal fade" data-keyboard="false"

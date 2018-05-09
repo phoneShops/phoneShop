@@ -140,6 +140,9 @@
 			</ul>
 		</div>
 	</div>
+	
+		<!-- 引入footer.jsp -->
+	<jsp:include page="footer.jsp"></jsp:include>
 
 <!-- 弹出的载入框 -->
  <div class="container">

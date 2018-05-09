@@ -224,7 +224,7 @@
 			</div>
 		</div>
 	</div>
-	<footer>
-	</footer>
+		<!-- 引入footer.jsp -->
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
