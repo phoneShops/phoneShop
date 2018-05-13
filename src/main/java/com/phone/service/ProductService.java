@@ -35,4 +35,6 @@ public interface ProductService {
 	public int removeCartOpt(int uid, int pid, int cid);
 
 	public List<Map<Object, Object>> showOrderByCid(String data);
+
+	public void inserOrder(String order_id, String arrayCid, String priceTotal);
 }

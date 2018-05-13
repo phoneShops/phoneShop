@@ -358,5 +358,21 @@ public class ProductServiceImpl  implements ProductService{
 		return listbean;
 	}
 
+	//将用户点击下单的加入订单
+	public void inserOrder(String order_id, String arrayCid, String priceTotal) {
+		
+		String[] array = arrayCid.split(",");
+		
+		for (int i = 0; i < array.length; i++) {
+			int cid = Integer.valueOf(array[0]);
+			
+			
+			
+			
+		}
+		
+		
+	}
+
 
 }
