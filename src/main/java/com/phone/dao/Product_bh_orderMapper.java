@@ -1,5 +1,7 @@
 package com.phone.dao;
 
+import java.util.List;
+
 import com.phone.pojo.Product_bh_order;
 
 public interface Product_bh_orderMapper {
@@ -50,4 +52,6 @@ public interface Product_bh_orderMapper {
      * @mbggenerated Tue May 01 22:59:25 CST 2018
      */
     int updateByPrimaryKey(Product_bh_order record);
+
+	List<Product_bh_order> qryFinishOrder(Integer uid);
 }

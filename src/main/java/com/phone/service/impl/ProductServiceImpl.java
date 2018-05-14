@@ -16,12 +16,14 @@ import com.phone.dao.ProductMapper;
 import com.phone.dao.Product_TypeMapper;
 import com.phone.dao.Product_attr_bizMapper;
 import com.phone.dao.Product_b_orderMapper;
+import com.phone.dao.Product_bh_orderMapper;
 import com.phone.dao.Product_pictureMapper;
 import com.phone.pojo.Cart;
 import com.phone.pojo.Product;
 import com.phone.pojo.Product_Type;
 import com.phone.pojo.Product_attr_biz;
 import com.phone.pojo.Product_b_order;
+import com.phone.pojo.Product_bh_order;
 import com.phone.pojo.Product_picture;
 import com.phone.service.ProductService;
 import com.phone.util.CreateOrderId;
@@ -47,6 +49,9 @@ public class ProductServiceImpl  implements ProductService{
 	
 	@Resource
 	private Product_b_orderMapper product_b_orderMapper;
+	
+	@Resource
+	private Product_bh_orderMapper product_bh_orderMapper;
 	
 
 	//根据前台出入的进行查询
@@ -443,5 +448,39 @@ public class ProductServiceImpl  implements ProductService{
 		}
 				
 		return listbean;
+	}
+
+	//查询已经完成的订单
+	public List<Map<Object, Object>> qryFinishOrder(Integer uid) {
+		
+			//最后返回的bean
+				List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
+				
+				List<Product_bh_order>  orderlist = product_bh_orderMapper.qryFinishOrder(uid);
+				
+				for (int i = 0; i < orderlist.size(); i++) {
+					//循环遍历订单集合
+					Product_bh_order  order = orderlist.get(i);
+					
+					Product product = productMapper.selectByPrimaryKey(order.getPid());
+					
+					List<Product_picture> picturelist = product_pictureMapper.selectProductPicture(order.getPid());
+					
+//					double allPrice = order.getCout()*product.getPrice();
+					
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String dateString = formatter.format(order.getFinishTime());
+					
+					Map<Object, Object> map = new HashMap<>();
+					map.put("order",order);
+					map.put("product",product);
+					map.put("allprice",order.getPrice());
+					map.put("orderTime",dateString);
+					map.put("address",picturelist.get(0).getPrAddress());
+					
+					listbean.add(map);
+				}
+						
+				return listbean;
 	}
 }

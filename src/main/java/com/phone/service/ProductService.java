@@ -39,4 +39,6 @@ public interface ProductService {
 	public int inserOrder(String order_id, String arrayCid, String priceTotal,int address_id);
 
 	public List<Map<Object, Object>> qryOrder(Integer uid);
+
+	public List<Map<Object, Object>> qryFinishOrder(Integer uid);
 }

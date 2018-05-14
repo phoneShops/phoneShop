@@ -226,6 +226,10 @@ public class Product_bh_order {
     public void setPrice(Double price) {
         this.price = price;
     }
+    
+    public Product_bh_order() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Product_bh_order(Integer bhid, String orderId, Integer uid, Integer pid, Integer cout, Date finishTime,
 			Double price) {

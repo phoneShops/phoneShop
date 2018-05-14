@@ -624,4 +624,58 @@ function managerOrder(){
 	
 }
 
+//加载已经完成的订单
+function managerFinishOrder(){
+	
+	var ordered = $("#buyed");
+	
+	$.ajax({  
+        url : "/phone/order/qryFinishOrder",
+			cache : false,
+			success : function(data) {
+				
+				
+				var content = "";
+				
+				
+				for(var i = 0; i < data.length; i++) {
+
+//					alert(data[i].product.pname);
+//					alert(data[i].product.price);
+//					alert(data[i].address);
+//					alert(data[i].allprice);
+//					alert(data[i].order.orderId);
+//					alert(data[i].orderTime);
+					
+					content  = "<div class='panel panel-default'>";
+					
+					/*
+					product_b_trade 中订单状态：0：还未支付     1：已经支付 还未发货   2： 已经发货 用户点击确认收货 状态改为 :3   
+					3表示：收货但未评价 最后完工状态为 9*/
+					
+					content  =  content + "<div class='panel-heading'><font size='3px;' color='red'>状态：已完成</font></div>";
+						
+					content = content + "<div class='panel-body'><span>订单号：</span>"+data[i].order.orderId+"" 
+						+ "<span style='position: relative;left: 150px;'>订单完成时间："+data[i].orderTime+"</span>"
+						+"<span style='position: relative;left: 350px;'><font color='red' size='4px;'>总额："+data[i].allprice+"</font></span></div>";
+					
+					
+					content = content + "<div class='panel-footer'><img style='width: 130px;height: 150px;' class='img-thumbnail' alt='' src=/phone/images"+data[i].address+">"
+					+ "<span style='position: relative;left: 200px;'>"+data[i].product.pname+"</span>"
+					+ "<span style='position: relative;left: 300px;'>数量："+data[i].order.cout+"</span>";
+					
+			 		
+			 		ordered.append(content);
+				}
+			},
+			error : function() {
+				sweetAlert("提示", "查询错误！", "error");
+			}
+		});
+	
+	
+	
+	
+}
+
 
