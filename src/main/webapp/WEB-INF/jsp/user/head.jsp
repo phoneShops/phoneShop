@@ -53,7 +53,7 @@
 					<%
 					}else{ 
 					%>
-						<li><a href="/phone/user/toPerson_Order"><span class="glyphicon glyphicon-user"></span></a></li>
+						<li><a href="/phone/user/toPerson_Order"><span class="glyphicon glyphicon-user"></span><%=u.getPhone() %></a></li>
 						<li><a href="/phone/product/toCart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 						<li>
 							<select class="form-control" style="width: 100px" onchange="choice(this)">

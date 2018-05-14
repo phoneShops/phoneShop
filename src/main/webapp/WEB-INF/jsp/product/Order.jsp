@@ -94,10 +94,10 @@
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">*我的地址：</label>
 									<div class="col-sm-2">
-										<input type="text" value="湖南省" class="form-control" id="province" readonly="readonly">
+										<input type="text" value="湖南省" class="form-control" id="province">
 									</div>
 									<div class="col-sm-2">
-										<input type="text" value="长沙市" class="form-control" id="province" readonly="readonly">
+										<input type="text" value="长沙市" class="form-control" id="city">
 									</div>
 								</div>
 
