@@ -36,5 +36,7 @@ public interface ProductService {
 
 	public List<Map<Object, Object>> showOrderByCid(String data);
 
-	public void inserOrder(String order_id, String arrayCid, String priceTotal);
+	public int inserOrder(String order_id, String arrayCid, String priceTotal,int address_id);
+
+	public List<Map<Object, Object>> qryOrder(Integer uid);
 }

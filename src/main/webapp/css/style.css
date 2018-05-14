@@ -1,5 +1,4 @@
 
-
 /* ==== Google font ==== */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700,900);
 @import url(http://fonts.googleapis.com/css?family=Ek+Mukta:400,600,700);
@@ -13,8 +12,8 @@ html, body {width:100%; padding:0; margin:0;}
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
-html { -webkit-text-size-adjust: none;}
-.video embed,.video object,.video iframe { width: 100%;  height: auto;}
+html { -webkit-text-size-adjust: none;}
+.video embed,.video object,.video iframe { width: 100%;  height: auto;}
 img{max-width:100%;	height: auto;width: auto\9; /* ie8 */}
 
 h1 {font-size: 38px;}
@@ -246,4 +245,3 @@ footer .copyright ul li {display: inline-block;margin-left: 10px;}
 .btn {}
 .btn.btn-1{ background-color: #222;color: #fff;font-size: 25px;padding: 10px 15px;}
 .btn.btn-2{margin-left: 5px;background: #D9534F;color: #fff;}
-

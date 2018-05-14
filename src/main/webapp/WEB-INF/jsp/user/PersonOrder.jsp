@@ -22,7 +22,8 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#buying" data-toggle="tab">交易中订单</a>
 						</li>
-						<li><a href="#buyed" data-toggle="tab">已成交订单</a></li>
+						<li><a href="#buyed" onclick="managerOrder();"
+							data-toggle="tab">已成交订单</a></li>
 						<li><a href="#address_manager" onclick="managerAddress();"
 							data-toggle="tab">地址管理</a></li>
 						<li><a href="#person_manager" onclick="managerMessage();"
@@ -30,46 +31,13 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="buying">
-
 							<div class="heading">
 								<font size="3px;">交易中的订单</font>
 							</div>
 
-							<div class="panel panel-default">
-								<div class="panel-heading"><font size="3px;" color="red">待付款</font></div>
-								<div class="panel-body">
-									
-									<span>订单号：</span>20180545782152
-									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
-									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
-									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去支付</button>
-								</div>
-							</div>
 							
-							<div class="panel panel-default">
-								<div class="panel-heading"><font size="3px;" color="red">待付款</font></div>
-								<div class="panel-body">
-									
-									<span>订单号：</span>20180545782152
-									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
-									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
-									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去支付</button>
-								</div>
-							</div>
 							
-							<div class="panel panel-default">
-								<div class="panel-heading"><font size="3px;" color="red">待付款</font></div>
-								<div class="panel-body">
-									
-									<span>订单号：</span>20180545782152
-									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
-									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
-									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去支付</button>
-								</div>
-							</div>
 						</div>
-						
-						
 
 
 						<!-- 已经购买的商品 -->
@@ -390,6 +358,10 @@
 	</div>
 
 	<!--end  -->
+	
+	
+	<!-- 引入footer.jsp -->
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 <script type="text/javascript" src="<%=basePath%>js/UserJs/AddressJs.js"></script>
@@ -422,6 +394,8 @@ $.ajax({
 		
 	}
 });
+//加载交易中的订单
+managerOrder();
 
 }
 

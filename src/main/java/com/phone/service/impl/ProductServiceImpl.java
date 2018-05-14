@@ -1,5 +1,6 @@
 package com.phone.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +15,17 @@ import com.phone.dao.CityMapper;
 import com.phone.dao.ProductMapper;
 import com.phone.dao.Product_TypeMapper;
 import com.phone.dao.Product_attr_bizMapper;
+import com.phone.dao.Product_b_orderMapper;
 import com.phone.dao.Product_pictureMapper;
 import com.phone.pojo.Cart;
 import com.phone.pojo.Product;
 import com.phone.pojo.Product_Type;
 import com.phone.pojo.Product_attr_biz;
+import com.phone.pojo.Product_b_order;
 import com.phone.pojo.Product_picture;
 import com.phone.service.ProductService;
 import com.phone.util.CreateOrderId;
+import com.phone.util.TimeUtil;
 
 @Service("productService")
 public class ProductServiceImpl  implements ProductService{
@@ -40,6 +44,9 @@ public class ProductServiceImpl  implements ProductService{
 	
 	@Resource
 	private CartMapper cartmapper;
+	
+	@Resource
+	private Product_b_orderMapper product_b_orderMapper;
 	
 
 	//根据前台出入的进行查询
@@ -359,20 +366,82 @@ public class ProductServiceImpl  implements ProductService{
 	}
 
 	//将用户点击下单的加入订单
-	public void inserOrder(String order_id, String arrayCid, String priceTotal) {
+	public int inserOrder(String order_id, String arrayCid, String priceTotal,int address_id) {
+		
+		int result = 0;
 		
 		String[] array = arrayCid.split(",");
 		
 		for (int i = 0; i < array.length; i++) {
-			int cid = Integer.valueOf(array[0]);
+			int cid = Integer.valueOf(array[i]);
 			
+			//获得购物车信息
+			Cart cart =  cartmapper.selectByPrimaryKey(cid);
 			
+			Product product =  new Product();
 			
-			
+			if(cart!=null){
+				product = productMapper.selectByPrimaryKey(cart.getPid());
+				double price = product.getPrice()*cart.getCount();
+				
+				Product_b_order order = new Product_b_order();
+				
+				order.setOrderId(order_id);
+				order.setUid(cart.getUid());
+				order.setPid(cart.getPid());
+				order.setAddressid(address_id);
+				order.setCout(cart.getCount());
+				order.setPrice(price);
+				
+				order.setOrderTime(TimeUtil.getTimestamp());
+
+				order.setOrderStatus(0);
+				
+				int code = product_b_orderMapper.insert(order);
+				
+				//如果订单加入成功，购物车则删除
+				if(code==1){
+					cartmapper.deleteByPrimaryKey(cart.getCid());
+					result = 1;
+				}
+			}
 		}
 		
 		
+		return result;
 	}
 
-
+	//查询交易中的订单
+	public List<Map<Object, Object>> qryOrder(Integer uid) {
+		
+		//最后返回的bean
+		List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
+		
+		List<Product_b_order>  orderlist = product_b_orderMapper.qryOrder(uid);
+		
+		for (int i = 0; i < orderlist.size(); i++) {
+			//循环遍历订单集合
+			Product_b_order  order = orderlist.get(i);
+			
+			Product product = productMapper.selectByPrimaryKey(order.getPid());
+			
+			List<Product_picture> picturelist = product_pictureMapper.selectProductPicture(order.getPid());
+			
+			double allPrice = order.getCout()*product.getPrice();
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String dateString = formatter.format(order.getOrderTime());
+			
+			Map<Object, Object> map = new HashMap<>();
+			map.put("order",order);
+			map.put("product",product);
+			map.put("allprice",allPrice);
+			map.put("orderTime",dateString);
+			map.put("address",picturelist.get(0).getPrAddress());
+			
+			listbean.add(map);
+		}
+				
+		return listbean;
+	}
 }

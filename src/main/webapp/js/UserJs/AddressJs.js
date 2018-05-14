@@ -158,12 +158,12 @@ function updateAddress() {
 	
 	
 	swal(
-            {title:"确认要添加该数据吗？",
+            {title:"确认要修改该数据吗？",
                 text:"",
                 type:"warning",
                 showCancelButton:true,
                 confirmButtonColor:"#DD6B55",
-                confirmButtonText:"确定添加！",
+                confirmButtonText:"确定修改！",
                 cancelButtonText:"取消",
                 closeOnConfirm:false,
                 closeOnCancel:false
@@ -538,6 +538,90 @@ function updatePerson(){
 	
 }
 
+//点击交易中的订单时触发的事件
+function managerOrder(){
+	
+	
+	var ordering = $("#buying");
+	
+	$.ajax({  
+        url : "/phone/order/qryOrder",
+			cache : false,
+			success : function(data) {
+				
+				
+				var content = "";
+				
+				
+				for(var i = 0; i < data.length; i++) {
 
+//					alert(data[i].product.pname);
+//					alert(data[i].product.price);
+//					alert(data[i].address);
+//					alert(data[i].allprice);
+//					alert(data[i].order.orderId);
+//					alert(data[i].orderTime);
+					
+					var status = data[i].order.orderStatus;
+					
+					content  = "<div class='panel panel-default'>";
+					
+					/*
+					product_b_trade 中订单状态：0：还未支付     1：已经支付 还未发货   2： 已经发货 用户点击确认收货 状态改为 :3   
+					3表示：收货但未评价 最后完工状态为 9*/
+					
+					if(status==0){
+						
+						content  =  content + "<div class='panel-heading'><font size='3px;' color='red'>状态：待付款</font></div>";
+						
+					}else if(status==1){
+						
+						content  =  content + "<div class='panel-heading'><font size='3px;' color='red'>状态：待发货</font></div>";
+						
+					}else if(status==2){
+						
+						content  =  content + "<div class='panel-heading'><font size='3px;' color='red'>状态：待收货</font></div>";
+						
+					}else if(status==3){
+						
+						content  =  content + "<div class='panel-heading'><font size='3px;' color='red'>状态：待评价</font></div>";
+						
+					}
+		
+					content = content + "<div class='panel-body'><span>订单号：</span>"+data[i].order.orderId+"" 
+						+ "<span style='position: relative;left: 150px;'>下单时间："+data[i].orderTime+"</span>"
+						+"<span style='position: relative;left: 350px;'><font color='red' size='4px;'>价格："+data[i].allprice+"</font></span></div>";
+					
+					
+					content = content + "<div class='panel-footer'><img style='width: 130px;height: 150px;' class='img-thumbnail' alt='' src=/phone/images"+data[i].address+">"
+					+ "<span style='position: relative;left: 200px;'>"+data[i].product.pname+"</span>"
+					+ "<span style='position: relative;left: 300px;'>数量："+data[i].order.cout+"</span>";
+					
+					//根据状态控制按钮状态
+			 		if(status==0){
+			 			
+			 			content  =  content + "<button style='position: relative;left: 700px;' type='button' class='btn btn-success active' >去支付</button></div>";
+			 		}else if(status==1){
+						
+						content  =  content + "<button style='position: relative;left: 700px;' readonly = 'readonly' type='button' class='btn btn-success active' >等待发货</button></div>";
+						
+					}else if(status==2){
+						
+						content  =  content + "<button style='position: relative;left: 700px;'  type='button' class='btn btn-success active' >确认收货</button></div>";
+						
+					}else if(status==3){
+						
+						content  =  content + "<button style='position: relative;left: 700px;'  type='button' class='btn btn-success active' >去评价</button></div>";
+					}
+			 		
+			 		ordering.append(content);
+				}
+			},
+			error : function() {
+				sweetAlert("提示", "查询错误！", "error");
+			}
+		});
+	
+}
 
 
