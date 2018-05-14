@@ -226,4 +226,24 @@ public class Product_bh_order {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+	public Product_bh_order(Integer bhid, String orderId, Integer uid, Integer pid, Integer cout, Date finishTime,
+			Double price) {
+		super();
+		this.bhid = bhid;
+		this.orderId = orderId;
+		this.uid = uid;
+		this.pid = pid;
+		this.cout = cout;
+		this.finishTime = finishTime;
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Product_bh_order [bhid=" + bhid + ", orderId=" + orderId + ", uid=" + uid + ", pid=" + pid + ", cout="
+				+ cout + ", finishTime=" + finishTime + ", price=" + price + "]";
+	}
+    
+    
 }
