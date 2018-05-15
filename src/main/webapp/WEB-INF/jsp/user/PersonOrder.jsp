@@ -20,9 +20,10 @@
 			<div class="span5">
 				<div class="tabbable" id="">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#buying" data-toggle="tab">交易中订单</a>
+						<li class="active"><a href="#buying" onclick="managerOrder();"
+							data-toggle="tab">交易中订单</a>
 						</li>
-						<li><a href="#buyed" onclick="managerOrder();"
+						<li><a href="#buyed" onclick="managerFinishOrder();"
 							data-toggle="tab">已成交订单</a></li>
 						<li><a href="#address_manager" onclick="managerAddress();"
 							data-toggle="tab">地址管理</a></li>
@@ -34,27 +35,12 @@
 							<div class="heading">
 								<font size="3px;">交易中的订单</font>
 							</div>
-
-							
-							
 						</div>
-
 
 						<!-- 已经购买的商品 -->
 						<div class="tab-pane" id="buyed">
 							<div class="heading">
 								<font size="3px;">已经完成的订单</font>
-							</div>
-
-							<div class="panel panel-default">
-								<div class="panel-heading"><font size="3px;" color="red">已完成</font></div>
-								<div class="panel-body">
-									
-									<span>订单号：</span>20180545782152
-									<span style="position: relative;left: 150px;">下单时间：2018-04-02 15：25:33</span>
-									<span style="position: relative;left: 350px;"><font color="red" size="4px;">价格：￥5000</font></span>
-									<button style="position: relative;left: 450px;" type="button" class="bt-lg btn-success" >去评价</button>
-								</div>
 							</div>
 							
 						</div>
@@ -266,10 +252,6 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-
-
-
-
 	<!-- 修改个人信息的弹框end -->
 
 
@@ -358,6 +340,45 @@
 	</div>
 
 	<!--end  -->
+	
+	
+	<!-- 用户评论的弹框 -->
+		<div class="modal fade" id="CommentModal" tabindex="-1" role="dialog"
+		aria-labelledby=""CommentModal"" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<small class="modal-title" id="myModalLabel">用户评论</small>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+
+						<input type="text" id="UPDATE_CID" style="display: none" /> <input
+							type="text" id="UPDATE_UID" style="display: none" />
+						<div class="form-group">
+							<label for="firstname" class="col-sm-3 control-label">评论信息：</label>
+							<div class="col-sm-6">
+								<textarea class="form-control" rows="5" id="comment"></textarea>
+							</div>
+							<input style='display:none' type='text' id='MODAL_UID' value="">
+							<input style='display:none' type='text' id='MODAL_OID' value="">
+						</div>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" onclick="SubComment();" class="btn btn-primary">提交评论</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>	
+	
+	<!-- 用户评论的弹框end -->
 	
 	
 	<!-- 引入footer.jsp -->

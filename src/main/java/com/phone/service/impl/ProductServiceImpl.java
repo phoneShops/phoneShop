@@ -17,6 +17,7 @@ import com.phone.dao.Product_TypeMapper;
 import com.phone.dao.Product_attr_bizMapper;
 import com.phone.dao.Product_b_orderMapper;
 import com.phone.dao.Product_bh_orderMapper;
+import com.phone.dao.Product_commentMapper;
 import com.phone.dao.Product_pictureMapper;
 import com.phone.pojo.Cart;
 import com.phone.pojo.Product;
@@ -24,6 +25,7 @@ import com.phone.pojo.Product_Type;
 import com.phone.pojo.Product_attr_biz;
 import com.phone.pojo.Product_b_order;
 import com.phone.pojo.Product_bh_order;
+import com.phone.pojo.Product_comment;
 import com.phone.pojo.Product_picture;
 import com.phone.service.ProductService;
 import com.phone.util.CreateOrderId;
@@ -53,6 +55,8 @@ public class ProductServiceImpl  implements ProductService{
 	@Resource
 	private Product_bh_orderMapper product_bh_orderMapper;
 	
+	@Resource
+	private Product_commentMapper product_commentMapper;
 
 	//根据前台出入的进行查询
 	public List<Map<Object,Object>> queryProductByName(String name, int headnum, int endnum) {
@@ -482,5 +486,67 @@ public class ProductServiceImpl  implements ProductService{
 				}
 						
 				return listbean;
+	}
+
+	//插入产品评论
+	public int addComment(int uid, int oid, String comment) {
+		
+		//先插入评论表 然后 删除该条订单，移到历史表中
+		
+		Product_b_order order =  product_b_orderMapper.selectByPrimaryKey(oid);
+		
+		
+		Product_comment comm = new Product_comment();
+		
+		if(order!=null){
+			comm.setCommentmsg(comment);
+			comm.setUid(uid);
+			comm.setPid(order.getPid());
+			comm.setCommenttime(TimeUtil.getTimestamp());
+		}
+		
+		int result_first = product_commentMapper.insert(comm);
+
+		if(result_first==1){
+			
+			Product_bh_order bhorder  =new Product_bh_order();
+			
+			bhorder.setCout(order.getCout());
+			bhorder.setOrderId(order.getOrderId());
+			bhorder.setPid(order.getPid());
+			bhorder.setPrice(order.getPrice());
+			bhorder.setUid(order.getUid());
+			bhorder.setFinishTime(TimeUtil.getTimestamp());
+			
+			//插入历史表
+			int result_second = product_bh_orderMapper.insert(bhorder);
+			
+			if(result_second>=1){
+				
+				int result_thread = product_b_orderMapper.deleteByPrimaryKey(oid);
+				return result_thread;
+			}
+			return result_second;
+		}
+		return result_first;
+	}
+
+	//查询订单总价
+	public double qryByOrder_id(String order_id) {
+		
+		List<Product_b_order>  orderlist = product_b_orderMapper.qryByOrderId(order_id);
+		
+		double allPrice = 0;
+		
+		if(orderlist!=null){
+			
+			for (int i = 0; i < orderlist.size(); i++) {
+				
+				Product_b_order order = orderlist.get(i);
+				
+				allPrice += order.getPrice()*order.getCout();
+			}
+		}
+		return allPrice;
 	}
 }

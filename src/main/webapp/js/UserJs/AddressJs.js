@@ -514,7 +514,7 @@ function updatePerson(){
                 	                     type:"success"},function(){
                 	                    	 
                 	                    	 loadPersonTable();
-                	                    	 $("#PersonModal").modal('hide');;
+                	                    	 $("#PersonModal").modal('hide');
                 	                     });
                 					
                 				}else{
@@ -544,6 +544,8 @@ function managerOrder(){
 	
 	var ordering = $("#buying");
 	
+	$(ordering).empty();
+	
 	$.ajax({  
         url : "/phone/order/qryOrder",
 			cache : false,
@@ -555,12 +557,6 @@ function managerOrder(){
 				
 				for(var i = 0; i < data.length; i++) {
 
-//					alert(data[i].product.pname);
-//					alert(data[i].product.price);
-//					alert(data[i].address);
-//					alert(data[i].allprice);
-//					alert(data[i].order.orderId);
-//					alert(data[i].orderTime);
 					
 					var status = data[i].order.orderStatus;
 					
@@ -600,7 +596,8 @@ function managerOrder(){
 					//根据状态控制按钮状态
 			 		if(status==0){
 			 			
-			 			content  =  content + "<button style='position: relative;left: 700px;' type='button' class='btn btn-success active' >去支付</button></div>";
+			 			content  =  content + "<button style='position: relative;left: 700px;' type='button' class='btn btn-success active' onclick='toPay(this);' >去支付</button>"
+			 			+"<input style='display:none' type='text' name='COMMENT_ORDER_ID' value='"+data[i].order.orderId+"'></div>";
 			 		}else if(status==1){
 						
 						content  =  content + "<button style='position: relative;left: 700px;' readonly = 'readonly' type='button' class='btn btn-success active' >等待发货</button></div>";
@@ -611,7 +608,9 @@ function managerOrder(){
 						
 					}else if(status==3){
 						
-						content  =  content + "<button style='position: relative;left: 700px;'  type='button' class='btn btn-success active' >去评价</button></div>";
+						content  =  content + "<button style='position: relative;left: 700px;'  type='button' class='btn btn-success active' onclick='toComment(this);' >去评价</button>"
+						+"<input style='display:none' type='text' name='COMMENT_UID' value='"+data[i].order.uid+"'>"	
+						+"<input style='display:none' type='text' name='COMMENT_OID' value='"+data[i].order.oid+"'></div>";
 					}
 			 		
 			 		ordering.append(content);
@@ -640,18 +639,8 @@ function managerFinishOrder(){
 				
 				for(var i = 0; i < data.length; i++) {
 
-//					alert(data[i].product.pname);
-//					alert(data[i].product.price);
-//					alert(data[i].address);
-//					alert(data[i].allprice);
-//					alert(data[i].order.orderId);
-//					alert(data[i].orderTime);
 					
 					content  = "<div class='panel panel-default'>";
-					
-					/*
-					product_b_trade 中订单状态：0：还未支付     1：已经支付 还未发货   2： 已经发货 用户点击确认收货 状态改为 :3   
-					3表示：收货但未评价 最后完工状态为 9*/
 					
 					content  =  content + "<div class='panel-heading'><font size='3px;' color='red'>状态：已完成</font></div>";
 						
@@ -673,9 +662,86 @@ function managerFinishOrder(){
 			}
 		});
 	
+}
+
+
+//用户评论弹框
+function toComment(object){
 	
+	var obj =  $(object).parent();
 	
+	var uid = obj.find('input[name="COMMENT_UID"]').val();
 	
+	var oid = obj.find('input[name="COMMENT_OID"]').val();
+	
+	$("#MODAL_UID").val(uid);
+	$("#MODAL_OID").val(oid);
+	
+	$("#CommentModal").modal();
+}
+
+//提交评论
+function SubComment(){
+	
+	var uid = $("#MODAL_UID").val();
+	var oid = $("#MODAL_OID").val();
+	
+	var comment = $("#comment").val();
+	
+	if(comment==null||comment==""){
+		
+		sweetAlert("提示", "不能有空值！", "error");
+		return;
+	}
+	
+	$.ajax({  
+        url : "/phone/order/addComment",
+			cache : false,
+			data : {
+				uid:uid,
+				oid:oid,
+				comment:comment
+			},
+			success : function(data) {
+				
+				if(data.result==1){
+    				
+					$("#CommentModal").modal('hide');
+					 $("#comment").val(" ");
+					 managerOrder();
+					sweetAlert("提示", "提交成功！", "success");
+    			}
+				
+			},
+			error : function() {
+				sweetAlert("提示", "提交错误！", "error");
+			}
+		});
+}
+
+
+function toPay(obj){
+	
+	var object = $(obj).parent();
+	
+	//获得订单id
+	var order_id = object.find('input[name="COMMENT_ORDER_ID"]').val()
+	
+	$.ajax({  
+        url : "/phone/order/toPayFee",
+			cache : false,
+			data : {
+				order_id:order_id
+			},
+			success : function(data) {
+				
+				var allprice = data.allPrice;
+				window.location.href = "/phone/order/toPay?order_id="+order_id+"&priceTotal="+allprice;
+			},
+			error : function() {
+				sweetAlert("提示", "错误！", "error");
+			}
+		});
 }
 
 

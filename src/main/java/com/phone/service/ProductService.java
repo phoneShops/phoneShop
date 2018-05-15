@@ -41,4 +41,8 @@ public interface ProductService {
 	public List<Map<Object, Object>> qryOrder(Integer uid);
 
 	public List<Map<Object, Object>> qryFinishOrder(Integer uid);
+
+	public int addComment(int uid, int oid, String comment);
+
+	public double qryByOrder_id(String order_id);
 }

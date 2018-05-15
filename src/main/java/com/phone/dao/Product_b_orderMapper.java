@@ -55,4 +55,6 @@ public interface Product_b_orderMapper {
     int updateByPrimaryKey(Product_b_order record);
 
     List<Product_b_order> qryOrder(Integer uid);
+
+	List<Product_b_order>  qryByOrderId(String order_id);
 }
