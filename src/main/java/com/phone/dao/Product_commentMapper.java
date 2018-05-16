@@ -1,5 +1,7 @@
 package com.phone.dao;
 
+import java.util.List;
+
 import com.phone.pojo.Product_comment;
 
 public interface Product_commentMapper {
@@ -50,4 +52,6 @@ public interface Product_commentMapper {
      * @mbggenerated Tue May 15 13:04:41 CST 2018
      */
     int updateByPrimaryKey(Product_comment record);
+
+	List<Product_comment> qryCommByPid(int pid);
 }

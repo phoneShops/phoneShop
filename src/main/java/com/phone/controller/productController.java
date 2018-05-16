@@ -50,19 +50,17 @@ public class productController extends BaseController {
 	 * @param headnum
 	 * @param endnum
 	 * @param status:标识
-	 *            手机名称还是手机类型
 	 * @return
 	 */
 	@RequestMapping(value = "/queryProduct")
 	@ResponseBody
-	public Object queryProduct(String pname, String headnum, String endnum) {
+	public Object queryProduct(int type_id) {
 
-		logger.info(pname);
-		logger.info(headnum);
-		logger.info(endnum);
 
 //		List<Product> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
-		List<Map<Object,Object>> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
+//		List<Map<Object,Object>> list = productService.queryProductByName(pname, Integer.valueOf(headnum),Integer.valueOf(endnum));
+		
+		List<Map<Object,Object>> list = productService.queryProductByTypeId(type_id);
 		
 		logger.info(list.size());
 
@@ -76,14 +74,16 @@ public class productController extends BaseController {
 	@RequestMapping(value = "/toProductDetail")
 	public String toProductDetail(int pid,Model model) {
 		
+		List<Map<Object,Object>> list = productService.qryComment(pid);
+		
+		
 		model.addAttribute("pid", pid);
-//		model.addAttribute("product", product); 
-//		model.addAttribute("pictureList", pictureList); 
-//		model.addAttribute("attrList", attrList); 
+		model.addAttribute("commList", list);
 		
 		return "product/productDetail";
 	}
 	
+	//查询产品详细信息
 	@RequestMapping(value ="/queryProductDetail")
 	@ResponseBody
 	public Object qryProductDetail(int pid){

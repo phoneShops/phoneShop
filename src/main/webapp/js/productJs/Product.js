@@ -128,6 +128,106 @@ function buy(){
 				alert("查询出错了！");
 			}
 		});
-	
-	
 }
+
+
+//用户选择的产品
+function choice(val) {
+		
+		
+	clearProduct(val);
+	
+		/*加载数据*/
+	    $.ajax({  
+	        url : "/phone/product/queryProduct",
+				data : {
+					type_id:val
+				},
+				cache : false,
+				success : function(data) {
+					loading = true;
+					
+					if (data.length>0) {
+						var content = "";
+						
+					    for (var i = 0; i < data.length; i++) {
+					    	
+					    	 content  = "<div class='col-md-3 product-men'>"
+					    	 		+ "<div class='men-pro-item simpleCart_shelfItem'>"
+									+ "<div class='men-thumb-item'>"
+									+"<img src=/phone/images"+data[i].picture.prAddress+" alt='' class='pro-image-front'>"
+									+ "<img src=/phone/images"+data[i].picture.prAddress+" alt='' class='pro-image-back'>"
+									+ "<div class='men-cart-pro'> <div class='inner-men-cart-pro'>"
+									+ "<a onclick='toDetail("+data[i].product.pid+")' class='link-product-add-cart'>查看详情</a> </div> </div>"
+									+"<span class='product-new-top'>New</span>"
+									+"</div>"
+									+" <div class='item-info-product'> "
+									+"<h4> <a href=''>"+data[i].product.pname+"</a></h4>"
+									+"<div class='info-product-price'> <span class='item_price'>$"+data[i].product.price+"</span> <del>$5000</del> </div>"
+									+"<a  onclick='toDetail("+data[i].product.pid+")' class='item_add single-item hvr-outline-out button2'>查看详情</a>"
+									+"	</div></div></div>";
+									
+					    	 appendContent(content,val);
+						}
+					    
+					} else{
+						sweetAlert("提示", "抱歉，暂时没货！", "error");
+					}
+				},
+				error : function() {
+					sweetAlert("提示", "系统错误", "error");
+				}
+			});
+
+	}
+	
+function clearProduct(val){
+	
+	if(val==1){
+		$("#ProductList").empty();
+	}else if(val==2){
+		$("#ProductList1").empty();
+	}else if(val==11){
+		$("#ProductList2").empty();
+	}else if(val==12){
+		$("#ProductList3").empty();
+	}else if(val==13){
+		$("#ProductList4").empty();
+	}else if(val==14){
+		$("#ProductList5").empty();
+	}else if(val==0){
+		$("#ProductList6").empty();
+	}
+	
+}	
+
+
+function  appendContent(content,val){
+	
+	
+	if(val==1){
+		$("#ProductList").append(content);
+	}else if(val==2){
+		$("#ProductList1").append(content);
+	}else if(val==11){
+		$("#ProductList2").append(content);
+	}else if(val==12){
+		$("#ProductList3").append(content);
+	}else if(val==13){
+		$("#ProductList4").append(content);
+	}else if(val==14){
+		$("#ProductList5").append(content);
+	}else if(val==0){
+		$("#ProductList6").append(content);
+	}
+}
+
+
+
+function toDetail(pid){
+		
+	//跳转到详情页并带pid过去
+	window.location.href='/phone/product/toProductDetail?pid='+pid;
+		
+}
+	

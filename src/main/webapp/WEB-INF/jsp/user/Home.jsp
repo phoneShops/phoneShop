@@ -1,230 +1,153 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.phone.pojo.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="../user/head.jsp"%>
+<body>
 
-<%@ include file="head.jsp"%>
-
-
-<title>Mobile Shop</title>
-	
-</head>
-
-<body style="background-color: #F5F5F5">
-	<!--//////////////////////////////////////////////////-->
-	<!--///////////////////HomePage///////////////////////-->
-	<!--//////////////////////////////////////////////////-->
-	<div id="page-content" class="home-page">
+		<!-- content -->
+	<div class="new_arrivals" style="background-color: #F5F5F5">
+			<center>
+				<font size="5px;">火爆抢购</font>
+			</center>
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<!-- Carousel -->
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-						<!-- Indicators -->
-						<ol class="carousel-indicators hidden-xs">
-							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						</ol>
-						<!-- Wrapper for slides -->
-						<div class="carousel-inner">
-							<div class="item active">
-								<img src="<%=basePath %>images/main-banner1-1903x600.jpg" alt="First slide">
-								<!-- Static Header -->
-								<div class="header-text hidden-xs">
-									<div class="col-md-12 text-center">
+					<br><br>
+					<div class="resp-tabs-container">
+					
+					<!-- 开始循环 -->
+					<c:forEach items="${hotList}" var="item">  
+							<div class="col-md-3 product-men">
+								<div class="men-pro-item simpleCart_shelfItem">
+									<div class="men-thumb-item">
+										<img src="../images${item.picture.prAddress}" alt="" class="pro-image-front"> <img src="../images${item.picture.prAddress}" alt="" class="pro-image-back">
+										<div class="men-cart-pro">
+											<div class="inner-men-cart-pro">
+												<a  onclick="toDetail(${item.product.pid})" class="link-product-add-cart">查看详情</a>
+											</div>
+										</div>
+										<span class="product-new-top">HOT</span>
+
 									</div>
-								</div><!-- /header-text -->
-							</div>
-							<div class="item">
-								<img src="<%=basePath %>images/main-banner2-1903x600.jpg" alt="Second slide">
-								<!-- Static Header -->
-								<div class="header-text hidden-xs">
-									<div class="col-md-12 text-center">
+									<div class="item-info-product ">
+										<h4>
+											<a href="single.html">${item.product.pname}</a>
+										</h4>
+										<div class="info-product-price">
+											<span class="item_price">$ ${item.product.price}</span>
+											<del>$5000</del>
+										</div>
+										<a onclick="toDetail(${item.product.pid})" class="item_add single-item hvr-outline-out button2">查看详情</a>
 									</div>
-								</div><!-- /header-text -->
+								</div>
 							</div>
-							<div class="item">
-								<img src="<%=basePath %>images/main-banner3-1903x600.jpg" alt="Third slide">
-								<!-- Static Header -->
-								<div class="header-text hidden-xs">
-									<div class="col-md-12 text-center">
-									</div>
-								</div><!-- /header-text -->
-							</div>
-						</div>
-						<!-- Controls -->
-						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left"></span>
-						</a>
-						<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right"></span>
-						</a>
-					</div><!-- /carousel -->
-				</div>
+						</c:forEach> 	
+					</div>
+		</div>
+	</div>
+	<!-- //content -->
+
+
+	<!-- banner -->
+	<div class="banner-grid">
+		<div id="visual">
+			<div class="slide-visual">
+				<!-- Slide Image Area (1000 x 424) -->
+				<ul class="slide-group">
+					<li><img class="img-responsive" src="../images/img/home.jpg" /></li>
+				</ul>
 			</div>
-			<div class="row">
-				<div class="banner">
-					<div class="col-sm-4">
-						<img src="<%=basePath %>images/sub-banner1.png" />
-					</div>
-					<div class="col-sm-4">
-						<img src="<%=basePath %>images/sub-banner2.png" />
-					</div>
-					<div class="col-sm-4">
-						<img src="<%=basePath %>images/sub-banner3.png" />
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading"><h2>最新产品</h2></div>
-					<div class="products">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/sanxingS8.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">SamSung GALAXY S8</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/sanxingS8+.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">SamSung GALAXY S8+</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/sanxingNote8.jpeg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">SamSung GALAXY NOTE8</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/Z1.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
-								</div>
-							</div>
+		</div>
+
+	</div>
+	
+	
+
+	<!-- product-nav -->
+	<div class="product-easy" style="background-color: #F5F5F5">
+		<div class="container">
+			<div class="sap_tabs">
+				<div id="horizontalTab"
+					style="display: block; width: 100%; margin: 0px;">
+					<ul class="resp-tabs-list">
+						<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"
+							onclick="choice('1');"><span>三星</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"
+							onclick="choice('2');"><span>苹果</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-2" role="tab"
+							onclick="choice('11');"><span>华为</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-3" role="tab"
+							onclick="choice('12');"><span>小米</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-4" role="tab"
+							onclick="choice('13');"><span>VIVO</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-5" role="tab"
+							onclick="choice('14');"><span>一加</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-5" role="tab"
+							onclick="choice('0');"><span>其他</span></li>
+					</ul>
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0" id="ProductList">
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="banner">
-					<div class="col-sm-6">
-						<img src="<%=basePath %>images/sub-banner4.jpg" />
-					</div>
-					<div class="col-sm-6">
-						<img src="<%=basePath %>images/sub-banner5.png" />
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading"><h2>FEATURED PRODUCTS</h2></div>
-					<div class="products">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/iphone.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/galaxy-s4.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/galaxy-note.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="<%=basePath %>images/Z1.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
-								</div>
-							</div>
+					
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1" id="ProductList1">
 						</div>
 					</div>
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2" id="ProductList2">
+						</div>
+					</div>
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3" id="ProductList3">
+						</div>
+					</div>
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4" id="ProductList4">
+						</div>
+					</div>
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-5" id="ProductList5">
+						</div>
+					</div>
+					<div class="resp-tabs-container">
+						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-6" id="ProductList6">
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- //product-nav -->
+	
 		<!-- 引入footer.jsp -->
 	<jsp:include page="footer.jsp"></jsp:include>
+	
 </body>
+
+<!-- js -->
+<!-- cart -->
+<script src="../js/newJs/simpleCart.min.js"></script>
+
+<script src="../js/newJs/bootstrap-3.1.1.min.js"></script>
+<script src="../js/newJs/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../js/newJs/pignose.layerslider.js"></script>
+<script src="../js/newJs/easyResponsiveTabs.js" type="text/javascript"></script>
+<script src="../js/productJs/Product.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+		$('#horizontalTab').easyResponsiveTabs({
+			type : 'default', //Types: default, vertical, accordion           
+			width : 'auto', //auto or any width like 600px
+			fit : true
+		// 100% fit in a container
+		});
+	});
+
+
+
+</script>
 </html>

@@ -8,7 +8,6 @@
 
 <%@ include file="../user/head.jsp"%>
 
-<link href="<%=basePath%>css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />  
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/timeCss/time.css">
 
 

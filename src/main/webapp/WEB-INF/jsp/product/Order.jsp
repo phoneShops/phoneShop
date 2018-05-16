@@ -47,6 +47,7 @@
 			</div>
 		</div>
 	</div>
+	<br>
 	<div class="container">
 		<div class="col-lg-12">
 			<div class="heading">
@@ -77,6 +78,7 @@
 					<font size="4px;"><b>默认快递地址</b></font>&nbsp;<a>&nbsp;[选择其他地址]</a>
 				</div>
 			</div>
+			<br><br>
 				<form class="form-horizontal" role="form">
 								<div class="form-group">
 									<label for="firstname" class="col-sm-2 control-label">*联系人：</label>
