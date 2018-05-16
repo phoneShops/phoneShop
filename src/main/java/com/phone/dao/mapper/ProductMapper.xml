@@ -36,10 +36,32 @@
     order by pid asc limit #{headnum},#{endnum}
       
   </select>	
+  <!-- 根据产品类型查询产品 end -->
   
-  
-  
-  
+  <!-- 查询热销产品 -->
+  <select id="qryHotProduct" resultMap="BaseResultMap" >
+      
+    select 
+    	<include refid="Base_Column_List" />
+    from product
+    where status = 0 and stock > 0
+    order by stock asc limit 0,3
+      
+  </select>	
+  <!-- 查询热销产品 end-->
+
+  <!-- 根据类型查询产品 -->	
+   <select id="qryProductByTypeId" resultMap="BaseResultMap" >
+      
+    select 
+    	<include refid="Base_Column_List" />
+    from product
+    where type_id = #{type_id}
+      
+  </select>	
+  <!-- 根据类型查询产品 end -->
+	
+
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--

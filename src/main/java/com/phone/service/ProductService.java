@@ -45,4 +45,10 @@ public interface ProductService {
 	public int addComment(int uid, int oid, String comment);
 
 	public double qryByOrder_id(String order_id);
+
+	public List<Map<Object, Object>> qryComment(int pid);
+
+	public List<Map<Object, Object>> qryHotProduct();
+
+	public List<Map<Object, Object>> queryProductByTypeId(int type_id);
 }

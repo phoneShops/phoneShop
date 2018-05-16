@@ -59,4 +59,10 @@ public interface ProductMapper {
      * @mbggenerated Thu Apr 26 15:13:03 CST 2018
      */
     int updateByPrimaryKey(Product record);
+
+
+	List<Product> qryHotProduct();
+
+
+	List<Product> qryProductByTypeId(int type_id);
 }

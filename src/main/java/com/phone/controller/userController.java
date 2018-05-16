@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.phone.controller.base.BaseController;
 import com.phone.pojo.User;
 import com.phone.pojo.UserAddress;
+import com.phone.service.ProductService;
 import com.phone.service.UserService;
 
 @Controller
@@ -31,19 +32,33 @@ public class userController  extends BaseController{
 	@Resource
 	private UserService userService;
 	
+	@Resource
+	private ProductService productService;
+	
+	/**
+	 * 测试
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/test")
+	public Object totest(HttpServletRequest request ){
+		
+		return "user/test";
+	}
+	
+	
 	/**
 	 * 跳转到主页
 	 */
 	@RequestMapping(value="/toHome")
-	public Object toHome(HttpServletRequest request ){
+	public Object toHome(HttpServletRequest request,Model model ){
 		
-		logger.info(userService);
 		
-//		HttpServletRequest request = null;
-//		HttpSession session = request.getSession();
-//		User u = new User();
-//		u.setUid(1);
-//		session.setAttribute("user",u);
+		//查询热销产品 并放入集合中
+		List<Map<Object, Object>> list =   productService.qryHotProduct();
+		
+		model.addAttribute("hotList", list);
+		
 		return "user/Home";
 	}
 	/**

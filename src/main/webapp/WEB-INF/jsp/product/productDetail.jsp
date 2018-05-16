@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <html>
 <%
 	String path = request.getContextPath();
@@ -150,54 +150,20 @@
 						</div>
 					</div>
 
+					<c:forEach items="${commList}" var="item">  
+						<div class="media">
+							<!-- <div class="media-left">
+								<img class="media-object" src="../images/prev.png" alt="...">
+							</div> -->
+							<div class="media-right">
+								<h6 class="media-heading">${item.username}</h6><br>
+								<p>${item.comment.commentmsg}</p>
+								<p>&nbsp;&nbsp; ${item.commtime}&nbsp;&nbsp;发表</p>
+								<hr>
+							</div>
+						</div>
+					</c:forEach> 	
 
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object" src="./images/36.jpg" alt="...">
-						</div>
-						<div class="media-right">
-							<h6 class="media-heading">小明</h6>
-							<p>用了快一个月了，推荐购买</p>
-							<p>4楼&nbsp;&nbsp;2017-08-08&nbsp;&nbsp;23:15发表</p>
-							<hr>
-						</div>
-					</div>
-
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object" src="./images/36.jpg" alt="...">
-						</div>
-						<div class="media-body">
-							<h6 class="media-heading">linda</h6>
-							<p>屏幕真的很惊艳，很喜欢，很漂亮</p>
-							<p>3楼&nbsp;&nbsp;2018-02-08&nbsp;&nbsp;23:15发表</p>
-							<hr>
-						</div>
-					</div>
-
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object" src="./images/36.jpg" alt="...">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">213213hkhkh</h4>
-							<p>Clla vel metus scelerisqpis.</p>
-							<p>2楼&nbsp;&nbsp;2018-01-08&nbsp;&nbsp;23:15发表</p>
-							<hr>
-						</div>
-					</div>
-
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object" src="./images/36.jpg" alt="...">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Media heading</h4>
-							<p>Cras sit amet nibherra turpis.</p>
-							<p>1楼&nbsp;&nbsp;2017-08-08&nbsp;&nbsp;23:15发表</p>
-							<hr>
-						</div>
-					</div>
 					<div class="text-center">
 						<button class="btn btn-default btn-block">查看更多</button>
 					</div>

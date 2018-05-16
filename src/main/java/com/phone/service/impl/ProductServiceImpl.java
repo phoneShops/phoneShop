@@ -19,6 +19,7 @@ import com.phone.dao.Product_b_orderMapper;
 import com.phone.dao.Product_bh_orderMapper;
 import com.phone.dao.Product_commentMapper;
 import com.phone.dao.Product_pictureMapper;
+import com.phone.dao.UserMapper;
 import com.phone.pojo.Cart;
 import com.phone.pojo.Product;
 import com.phone.pojo.Product_Type;
@@ -27,6 +28,7 @@ import com.phone.pojo.Product_b_order;
 import com.phone.pojo.Product_bh_order;
 import com.phone.pojo.Product_comment;
 import com.phone.pojo.Product_picture;
+import com.phone.pojo.User;
 import com.phone.service.ProductService;
 import com.phone.util.CreateOrderId;
 import com.phone.util.TimeUtil;
@@ -57,6 +59,9 @@ public class ProductServiceImpl  implements ProductService{
 	
 	@Resource
 	private Product_commentMapper product_commentMapper;
+	
+	@Resource
+	private UserMapper userMapper;
 
 	//根据前台出入的进行查询
 	public List<Map<Object,Object>> queryProductByName(String name, int headnum, int endnum) {
@@ -548,5 +553,92 @@ public class ProductServiceImpl  implements ProductService{
 			}
 		}
 		return allPrice;
+	}
+
+	//产品详情 查询评论信息
+	public List<Map<Object, Object>> qryComment(int pid) {
+		
+		//最后返回的bean
+		List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
+		
+		List<Product_comment>list =  product_commentMapper.qryCommByPid(pid);
+		
+		if(list!=null){
+			
+			for (int i = 0; i < list.size(); i++) {
+				
+				int uid = list.get(i).getUid();
+				User user =  userMapper.selectByPrimaryKey(uid);
+				
+				if(user!=null){
+					
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String dateString = formatter.format(list.get(i).getCommenttime());
+					
+					
+					Map<Object, Object> map = new HashMap<>();
+					map.put("comment",list.get(i));
+					map.put("username",user.getUsername());
+					map.put("commtime",dateString);
+					listbean.add(map);
+				}
+			}
+		}
+		return listbean;
+	}
+
+	@Override
+	public List<Map<Object, Object>> qryHotProduct() {
+		
+		
+		//最后返回的bean
+		List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
+		
+		//查询热销产品
+		List<Product> list =  productMapper.qryHotProduct();
+		
+		if(list!=null){
+			
+			for (int i = 0; i < list.size(); i++) {
+				
+				Product product = list.get(i);
+				
+				List<Product_picture> picturelist = product_pictureMapper.selectProductPicture(product.getPid());
+			 
+				Map<Object, Object> map = new HashMap<>();
+				map.put("product",product);
+				map.put("picture",picturelist.get(0));
+				listbean.add(map);
+			}
+		}
+		return listbean;
+	}
+
+	//通过产品类型 查询产品
+	public List<Map<Object, Object>> queryProductByTypeId(int type_id) {
+		
+		
+		//最后返回的bean
+		List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
+				
+		List<Product> list =  productMapper.qryProductByTypeId(type_id);
+		
+		if(list!=null){
+			
+			for (int i = 0; i < list.size(); i++) {
+				
+				Product product = list.get(i);
+				
+				List<Product_picture> picturelist = product_pictureMapper.selectProductPicture(product.getPid());
+			 
+				Map<Object, Object> map = new HashMap<>();
+				map.put("product",product);
+				map.put("picture",picturelist.get(0));
+				listbean.add(map);
+			}
+			
+		}
+		
+		return listbean;
 	}
 }
