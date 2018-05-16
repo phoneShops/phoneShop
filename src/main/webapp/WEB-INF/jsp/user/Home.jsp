@@ -38,7 +38,7 @@
 											<span class="item_price">$ ${item.product.price}</span>
 											<del>$5000</del>
 										</div>
-										<a onclick="toDetail(${item.product.pid})" class="item_add single-item hvr-outline-out button2">查看详情</a>
+										<a onclick="toDetail(${item.product.pid});" class="item_add single-item hvr-outline-out button2">查看详情</a>
 									</div>
 								</div>
 							</div>

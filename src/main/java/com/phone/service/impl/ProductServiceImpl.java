@@ -590,7 +590,6 @@ public class ProductServiceImpl  implements ProductService{
 	@Override
 	public List<Map<Object, Object>> qryHotProduct() {
 		
-		
 		//最后返回的bean
 		List<Map<Object,Object>> listbean = new ArrayList<Map<Object,Object>>();
 		
@@ -606,9 +605,12 @@ public class ProductServiceImpl  implements ProductService{
 				List<Product_picture> picturelist = product_pictureMapper.selectProductPicture(product.getPid());
 			 
 				Map<Object, Object> map = new HashMap<>();
-				map.put("product",product);
-				map.put("picture",picturelist.get(0));
-				listbean.add(map);
+				
+				if(picturelist.size()>0){
+					map.put("product",product);
+					map.put("picture",picturelist.get(0));
+					listbean.add(map);
+				}
 			}
 		}
 		return listbean;
@@ -632,8 +634,10 @@ public class ProductServiceImpl  implements ProductService{
 				List<Product_picture> picturelist = product_pictureMapper.selectProductPicture(product.getPid());
 			 
 				Map<Object, Object> map = new HashMap<>();
-				map.put("product",product);
-				map.put("picture",picturelist.get(0));
+				if(picturelist.size()>0){
+					map.put("product",product);
+					map.put("picture",picturelist.get(0));
+				}
 				listbean.add(map);
 			}
 			
