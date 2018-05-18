@@ -138,4 +138,24 @@ public class orderController extends BaseController {
 			json.addProperty("allPrice",allPrice);
 			return new Gson().toJson(json);			
 		}
+		
+		/**
+		 * 用户确认收货
+		 */
+		@RequestMapping(value="/confirmOrder",produces = "application/json; charset=utf-8")
+		@ResponseBody
+		public Object confirmOrder(int uid,int oid,String phone){
+			
+			JsonObject json = new JsonObject();
+			
+//			HttpSession session = request.getSession();
+//			User user = (User) session.getAttribute("user");
+			
+			int result = productService.confirmOrder(uid,oid);
+			
+			json.addProperty("result",result);
+			return new Gson().toJson(json);			
+		}	
+		
+		
 }

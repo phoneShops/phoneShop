@@ -604,7 +604,9 @@ function managerOrder(){
 						
 					}else if(status==2){
 						
-						content  =  content + "<button style='position: relative;left: 700px;'  type='button' class='btn btn-success active' >确认收货</button></div>";
+						content  =  content + "<button style='position: relative;left: 700px;'  type='button' class='btn btn-success active' onclick='toConfirm(this);'>确认收货</button>"
+						+"<input style='display:none' type='text' name='CONFIRM_UID' value='"+data[i].order.uid+"'>"	
+						+"<input style='display:none' type='text' name='CONFIRM_OID' value='"+data[i].order.oid+"'></div>";
 						
 					}else if(status==3){
 						
@@ -725,7 +727,7 @@ function toPay(obj){
 	var object = $(obj).parent();
 	
 	//获得订单id
-	var order_id = object.find('input[name="COMMENT_ORDER_ID"]').val()
+	var order_id = object.find('input[name="COMMENT_ORDER_ID"]').val();
 	
 	$.ajax({  
         url : "/phone/order/toPayFee",
@@ -744,4 +746,106 @@ function toPay(obj){
 		});
 }
 
+
+//确认收货
+function toConfirm(obj){
+	
+
+	var object = $(obj).parent();
+
+	var uid = object.find('input[name="CONFIRM_UID"]').val();
+	var oid = object.find('input[name="CONFIRM_OID"]').val();
+	
+	swal(
+            {title:"确认收货吗？",
+                text:"",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定收货",
+                cancelButtonText:"取消",
+                closeOnConfirm:false,
+                closeOnCancel:false
+            },
+            function(isConfirm)
+            {
+                if(isConfirm)
+                {
+                	$.ajax({  
+                        url : "/phone/order/confirmOrder",
+                			cache : false,
+                			data:{
+                				uid:uid,
+                				oid:oid
+                			},
+                			success : function(data) {
+                				if(data.result==1){
+                					 swal({title:"提示信息",
+                	                     text:"收货成功。",
+                	                     type:"success"},function(){
+                	                    	 managerOrder();
+                	                     });
+                					
+                				}else{
+                					
+                					sweetAlert("提示", "收货失败！请联系管理员", "error");
+                				}
+                			},
+                			error : function() {
+                				sweetAlert("提示", "收货失败！请联系管理员", "error");
+                			}
+                		});
+                }
+             else{
+                 swal({title:"已取消",
+                     text:"您取消了收货操作！",
+                     type:"error"})
+             }
+         }
+     )
+}
+
+/**
+ * 密码修改
+ */
+
+
+function checkpassword(){
+	
+	$("#font").html("");
+
+	 
+	var pwd = $("#pwd").val();
+	var newpwd = $("#newpwd").val();
+	var newpwd2 = $("#newpwd2").val();
+	
+	if(pwd==""||pwd==null){
+		alert("密码不能为空！");
+	}else if(newpwd==""||newpwd==null){
+		alert("密码不能为空！");
+	}else if(newpwd2==""||newpwd2==null){
+		alert("密码不能为空！");
+	}else if(newpwd!=newpwd2){
+		alert("两次密码不一致！");
+	}else{
+		$.ajax({  
+			type : 'post',
+			dataType : 'json',
+	        url : '/phone/user/checkPassword',
+	        data : {
+					"pwd" : pwd,
+					"newpwd" : newpwd,
+				   },
+				success : function(data) {
+					if(data.msg=="1"){
+						sweetAlert("提示", "修改成功", "success");
+						window.location.href = "/phone/user/toHome";
+					}else{
+					    	$("#font").html(data.msg);
+					    	$("#font").attr("style", "visibility:visible");
+					     }
+				   }
+					});
+	}
+}
 

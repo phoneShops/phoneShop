@@ -23,7 +23,7 @@ function queryCart(uid){
 							+"<td style='vertical-align:middle;' class='number small-bold-red'><span name='onePrice'>"+data[i].product.price+"</span></td>"
 							+"<td style='vertical-align:middle;'><button onclick='reduce(this)'>-</button><input style='width:100px;text-align' type='text' value='"+data[i].cart.count+"' readonly='readonly' class='num'  ng-change='change($index)' /><button onclick='add(this)'>+</button></td>"
 							+"<td style='vertical-align:middle;' class='subtotal number small-bold-red' name='total'>"+data[i].product.price*data[i].cart.count+"</td> "
-							+"<td style='vertical-align:middle;' class='operation'><a onclick='remove(this);' class='btn btn-danger btn-info btn-md'><span class='glyphicon glyphicon-remove-sign'></span></a></td>"
+							+"<td style='vertical-align:middle;' class='operation'><a onclick='remove(this);' class='btn btn-danger btn-info btn-md'><span class='glyphicon glyphicon-remove-sign'>取消</span></a></td>"
 							+"<td style='display:none;' name='PID'>"+data[i].product.pid+"</td>"
 							+"<td style='display:none;' name='UID'>"+data[i].cart.uid+"</td>"
 							+"<td style='display:none;' name='COUNT'>"+data[i].cart.count+"</td>"

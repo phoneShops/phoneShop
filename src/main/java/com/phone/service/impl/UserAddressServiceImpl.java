@@ -98,7 +98,7 @@ public class UserAddressServiceImpl  implements UserAddressService{
 					//将其他的置为1
 					int result = userAddressMapper.updateToUnStatus(uid);
 					
-					if(result>=1){
+					if(result>=0){
 						//翻译省名
 						Province provinces = provinceMapper.selectProvinceById(province);
 						//翻译城市名

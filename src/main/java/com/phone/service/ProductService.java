@@ -51,4 +51,6 @@ public interface ProductService {
 	public List<Map<Object, Object>> qryHotProduct();
 
 	public List<Map<Object, Object>> queryProductByTypeId(int type_id);
+
+	public int confirmOrder(int uid, int oid);
 }

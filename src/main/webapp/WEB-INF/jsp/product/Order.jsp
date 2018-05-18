@@ -47,14 +47,14 @@
 			</div>
 		</div>
 	</div>
-	<br>
+	<br><br>
 	<div class="container">
 		<div class="col-lg-12">
 			<div class="heading">
 				<font size="4px">订单号：<span id="ORDER_ID"></span></font>
 			</div>
 		</div>
-		
+		<br><br>
 		<div class="row">
 				<table class="table table-striped"  id="orderTable" >
 					<thead>

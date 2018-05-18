@@ -645,4 +645,13 @@ public class ProductServiceImpl  implements ProductService{
 		
 		return listbean;
 	}
+
+	//用户确认收款
+	public int confirmOrder(int uid, int oid) {
+		
+		Product_b_order order =  product_b_orderMapper.selectByPrimaryKey(oid);
+		
+		order.setOrderStatus(3);
+		return product_b_orderMapper.updateByPrimaryKey(order);
+	}
 }

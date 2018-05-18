@@ -11,6 +11,7 @@
 %>
 
 <link rel="stylesheet" href="../css/newCss/bootstrap.css" type="text/css">
+<%-- <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css"> --%>
 <!-- <link rel="stylesheet" href="../css/newCss/flexslider.css"  type="text/css">-->
 <%-- <link rel="stylesheet" href="<%=basePath %>css/newCss/jquery-ui.css"  type="text/css"> --%>
 <%-- <link rel="stylesheet" href="<%=basePath %>css/newCss/flexslider.css"  type="text/css"> --%>
@@ -25,7 +26,6 @@
 	<!-- header -->
 	<div class="header" style="background-color: #F5F5F5">
 		<div class="container">
-
 				<%
 					User u = (User) session.getAttribute("user");
 					if (u == null) {
@@ -48,7 +48,6 @@
  	}
  %>
 
-			</ul>
 		</div>
 	</div>
 	<!-- //header -->
@@ -70,8 +69,8 @@
 					<div class="section_room">
 						<select id="country" onChange="change_country(this.value)"
 							class="frm-field required">
-							<option value="null">All categories</option>
-							<option value="null">Electronics</option>
+							<option value="null">三星</option>
+							<option value="null">苹果</option>
 						</select>
 					</div>
 					<div class="sear-sub">
@@ -115,8 +114,6 @@
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav menu__list">
 							<li class=" menu__item"><a class="menu__link" href="/phone/user/toHome">主页</a></li>
-							<li class=" menu__item"><a class="menu__link" href="">Electronics</a></li>
-							<li class=" menu__item"><a class="menu__link" href="">Short Codes</a></li>
 							<li class=" menu__item"><a class="menu__link" href="">本店须知</a></li>
 						</ul>
 					</div>

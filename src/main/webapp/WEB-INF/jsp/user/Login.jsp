@@ -73,15 +73,12 @@
 	</header>
 	<div class="row" style="margin-top: 30px;background-color: #E5E5E5">
 		
-		<div class="col-md-4" style="border-right: 1px solid #ddd;">
-		 	<font size="5px;">
-		 			说明：第一次登陆的用户的初始密码是：6个6
-		 	</font>
-		</div>
-		
 		<div class="col-md-3" style="border-right: 1px solid #ddd;">
+		 	<!-- <font size="5px;">
+		 			说明：第一次登陆的用户的初始密码是：6个6
+		 	</font> -->
 		</div>
-		<div class="col-md-5" style="border-right: 1px solid #ddd;">
+		<div class="col-md-6">
 			<div class="well col-md-10">
 				<center>
 					<h4>用户登录</h4>
@@ -135,10 +132,11 @@
 				<button id="register" type="button" class="btn btn-success btn-block">立即注册</button>
 			</div>
 		</div>
+		
+		<div class="col-md-3" style="border-right: 1px solid #ddd;">
+		</div>
 	</div>
 
-	<!-- 引入footer.jsp -->
-	<jsp:include page="footer.jsp"></jsp:include>
 
 
  <div class="container">
@@ -181,6 +179,13 @@ function chgUrl(url) {
     }  
     return url;  
 };  
+
+
+$("#register").click(function(){
+	
+	window.location.href = "/phone/user/toregister";
+});
+
 
 
 $("#login").click(function(){

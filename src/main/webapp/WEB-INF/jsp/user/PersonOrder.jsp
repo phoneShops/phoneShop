@@ -20,15 +20,15 @@
 			<div class="span5">
 				<div class="tabbable" id="">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#buying" onclick="managerOrder();"
-							data-toggle="tab">交易中订单</a>
-						</li>
+						<li class="active"><a href="#buying"
+							onclick="managerOrder();" data-toggle="tab">交易中订单</a></li>
 						<li><a href="#buyed" onclick="managerFinishOrder();"
 							data-toggle="tab">已成交订单</a></li>
 						<li><a href="#address_manager" onclick="managerAddress();"
 							data-toggle="tab">地址管理</a></li>
 						<li><a href="#person_manager" onclick="managerMessage();"
 							data-toggle="tab">个人信息</a></li>
+						<li><a href="#person_password" data-toggle="tab">个人密码修改</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="buying">
@@ -42,10 +42,9 @@
 							<div class="heading">
 								<font size="3px;">已经完成的订单</font>
 							</div>
-							
+
 						</div>
 						<!-- 已经购买的商品 end -->
-						
 
 
 						<div class="tab-pane" id="address_manager">
@@ -194,6 +193,48 @@
 
 						</div>
 
+						<!-- 个人密码修改 -->
+						<div class="tab-pane" id="person_password">
+							<div class="row" style="margin-top: 30px;">
+
+								<div class="col-md-1"></div>
+								<div class="col-md-5" style="border-right: 1px solid #ddd;">
+									<div class="well col-md-10">
+										<center>
+											<h4>密码修改</h4>
+										</center>
+										<br> <br>
+										<div class="input-group input-group-md">
+											<span class="input-group-addon" id="sizing-addon1"><i
+												class="glyphicon glyphicon-lock"></i></span> <input id="pwd"
+												type="password" class="form-control" placeholder="旧密码"
+												aria-describedby="sizing-addon1">
+										</div>
+										<br>
+										<div class="input-group input-group-md">
+											<span class="input-group-addon" id="sizing-addon1"><i
+												class="glyphicon glyphicon-lock"></i></span> <input id="newpwd"
+												type="password" class="form-control" placeholder="新密码"
+												aria-describedby="sizing-addon1">
+										</div>
+										<br>
+										<div class="input-group input-group-md">
+											<span class="input-group-addon" id="sizing-addon1"><i
+												class="glyphicon glyphicon-lock"></i></span> <input id="newpwd2"
+												type="password" class="form-control" placeholder="再次输入新密码"
+												aria-describedby="sizing-addon1">
+										</div>
+										<br> <br> <font id="font" style="visibility: hidden"
+											color="#FF0000"></font> <br> <br>
+										<button type="button" onclick="checkpassword();"
+											class="btn btn-success btn-block">确认修改</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 个人密码修改 end -->
+
+
 					</div>
 				</div>
 			</div>
@@ -340,11 +381,11 @@
 	</div>
 
 	<!--end  -->
-	
-	
+
+
 	<!-- 用户评论的弹框 -->
-		<div class="modal fade" id="CommentModal" tabindex="-1" role="dialog"
-		aria-labelledby=""CommentModal"" aria-hidden="true">
+	<div class="modal fade" id="CommentModal" tabindex="-1" role="dialog"
+		aria-labelledby="" CommentModal"" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -362,25 +403,36 @@
 							<div class="col-sm-6">
 								<textarea class="form-control" rows="5" id="comment"></textarea>
 							</div>
-							<input style='display:none' type='text' id='MODAL_UID' value="">
-							<input style='display:none' type='text' id='MODAL_OID' value="">
+							<input style='display: none' type='text' id='MODAL_UID' value="">
+							<input style='display: none' type='text' id='MODAL_OID' value="">
 						</div>
 					</form>
 
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" onclick="SubComment();" class="btn btn-primary">提交评论</button>
+					<button type="button" onclick="SubComment();"
+						class="btn btn-primary">提交评论</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal -->
-	</div>	
-	
+	</div>
+
 	<!-- 用户评论的弹框end -->
-	
-	
+	<!-- 弹出的载入框 -->
+	<div class="container">
+		<div id="myModal" class="modal fade" data-keyboard="false"
+			data-backdrop="static" data-role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div id="loading" class="loading">
+				<span id="loadfont">加载中。。。</span>
+			</div>
+		</div>
+	</div>
+	<!-- end -->
+
 	<!-- 引入footer.jsp -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
@@ -426,7 +478,8 @@ function changeCity(data) {
 	
 	selcity.empty();
 	
-	$.ajax({url:'<%=basePath%>province/selectCity?pid=' + province,
+	$.ajax({
+		url:'<%=basePath%>province/selectCity?pid=' + province,
 					type : "post",
 					dataType : "json",
 					success : function(data) {

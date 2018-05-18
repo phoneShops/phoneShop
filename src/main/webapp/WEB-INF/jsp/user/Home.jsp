@@ -145,6 +145,10 @@ $(document).ready(function() {
 			fit : true
 		// 100% fit in a container
 		});
+		
+		
+		choice(1);
+		
 	});
 
 
