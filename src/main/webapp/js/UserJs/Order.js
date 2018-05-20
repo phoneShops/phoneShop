@@ -78,7 +78,8 @@ function toOrder(){
             		//获得总价
             		var priceTotal = $("#priceTotal").text();
                 	//地址id
-            		var address_id = 1;
+            		var address_id =  $("#AddressId").val();
+            		alert(address_id);
             		
             		$.ajax({
                     		 type: "get",

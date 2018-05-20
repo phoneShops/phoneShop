@@ -23,6 +23,7 @@ import com.phone.controller.base.BaseController;
 import com.phone.pojo.User;
 import com.phone.pojo.UserAddress;
 import com.phone.service.ProductService;
+import com.phone.service.UserAddressService;
 import com.phone.service.UserService;
 
 @Controller
@@ -35,6 +36,8 @@ public class userController  extends BaseController{
 	@Resource
 	private ProductService productService;
 	
+	@Resource
+	private UserAddressService userAddressService;
 	/**
 	 * 测试
 	 * @param request
@@ -218,11 +221,21 @@ public class userController  extends BaseController{
 	 */
 	@RequestMapping(value="/toOrder")
 	public Object toOrder(HttpServletRequest request ,String[] array,Model model){
+		
+		HttpSession session = request.getSession();
+		
+		User user = (User) session.getAttribute("user");
+		
 		List<String> lists = new ArrayList<>();
 		for (int i = 0; i < array.length; i++) {
 			lists.add(array[i]);
 		}
 		model.addAttribute("array",new Gson().toJson(lists));
+		
+		//查询用户的所有地址
+		List<UserAddress> list = 	 userAddressService.qryUserAddress(user.getUid());
+		
+		model.addAttribute("list",list);
 		
 		return "product/Order";
 	}

@@ -207,7 +207,7 @@
 										<div class="input-group input-group-md">
 											<span class="input-group-addon" id="sizing-addon1"><i
 												class="glyphicon glyphicon-lock"></i></span> <input id="pwd"
-												type="password" class="form-control" placeholder="旧密码"
+												type="text" class="form-control" placeholder="旧密码"
 												aria-describedby="sizing-addon1">
 										</div>
 										<br>

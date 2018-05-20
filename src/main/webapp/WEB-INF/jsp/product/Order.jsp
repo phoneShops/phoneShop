@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -75,7 +76,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="heading">
-					<font size="4px;"><b>默认快递地址</b></font>&nbsp;<a>&nbsp;[选择其他地址]</a>
+					<font size="4px;"><b>默认快递地址</b></font>&nbsp;<a onclick="choiceAddr();">&nbsp;[选择其他地址]</a>
 				</div>
 			</div>
 			<br><br>
@@ -96,10 +97,10 @@
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">*我的地址：</label>
 									<div class="col-sm-2">
-										<input type="text" value="湖南省" class="form-control" id="province">
+										<input type="text" readonly="readonly" value="湖南省" class="form-control" id="province">
 									</div>
 									<div class="col-sm-2">
-										<input type="text" value="长沙市" class="form-control" id="city">
+										<input type="text" readonly="readonly" value="长沙市" class="form-control" id="city">
 									</div>
 								</div>
 
@@ -140,9 +141,68 @@
 		<div class="row"></div>
 		
 </div>
+
+<!-- 选地址的弹框 -->
+
+	<!-- 用户评论的弹框 -->
+	<div class="modal fade" id="AddressModal" tabindex="-1" role="dialog"
+		aria-labelledby="" CommentModal"" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<small class="modal-title" id="myModalLabel">地址选择</small>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+
+						<table class="table">
+							<thead>
+								<th>选择</th>
+								<th>收件人</th>
+								<th>号码</th>
+								<th>省份</th>
+								<th>城市</th>
+								<th>详细地址</th>
+							</thead>
+							
+							<tbody>
+							<!-- 开始循环 -->
+							<c:forEach items="${list}" var="item">  
+								<tr>
+									<td><input type="radio" name="ADDRESSradio" value="${item.cid}"></td>
+									<td>${item.aname}</td>
+									<td>${item.phone}</td>
+									<td>${item.areaprovince}</td>
+									<td>${item.areacity}</td>
+									<td>${item.areadetail}</td>
+								</tr>
+							</c:forEach>	
+							</tbody>
+						
+						</table>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="SubAddress"
+						class="btn btn-primary">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+
+
+
 <br><br>
 <!-- 隐藏域 -->
 <input type="hidden" id="DataArray" value="">
+<input type="hidden" id="AddressId" value="">
 <!-- 隐藏域end -->
 </body>
 <script src="<%=basePath%>js/UserJs/Order.js"></script>
@@ -154,5 +214,35 @@
 			
 			queryOrder(data.toString());//查询 
 	});
+	
+	function choiceAddr(){
+		
+		$("#AddressModal").modal('show');
+		
+	}
+	
+	 $("#SubAddress").click(function(){
+         var obj=$('input:radio[name="ADDRESSradio"]:checked');
+         var val = obj.val();
+         if(val==null){
+        	 
+        	 $("#AddressModal").modal('hide');
+         }
+         else{
+        	 
+        	 $("#AddressId").val(val);
+        	 
+        	 $("#username").val(obj.parent().parent().find("td").eq(1).html());
+        	 $("#phoneNumber").val(obj.parent().parent().find("td").eq(2).html());
+        	 $("#province").val(obj.parent().parent().find("td").eq(3).html());
+        	 $("#city").val(obj.parent().parent().find("td").eq(4).html());
+        	 $("#detailAddress").val(obj.parent().parent().find("td").eq(5).html());
+        	 
+         	 $("#AddressModal").modal('hide');
+         }
+      });
+	
+	
+	
 </script>
 </html>
