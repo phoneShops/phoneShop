@@ -25,11 +25,6 @@ function queryOrder(array){
 				
 				for (var i = 0; i < data.length; i++) {
 					
-//					alert(data[i].product.pid);
-//					alert(data[i].cart.uid);
-//							
-//					alert(data[i].cart.count);
-					
 					TotalPrice = TotalPrice + data[i].cart.count*data[i].product.price;
 					
 					content  = "<tr>"
@@ -79,7 +74,6 @@ function toOrder(){
             		var priceTotal = $("#priceTotal").text();
                 	//地址id
             		var address_id =  $("#AddressId").val();
-            		alert(address_id);
             		
             		$.ajax({
                     		 type: "get",

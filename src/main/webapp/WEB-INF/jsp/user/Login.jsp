@@ -73,12 +73,12 @@
 	</header>
 	<div class="row" style="margin-top: 30px;background-color: #E5E5E5">
 		
-		<div class="col-md-3" style="border-right: 1px solid #ddd;">
+		<div class="col-md-4" style="border-right: 1px solid #ddd;">
 		 	<!-- <font size="5px;">
 		 			说明：第一次登陆的用户的初始密码是：6个6
 		 	</font> -->
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="well col-md-10">
 				<center>
 					<h4>用户登录</h4>
@@ -133,7 +133,7 @@
 			</div>
 		</div>
 		
-		<div class="col-md-3" style="border-right: 1px solid #ddd;">
+		<div class="col-md-4" style="border-right: 1px solid #ddd;">
 		</div>
 	</div>
 

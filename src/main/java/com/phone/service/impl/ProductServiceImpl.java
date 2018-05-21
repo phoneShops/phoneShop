@@ -508,6 +508,7 @@ public class ProductServiceImpl  implements ProductService{
 			comm.setUid(uid);
 			comm.setPid(order.getPid());
 			comm.setCommenttime(TimeUtil.getTimestamp());
+			comm.setStatus(0);
 		}
 		
 		int result_first = product_commentMapper.insert(comm);
