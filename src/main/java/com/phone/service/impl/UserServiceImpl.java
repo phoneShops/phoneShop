@@ -125,4 +125,31 @@ public class UserServiceImpl implements UserService {
 		return usermapper.updateByPrimaryKey(user);
 	}
 
+	//用户找回密码
+	public int findPwd(String phone, String card, String pwd) {
+		
+		
+		User user = usermapper.selectUserByPhone(phone);
+		
+		if(user!=null){
+			if(!user.getCard().equals(card)){
+				//手机与身份证不匹配
+				return 1;
+			}else{
+				user.setPassword(MD5.MD5Encode(pwd));
+				int code = usermapper.updateByPrimaryKey(user);
+				if(code==1){
+					//修改成功
+					return 2;
+				}
+				
+				//修改密码失败
+				return 3;
+			}
+		}else{
+			//用户不存在
+			return 0;
+		}
+	}
+
 }

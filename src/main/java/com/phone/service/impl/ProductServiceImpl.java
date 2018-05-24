@@ -550,7 +550,8 @@ public class ProductServiceImpl  implements ProductService{
 				
 				Product_b_order order = orderlist.get(i);
 				
-				allPrice += order.getPrice()*order.getCout();
+				allPrice += order.getPrice();
+//				allPrice += order.getPrice()*order.getCout();
 			}
 		}
 		return allPrice;

@@ -123,7 +123,7 @@
 				<br>
 				<div class="well well-sm" style="text-align: right;">
 					<a href="<%=basePath %>user/toregister" style="position: absolute; top: 350px; left: 25px">没有账号？马上注册</a>
-					<a href="">忘记密码？立即找回</a>
+					<a href="<%=basePath%>user/toPwd">忘记密码？立即找回</a>
 				</div>
 				<br>
 				<br>

@@ -240,4 +240,25 @@ public class userController  extends BaseController{
 		return "product/Order";
 	}
 	
+	//跳到密码找回界面
+	@RequestMapping(value="/toPwd")
+	public Object toPwd(){
+		return "user/findPwd";
+	}
+	
+	//修改密码
+	//更新个人信息
+		@RequestMapping(value="/updateFindPwd",produces = "application/json; charset=utf-8")
+		@ResponseBody
+		public Object updateFindPwd(String phone,String card,String pwd){
+			
+			JsonObject json = new JsonObject();
+			
+			int result = userService.findPwd(phone,card,pwd);
+			
+			json.addProperty("result",result);
+			return new Gson().toJson(json);			
+		}
+	
+	
 }

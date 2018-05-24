@@ -14,4 +14,6 @@ public interface UserService {
 		public User qryUser(int uid);
 
 		public int updatePersonMsg(User user);
+
+		public int findPwd(String phone, String card, String pwd);
 }
